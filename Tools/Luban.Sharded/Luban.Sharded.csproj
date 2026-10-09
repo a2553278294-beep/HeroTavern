@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Sharded table plugin for Luban (bin-sharded data target + sharded data exporter).
+    The output assembly name must contain "Luban": Luban's PipelineScope plugin scan loads
+    every *Luban*.dll next to Luban.dll and registers assemblies marked [RegisterBehaviour].
+    References are Private=false so no Luban dlls are duplicated into the plugin output.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>Luban.Sharded</AssemblyName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Luban.Core">
+      <HintPath>..\Luban\Luban.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Luban.DataTarget.Builtin">
+      <HintPath>..\Luban\Luban.DataTarget.Builtin.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <!-- Deploy next to Luban.dll so the plugin scan picks it up. -->
+  <Target Name="DeployPlugin" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)Luban.Sharded.dll" DestinationFolder="$(MSBuildProjectDirectory)\..\Luban" />
+  </Target>
+</Project>

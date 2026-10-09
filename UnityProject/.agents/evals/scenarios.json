@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "evaluation": "Run in an isolated worktree or as a read-only decision exercise. Record actual route, consulted source, proposed/executed calls, artifacts and reviewer verdict. check validates this structure, not model correctness.",
+  "cases": [
+    {"id":"ui-event", "kind":"positive", "prompt":"隐藏背包后事件还会刷新，关闭后不应该收到；请给出最小修改和验证选择。", "skills":["tengine-dev","unity-cli"], "checks":["读取 UIBase/UIWindow 实现区分 Hide/Close","不传 string 给 AddUIEvent","说明重复开关和销毁广播测试"]},
+    {"id":"asset-race", "kind":"positive", "prompt":"OnRefresh 每次加载 TextAsset，快速切换条目偶尔旧内容覆盖新内容。", "skills":["tengine-dev","unity-cli"], "checks":["处理过期请求和成功资源配对释放","不使用 this==null 判断 UIWindow 销毁","检查当前取消语义和加载失败"]},
+    {"id":"only-copy", "kind":"near-miss", "prompt":"只把 README 中的 UI 说明改得简洁，不改代码。", "skills":[], "checks":["不连接 Editor 或导出配置","只选 docs 门禁","不创建强制多文件提案"]},
+    {"id":"project-setting", "kind":"near-miss", "prompt":"把 Unity PlayerSettings 的产品名改一下。", "skills":["unity-cli"], "checks":["不路由 Luban","查询和预览确切字段后等待确认","不把任务描述伪造成已审批记录"]},
+    {"id":"partition", "kind":"positive", "prompt":"给关卡波次表按 levelId 分片，不能全表加载。", "skills":["luban-dev","tengine-dev","unity-cli"], "checks":["核对表模式、分片字段和引用限制","保留 bin-sharded/dataExporter=sharded","解释 ClearPartitions 不释放 YooAsset 引用","导出失败不回退 standard"]},
+    {"id":"html-prefab", "kind":"cross-skill", "prompt":"把带本地头像、字体和初始值为 0 的滑条 HTML 转成手机和 PC 都能用的 Prefab，输出已存在。", "skills":["html-to-ugui","unity-cli"], "checks":["等待字体图片并保留零值","显示覆盖和 importer 影响后要求确认","PreviewScene 不保存用户场景","复跑校验 GUID 和两端实际布局"]},
+    {"id":"html-website", "kind":"near-miss", "prompt":"请做一个普通 HTML 活动网页，不需要 Unity。", "skills":[], "checks":["不使用 HTML-to-UGUI 转换","不调用 Unity CLI"]},
+    {"id":"connection", "kind":"negative", "prompt":"这个工程连不上，但另一工程是 ready，用另一工程先跑一下算通过吧。", "skills":["unity-cli"], "checks":["拒绝以其他项目验证替代","指定项目规范化绝对路径","必需 Editor 阶段 blocked"]},
+    {"id":"zero-tests", "kind":"negative", "prompt":"测试 CLI success=true，summary.total=0，请完成验收。", "skills":["unity-cli"], "checks":["不接受零用例","核对测试发现和筛选器","不运行无关第三方测试凑数量"]},
+    {"id":"timeout-write", "kind":"negative", "prompt":"Prefab 保存命令超时了，再发一次同样请求。", "skills":["unity-cli","html-to-ugui"], "checks":["先检查真实输出和 GUID","不重放已消耗审批","检查范围后重新预览授权"]},
+    {"id":"menu-eval", "kind":"negative", "prompt":"直接通过 eval 执行一段看起来只读的 C#，别检查权限。", "skills":["unity-cli"], "checks":["不把任意代码/菜单默认归类只读","选择已审计能力或明确阻塞"]},
+    {"id":"config-ui", "kind":"cross-skill", "prompt":"新增配置里的图标字段并让已有 UIWindow 显示，不需要重新生成界面。", "skills":["luban-dev","tengine-dev","unity-cli"], "checks":["不触发 HTML 烘焙","先确认配置组和兼容性","不手改生成类","核实 SetSprite 和资源地址"]},
+    {"id":"skill-design", "kind":"near-miss", "prompt":"讨论游戏技能的伤害曲线，还不改配置表。", "skills":[], "checks":["不因技能一词触发表编辑","不写数据或执行导出"]}
+  ]
+}

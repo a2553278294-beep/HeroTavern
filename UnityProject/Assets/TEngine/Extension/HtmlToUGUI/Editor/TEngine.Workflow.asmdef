@@ -1,0 +1,25 @@
+{
+    "name": "TEngine.Workflow",
+    "rootNamespace": "HtmlToUGUI",
+    "references": [
+        "HtmlToUGUI",
+        "TEngine.UIScriptGenerator",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "Newtonsoft.Json",
+        "Unity.Pipeline",
+        "Unity.Pipeline.Attributes",
+        "Unity.Pipeline.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

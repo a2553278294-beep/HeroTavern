@@ -1,0 +1,14 @@
+<module name="">
+  <bean name="Row">
+    <var name="id" type="int"/>
+    <var name="groupId" type="int"/>
+    <var name="label" type="string"/>
+  </bean>
+  <table name="TbNormal" value="Row" input="*@rows.json" mode="map" index="id"/>
+  <table name="TbRange" value="Row" input="*@rows.json" mode="map" index="id"
+         tags="partition=range#partition_field=id#partition_size=1000"/>
+  <table name="TbCount" value="Row" input="*@rows.json" mode="map" index="id"
+         tags="partition=count#partition_field=id#partition_size=2"/>
+  <table name="TbField" value="Row" input="*@rows.json" mode="list" index="groupId+id"
+         tags="partition=field#partition_field=groupId"/>
+</module>

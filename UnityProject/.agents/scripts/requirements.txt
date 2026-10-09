@@ -1,0 +1,6 @@
+# Core execution uses Python 3.11 stdlib. Check parses YAML/Markdown with real parsers.
+PyYAML>=6.0,<7
+markdown-it-py>=3.0,<5
+# Domain tools only; never installed implicitly by the workflow.
+openpyxl>=3.1,<4
+playwright>=1.40,<2

@@ -1,0 +1,13 @@
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.csproj.AssemblyReference.cache
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.GeneratedMSBuildEditorConfig.editorconfig
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.AssemblyInfoInputs.cache
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.AssemblyInfo.cs
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.csproj.CoreCompileInputs.cache
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.sourcelink.json
+G:\project\HeroTavern\Tools\Luban.Sharded\bin\Release\Luban.Sharded.deps.json
+G:\project\HeroTavern\Tools\Luban.Sharded\bin\Release\Luban.Sharded.dll
+G:\project\HeroTavern\Tools\Luban.Sharded\bin\Release\Luban.Sharded.pdb
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.dll
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\refint\Luban.Sharded.dll
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\Luban.Sharded.pdb
+G:\project\HeroTavern\Tools\Luban.Sharded\obj\Release\ref\Luban.Sharded.dll

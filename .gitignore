@@ -1,16 +1,26 @@
-# Node rules:
-## Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
 
-## Dependency directory
-## Commenting this out is preferred by some people, see
-## https://docs.npmjs.com/misc/faq#should-i-check-my-node_modules-folder-into-git
-node_modules
+UnityProject/UserSettings/Layouts/default-2021.dwlt
+UnityProject/UserSettings/Search.settings
 
-# Book build output
-_book
+#Luban
+Tools/Luban/
+Tools/Luban.ClientServer/
+Configs/.cache.meta
+GenerateDatas/
 
-# eBook build output
-*.epub
-*.mobi
-*.pdf
+#FileServer
+Tools/FileServer/AssetRoot
+
+UnityProject/ProjectSettings/CommonBurstAotSettings.json
+UnityProject/ProjectSettings/BurstAotSettings_StandaloneWindows.json
+
+#GameEventSourceGenerator
+Tools/GameEventSourceGenerator/*/.idea
+Tools/GameEventSourceGenerator/*/bin
+Tools/GameEventSourceGenerator/*/obj
+
+#openspec
+openspec/
+
+# Local agent harness session state (pi/fabric); never part of approvals
+.pi/
