@@ -24,3 +24,4 @@ openspec/
 
 # Local agent harness session state (pi/fabric); never part of approvals
 .pi/
+docs/

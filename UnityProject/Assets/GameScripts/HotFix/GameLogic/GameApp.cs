@@ -36,7 +36,10 @@ public partial class GameApp
     private static void StartGameLogic()
     {
         // GameEvent.Get<ILoginUI>().ShowLoginUI();
-        GameModule.UI.ShowUIAsync<BattleMainUI>();
+        // 演示 UI 保留备查：GameModule.UI.ShowUIAsync<BattleMainUI>();
+        // 当前入口：酒馆主场景原型（世界模拟 + 运行时代码构建场景，任务 20261011-main-scene-bootstrap）。
+        GameModule.World.StartNewGame();
+        WorldSceneBootstrap.Active();
     }
     
     private static void Release()

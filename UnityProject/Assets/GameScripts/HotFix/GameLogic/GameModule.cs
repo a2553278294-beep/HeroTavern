@@ -85,6 +85,16 @@ public class GameModule
     
     private static ILocalizationModule _localization;
     #endregion
+
+    #region 业务模块
+
+    /// <summary>
+    /// 世界模拟模块（最低基座：时间/地图/角色/货币）。
+    /// </summary>
+    public static WorldModule World => _world ??= WorldModule.Instance;
+
+    private static WorldModule _world;
+    #endregion
     
     /// <summary>
     /// 获取游戏框架模块类。
@@ -114,5 +124,6 @@ public class GameModule
         _scene = null;
         _timer = null;
         _localization = null;
+        _world = null;
     }
 }

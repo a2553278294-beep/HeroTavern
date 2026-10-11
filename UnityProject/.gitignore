@@ -82,6 +82,7 @@ crashlytics-build.properties
 /.agents/.venv/
 /.agents/**/__pycache__/
 /.agents/**/*.pyc
+/.agents/tasks
 
 #Bundles
 Bundles/
@@ -95,7 +96,6 @@ package/
 
 #Rider
 .idea/
-
 #Odin Inspector
 # [Aa]ssets/Plugins/Sirenix/
 # [Aa]ssets/Plugins/Sirenix.meta
@@ -105,3 +105,5 @@ package/
 yoo/
 [Aa]ssets/TEngine/AssetSetting/Resources/BuiltinFileManifest.asset
 [Aa]ssets/TEngine/AssetSetting/Resources/BuiltinFileManifest.asset.meta
+
+UserSettings/
