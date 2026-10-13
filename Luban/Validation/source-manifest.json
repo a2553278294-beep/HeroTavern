@@ -16,9 +16,10 @@
   {
     "file": "Excel/Item.xlsx",
     "url": "https://docs.qq.com/sheet/DUkJzc05OTkxXVnVH",
-    "bytes": 20167,
-    "sha256": "0b01744a4e0f25f71044eed9fe0a24f5a5b6b5102a09f52f4b82e6438a9ed61b",
-    "beforeWebFixesSha256": "1a63868a5fa5c64ba803ce7f0e05f250edb7051a15628991fe0295d83db92003"
+    "bytes": 21033,
+    "sha256": "5979dbea22f8fb7054a06945f4b357db46137abeec7ccb8e7849c89d569a8833",
+    "beforeWebFixesSha256": "1a63868a5fa5c64ba803ce7f0e05f250edb7051a15628991fe0295d83db92003",
+    "updatedAt": "2026-10-13"
   },
   {
     "file": "Excel/NAME.xlsx",
@@ -30,9 +31,10 @@
   {
     "file": "Excel/CharacterPart.xlsx",
     "url": "https://docs.qq.com/sheet/DUm1yY3FyTkVacUh2",
-    "bytes": 19024,
-    "sha256": "42e1516cf450de01756035ff3b3b3e12273d52c0c8903184feedb4d970f45a10",
-    "beforeWebFixesSha256": "42e1516cf450de01756035ff3b3b3e12273d52c0c8903184feedb4d970f45a10"
+    "bytes": 19870,
+    "sha256": "4952326c8410c7f9166c6426964a65b994586db9c87fbfa7305eec3f157f5a38",
+    "beforeWebFixesSha256": "42e1516cf450de01756035ff3b3b3e12273d52c0c8903184feedb4d970f45a10",
+    "updatedAt": "2026-10-13"
   },
   {
     "file": "Excel/global.xlsx",

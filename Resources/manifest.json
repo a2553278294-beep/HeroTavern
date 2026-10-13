@@ -1,0 +1,581 @@
+{
+  "date": "2026-10-13",
+  "files": [
+    {
+      "file": "Resources/Characters/character_c_idle_body_01.png",
+      "bytes": 15389,
+      "sha256": "7f2d0235e4d07cb57f8f758fb24cdd06211254958702cc29f534907de3665eb7",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_01_m.png",
+      "bytes": 8771,
+      "sha256": "472988f00f41ab5e4d1d873221689e9ce723b53f92f1f070f5bb7da4943d9d5b",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_01.png",
+      "bytes": 11239,
+      "sha256": "7cfc1856a4864ddb70c12803860b4ccde2c565630d48c79d12ee501fb0968a13",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_01_m.png",
+      "bytes": 8214,
+      "sha256": "b1aa24cab4b7bef498f9752e804031c46caf20aa80e0cef7bedfadaa3f1abb84",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_01.png",
+      "bytes": 28224,
+      "sha256": "c3b5d341a9891d35fa7aa668a7fd05da6d44b16166a310b67b6170074e8e8b7f",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_01_m.png",
+      "bytes": 8334,
+      "sha256": "8f5cd14c85a3d34d9966fd918fd8e8b51dc3f8379d90b53de6d2b5de33ff9864",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_03.png",
+      "bytes": 19486,
+      "sha256": "66bce0f2c077b5b94fd55c7f5946727b3357943fa0c3c7fc5d82a27c7d15215d",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_03_m.png",
+      "bytes": 8582,
+      "sha256": "e9b9909c1869384ea573f64035f3b9a4907158f42d6514ddc96d604fa1d9dc2b",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_01.png",
+      "bytes": 19208,
+      "sha256": "a3483c93ee889f95837fea70cd6afe24eb0c934a10620331dd02f6409f1ceeca",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_01_m.png",
+      "bytes": 9375,
+      "sha256": "34309f2893f4b9d04916a91ba02ba399b6f13aab82e2d92cfd07a3c635b4a63c",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_01.png",
+      "bytes": 11366,
+      "sha256": "1a53fa33994f82c9ad89b91d0d53b1c97432b92eaf7cde274dfc4048a334c6fa",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_01_m.png",
+      "bytes": 7769,
+      "sha256": "1774e385b3ebca811ec8d9584f4d79ec7da80dd5a9586f50e8398e982d8902ee",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_01.png",
+      "bytes": 28224,
+      "sha256": "a609fbe81abb2de964ffbaedf85f0e5542770990f5c1e69df4f101e34608db94",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_01_m.png",
+      "bytes": 8336,
+      "sha256": "ce96b470f0e532c83bf7225ba40d7a8012681c7aa27b21aaf511352836c5fbfd",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_03.png",
+      "bytes": 18679,
+      "sha256": "ca13b73a22d8daa199371774c64ab077523ed56f2e8ad423ec34bd970683b279",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_03_m.png",
+      "bytes": 8724,
+      "sha256": "83ba4a88b2ec0a41968cbfb75077ee58c6a917ad03f338dac80fed7a8cce3f74",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_01.png",
+      "bytes": 22683,
+      "sha256": "ce0613fe03d1357b5b3f8500d0c9f8ea20e017e614ac58fa27f560ab10c4a798",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_01_m.png",
+      "bytes": 6724,
+      "sha256": "6de96a421326eb60aa5da0ab3924d02e6a17771bd536c865907a22175c9dd9e5",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_02.png",
+      "bytes": 25145,
+      "sha256": "fb3ea4b0f7bc645e8e5fef8aa0e979239af492873fc9f35f0f541a417d16e193",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_02_m.png",
+      "bytes": 8215,
+      "sha256": "34a190720f885d77d3590774fe59971e6c4975c00057078bb55a313eeb7e3cde",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_01.png",
+      "bytes": 13323,
+      "sha256": "ad04bd1fca1a4c382732a81b864c66eebe20d68b8b40ac134d5fe7c20757ba82",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_01_m.png",
+      "bytes": 5647,
+      "sha256": "7361b1645cb50b347206a526570a0210d301120dbb94a4f19fd3aeb75db679d9",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_02.png",
+      "bytes": 14396,
+      "sha256": "b3411c56a15e77d162db0ddb2268113ec6dc8805465eea845c0e568b271eac66",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_02_m.png",
+      "bytes": 7440,
+      "sha256": "17448b95e87004d37f3e7aa673e904b3723b1eea3c6ef89d29c0ab48f2ce82e3",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_03.png",
+      "bytes": 10424,
+      "sha256": "21015393e755ea600a7c5d32222dd8672fd910289d9c13ad8642c9d312c84708",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_03_m.png",
+      "bytes": 7061,
+      "sha256": "7bf19f811761137996173ac40eb1682579efa9c17c19b779f01a9de2f9e79b42",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_04.png",
+      "bytes": 12242,
+      "sha256": "64176f4c1a45f22a2453134a9387ef757fc264e8ac7abd98a135150473ddcf5c",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_04_m.png",
+      "bytes": 7171,
+      "sha256": "393d8811ae4b40d38d4b4400fcf273a40edcbdf0c4c7c724fa036fb87b6f1f48",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_05.png",
+      "bytes": 12160,
+      "sha256": "f99b38f412c1e16b631f5bb07b644478682a14ec2044345ef662419c6cb2fb8f",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_05_m.png",
+      "bytes": 7327,
+      "sha256": "83d41dd399b7776d70e136aa104abfdea5187b86869c66959e05842272f23d80",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_06.png",
+      "bytes": 10823,
+      "sha256": "9f4701b03b35c30de2a4022a318ed970c2b7f4e1be7449e7866c3daf14ec5019",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_face_06_m.png",
+      "bytes": 6886,
+      "sha256": "fdd70cc93b624fc4778902c0193984b67d7b08e00640d3196b509277489a7b22",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_01.png",
+      "bytes": 16600,
+      "sha256": "bb15438250e493d3026312b7d0de994ac0e72b18a05f042bd13b68088eabc905",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_01_m.png",
+      "bytes": 5607,
+      "sha256": "657091aec93340f3afc250700392aa7a4ace15c4a9cee262f1ef53c3735103a0",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_02.png",
+      "bytes": 18794,
+      "sha256": "c23f0a28d3c3927ee3d886df4d0ce2ba002596b24fd2541bdb3aa13010a1d401",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_02_m.png",
+      "bytes": 6971,
+      "sha256": "2b1987a8d3b54a16100e1c31111ec607954d2bd6c5188bcca9158ce8d62984b2",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_03.png",
+      "bytes": 13111,
+      "sha256": "057fd9a668e05d43800f4668feb24feebb6ebcbf368dbed03bd52065e7e044fc",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_03_m.png",
+      "bytes": 6992,
+      "sha256": "fc7a3062f20c8fae11967d94c2348b26ef3a47a41570fb83aaa02e695a9f9fa9",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_04.png",
+      "bytes": 14987,
+      "sha256": "96e67fe0dd3d3d24777e059090f84586660af52d443fed9b0f2b1e5c9b013aab",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_04_m.png",
+      "bytes": 6847,
+      "sha256": "69cb56bacac5f13ac55de8dc00676599b306789a01d06311f8a4b54805b54c74",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_1.png",
+      "bytes": 2124,
+      "sha256": "04393c99faccc36eee1c6bf9aa5540f47ba758dcd461de43d360d80d6ab29b80",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_10.png",
+      "bytes": 1665,
+      "sha256": "97a4e3b00f59d55d1738acba3615c8930000a5dc3992694d4f69daec3a1533da",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_11.png",
+      "bytes": 1679,
+      "sha256": "b295fdafe575167bad56b949ea0b716ee7e43940b1de0302f22d8a8066807daf",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_12.png",
+      "bytes": 1148,
+      "sha256": "e2ddd70010885ead62c465f271e578ded486beef2878df0bc10d8049c0ddaa8c",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_13.png",
+      "bytes": 1296,
+      "sha256": "7b0277d91c621cabfc7f373d7ac91104e518c83e9a521c05a6f820304c02ac1e",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_14.png",
+      "bytes": 1383,
+      "sha256": "58d4bc6c88395e1c95552d5059e9ed778ba8df739ada2d51b334748c28329324",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_15_.png",
+      "bytes": 1204,
+      "sha256": "f99cdd52a4988b7d7fc613ba45b58bd247b5b12b7b07948af20984889ff75027",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_16.png",
+      "bytes": 1402,
+      "sha256": "62f71bebe73461a6481b803b4496217318300690e6242eebbe23b73d0fe8a354",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_17.png",
+      "bytes": 1398,
+      "sha256": "67daf0ae904affb447c56e3a82112dea4aa76fcd79f62ccff24119bf8b41245f",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_18.png",
+      "bytes": 7945,
+      "sha256": "2796b6f2e8fe4ef8c823b3c8d01f9588909a6f31a59d96f2c8be49bd79d3f0ee",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_19.png",
+      "bytes": 1415,
+      "sha256": "2276eb32d917663cc8d0d20a3a1e3bb07d8adc870c247626b59d351f9ed0d6b6",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_20.png",
+      "bytes": 1576,
+      "sha256": "02a2d811e0ccc2d07571c94b9f2771a30c394285608d62f45f2516ab79f1a8d2",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_21.png",
+      "bytes": 2112,
+      "sha256": "9330bdb5ab2e464beff728e9be4e543e3b3ce1ca579e7bea5e13bcd8c029ae4f",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_22.png",
+      "bytes": 1965,
+      "sha256": "5bfc192f0614e8868d36c066fcec5f74b1854cd357e38753566b527cb1339b5f",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_23.png",
+      "bytes": 1712,
+      "sha256": "604833c7d4d85cad1e60c6c54dba8c77ae4865cf46ea2c70bbde6715a7503010",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_24.png",
+      "bytes": 1924,
+      "sha256": "b76059b995b86b29d558dc193eb5b9497d7c095947ad32a626efb691103370e7",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_2_.png",
+      "bytes": 1416,
+      "sha256": "acd27e56a1e6507f47d8709cb02c2fa554f9dbf3952ce41a779dfe1076c992f4",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_3.png",
+      "bytes": 1670,
+      "sha256": "a8b15a082d09f0aa1939760c80e61a24f13f88afd8679d8bd69c17976229eb35",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_4_.png",
+      "bytes": 1501,
+      "sha256": "24f916a13c2add82916543f339c141edc226311263e6d7dcb4b25d62d4fc874d",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_5.png",
+      "bytes": 2523,
+      "sha256": "ac2d67d442476807cb4806d98f9e0d7694ce0ef1404dd2ce077c107e3b50f7a4",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_6.png",
+      "bytes": 1738,
+      "sha256": "4273da50da3059820268ae836b4f61d668e91f33ba51db1bb1c174942cf332ef",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_7.png",
+      "bytes": 1813,
+      "sha256": "c7dd49cb752f89e7a8b63077150342a3fa75540947b1d5fa520dde5567eccf0c",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_8_.png",
+      "bytes": 1784,
+      "sha256": "b36dfe12526a50e30fee2e397770eacc1d5f633c425b79f073f50f56f8f179b1",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_9.png",
+      "bytes": 1566,
+      "sha256": "def41c4493ab6957d79c58d58e0fe2dd384eac8557e2a8910572228f6590e7a9",
+      "size": [
+        128,
+        128
+      ]
+    }
+  ]
+}

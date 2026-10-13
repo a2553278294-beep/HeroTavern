@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-13",
+  "changedWorkbooks": [
+    {
+      "file": "Excel/Item.xlsx",
+      "sha256": "5979dbea22f8fb7054a06945f4b357db46137abeec7ccb8e7849c89d569a8833",
+      "bytes": 21033,
+      "modifiedExistingCells": 24,
+      "addedRows": 0,
+      "originalValuesAndStylesPreservedOutsideScope": true,
+      "diffs": [
+        [
+          "Item",
+          "D4",
+          "icon_1.jpg",
+          "icon_1.png"
+        ],
+        [
+          "Item",
+          "D5",
+          "icon_2.jpg",
+          "icon_2_.png"
+        ],
+        [
+          "Item",
+          "D6",
+          "icon_3.jpg",
+          "icon_3.png"
+        ],
+        [
+          "Item",
+          "D7",
+          "icon_4.jpg",
+          "icon_4_.png"
+        ],
+        [
+          "Item",
+          "D8",
+          "icon_5.jpg",
+          "icon_5.png"
+        ],
+        [
+          "Item",
+          "D9",
+          "icon_6.jpg",
+          "icon_6.png"
+        ],
+        [
+          "Item",
+          "D10",
+          "icon_7.jpg",
+          "icon_7.png"
+        ],
+        [
+          "Item",
+          "D11",
+          "icon_8.jpg",
+          "icon_8_.png"
+        ],
+        [
+          "Item",
+          "D12",
+          "icon_9.jpg",
+          "icon_9.png"
+        ],
+        [
+          "Item",
+          "D13",
+          "icon_10.jpg",
+          "icon_10.png"
+        ],
+        [
+          "Item",
+          "D14",
+          "icon_11.jpg",
+          "icon_11.png"
+        ],
+        [
+          "Item",
+          "D15",
+          "icon_12.jpg",
+          "icon_12.png"
+        ],
+        [
+          "Item",
+          "D16",
+          "icon_13.jpg",
+          "icon_13.png"
+        ],
+        [
+          "Item",
+          "D17",
+          "icon_14.jpg",
+          "icon_14.png"
+        ],
+        [
+          "Item",
+          "D18",
+          "icon_15.jpg",
+          "icon_15_.png"
+        ],
+        [
+          "Item",
+          "D19",
+          "icon_16.jpg",
+          "icon_16.png"
+        ],
+        [
+          "Item",
+          "D20",
+          "icon_17.jpg",
+          "icon_17.png"
+        ],
+        [
+          "Item",
+          "D21",
+          "icon_18.jpg",
+          "icon_18.png"
+        ],
+        [
+          "Item",
+          "D22",
+          "icon_19.jpg",
+          "icon_19.png"
+        ],
+        [
+          "Item",
+          "D23",
+          "icon_20.jpg",
+          "icon_20.png"
+        ],
+        [
+          "Item",
+          "D24",
+          "icon_21.jpg",
+          "icon_21.png"
+        ],
+        [
+          "Item",
+          "D25",
+          "icon_22.jpg",
+          "icon_22.png"
+        ],
+        [
+          "Item",
+          "D26",
+          "icon_23.jpg",
+          "icon_23.png"
+        ],
+        [
+          "Item",
+          "D27",
+          "icon_24.jpg",
+          "icon_24.png"
+        ]
+      ]
+    },
+    {
+      "file": "Excel/CharacterPart.xlsx",
+      "sha256": "4952326c8410c7f9166c6426964a65b994586db9c87fbfa7305eec3f157f5a38",
+      "bytes": 19870,
+      "modifiedExistingCells": 0,
+      "addedRows": 24,
+      "originalValuesAndStylesPreservedOutsideScope": true,
+      "diffs": []
+    }
+  ],
+  "assetCount": 64,
+  "retainedPlaceholders": {
+    "characterIdleResourcesWithoutPng": 20,
+    "itemIconsOutsideNewBatch": 32
+  },
+  "generation": {
+    "strict": true,
+    "target": "all",
+    "exitCode": 0,
+    "tableCount": 14,
+    "rowCount": 539,
+    "changedTableValuesComparedToJson": 2944,
+    "newReferencesExist": true,
+    "characterMasksPaired": true,
+    "runtimeValidation": "This update validates generation and JSON values; the 2026-10-12 compiled binary runtime result is historical."
+  }
+}
