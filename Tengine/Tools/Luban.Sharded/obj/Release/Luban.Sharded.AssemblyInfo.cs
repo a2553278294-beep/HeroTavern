@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Luban.Sharded")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0dfa4e10200be592d8b3bda612ab2ee84e647005")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a25daafe3342dc2e7abe9c788e7a36d46339c1d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Luban.Sharded")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Luban.Sharded")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

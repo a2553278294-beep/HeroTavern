@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\project\\HeroTavern\\Tools\\Luban.Sharded\\Luban.Sharded.csproj",
+      "projectUniqueName": "G:\\project\\HeroTavern\\Tengine\\Tools\\Luban.Sharded\\Luban.Sharded.csproj",
       "projectName": "Luban.Sharded",
-      "projectPath": "G:\\project\\HeroTavern\\Tools\\Luban.Sharded\\Luban.Sharded.csproj",
+      "projectPath": "G:\\project\\HeroTavern\\Tengine\\Tools\\Luban.Sharded\\Luban.Sharded.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "G:\\project\\HeroTavern\\Tools\\Luban.Sharded\\obj\\",
+      "outputPath": "G:\\project\\HeroTavern\\Tengine\\Tools\\Luban.Sharded\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Visual Studio\\Shared\\NuGetPackages"
