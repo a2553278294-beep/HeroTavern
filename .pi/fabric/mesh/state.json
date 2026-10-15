@@ -1,0 +1,308 @@
+{
+  "format": 1,
+  "revisionFormat": 2,
+  "entries": {
+    "topology/peer-seq": {
+      "key": "topology/peer-seq",
+      "value": {
+        "format": 1,
+        "next": 3
+      },
+      "version": 3,
+      "updatedAt": 1792072889999,
+      "updatedBy": {
+        "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a13fdd-51d5-71cb-bbce-fcba73e553ba"
+      }
+    },
+    "sessions/01a12147-9ded-7286-9dba-ba77f9761a73": {
+      "key": "sessions/01a12147-9ded-7286-9dba-ba77f9761a73",
+      "value": {
+        "id": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "name": "HER-1",
+        "label": "HER-1",
+        "kind": "peer",
+        "status": "idle",
+        "runner": "pi",
+        "transport": "host",
+        "cwd": "G:\\project\\HeroTavern",
+        "sessionId": "01a12147-9ded-7286-9dba-ba77f9761a73",
+        "model": "kimi-coding/k3-256k",
+        "thinking": "high",
+        "startedAt": 1791635821646,
+        "updatedAt": 1791650668900,
+        "pendingMessages": false,
+        "local": false
+      },
+      "version": 5267,
+      "updatedAt": 1791650668903,
+      "updatedBy": {
+        "id": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a12147-9ded-7286-9dba-ba77f9761a73"
+      }
+    },
+    "topology/participants/2688032e548f2fdb5ebe2da3ae0596fbd10a2c756bdca6d82e6638c3b9ac4661": {
+      "key": "topology/participants/2688032e548f2fdb5ebe2da3ae0596fbd10a2c756bdca6d82e6638c3b9ac4661",
+      "value": {
+        "format": 1,
+        "id": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "kind": "root",
+        "rootId": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "ownerHostId": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "ownerIdentityId": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "name": "main",
+        "status": "idle",
+        "runner": "pi",
+        "transport": "host",
+        "capabilities": [
+          "steer",
+          "followUp",
+          "fabric"
+        ],
+        "cwd": "G:\\project\\HeroTavern",
+        "sessionId": "01a12147-9ded-7286-9dba-ba77f9761a73",
+        "model": "kimi-coding/k3-256k",
+        "thinking": "high",
+        "startedAt": 1791635821646,
+        "updatedAt": 1791650668900,
+        "pendingMessages": false,
+        "controlProtocol": "v1",
+        "ownerIncarnation": "3cb92090-4fcd-4f8e-8087-265199537550",
+        "label": "HER-1"
+      },
+      "version": 5268,
+      "updatedAt": 1791650668909,
+      "updatedBy": {
+        "id": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a12147-9ded-7286-9dba-ba77f9761a73"
+      }
+    },
+    "topology/hosts/2688032e548f2fdb5ebe2da3ae0596fbd10a2c756bdca6d82e6638c3b9ac4661": {
+      "key": "topology/hosts/2688032e548f2fdb5ebe2da3ae0596fbd10a2c756bdca6d82e6638c3b9ac4661",
+      "value": {
+        "format": 1,
+        "id": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "rootId": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "identity": {
+          "id": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+          "name": "main",
+          "kind": "main",
+          "sessionId": "01a12147-9ded-7286-9dba-ba77f9761a73"
+        },
+        "startedAt": 1791635821647,
+        "updatedAt": 1791650668912,
+        "expiresAt": 1791650683912
+      },
+      "version": 5269,
+      "updatedAt": 1791650668914,
+      "updatedBy": {
+        "id": "session:01a12147-9ded-7286-9dba-ba77f9761a73",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a12147-9ded-7286-9dba-ba77f9761a73"
+      }
+    },
+    "sessions/01a128c2-10ba-7647-9c7a-b8c782b5def6": {
+      "key": "sessions/01a128c2-10ba-7647-9c7a-b8c782b5def6",
+      "value": {
+        "id": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "name": "HER-2",
+        "label": "HER-2",
+        "kind": "peer",
+        "status": "idle",
+        "runner": "pi",
+        "transport": "host",
+        "cwd": "G:\\project\\HeroTavern",
+        "sessionId": "01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "model": "kimi-coding/k3-256k",
+        "thinking": "high",
+        "startedAt": 1791685655143,
+        "updatedAt": 1791709376068,
+        "pendingMessages": false,
+        "local": false
+      },
+      "version": 20878,
+      "updatedAt": 1791709376069,
+      "updatedBy": {
+        "id": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a128c2-10ba-7647-9c7a-b8c782b5def6"
+      }
+    },
+    "topology/participants/f8c58825fae67a76e9fe66cd6ccc984a60684c0191243e4dc28f185aaf613b35": {
+      "key": "topology/participants/f8c58825fae67a76e9fe66cd6ccc984a60684c0191243e4dc28f185aaf613b35",
+      "value": {
+        "format": 1,
+        "id": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "kind": "root",
+        "rootId": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "ownerHostId": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "ownerIdentityId": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "name": "main",
+        "status": "idle",
+        "runner": "pi",
+        "transport": "host",
+        "capabilities": [
+          "steer",
+          "followUp",
+          "fabric"
+        ],
+        "cwd": "G:\\project\\HeroTavern",
+        "sessionId": "01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "model": "kimi-coding/k3-256k",
+        "thinking": "high",
+        "startedAt": 1791685655143,
+        "updatedAt": 1791709376068,
+        "pendingMessages": false,
+        "controlProtocol": "v1",
+        "ownerIncarnation": "9b9b70ff-3740-439e-9f62-619b20f24970",
+        "label": "HER-2"
+      },
+      "version": 20879,
+      "updatedAt": 1791709376072,
+      "updatedBy": {
+        "id": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a128c2-10ba-7647-9c7a-b8c782b5def6"
+      }
+    },
+    "topology/hosts/f8c58825fae67a76e9fe66cd6ccc984a60684c0191243e4dc28f185aaf613b35": {
+      "key": "topology/hosts/f8c58825fae67a76e9fe66cd6ccc984a60684c0191243e4dc28f185aaf613b35",
+      "value": {
+        "format": 1,
+        "id": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "rootId": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "identity": {
+          "id": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+          "name": "main",
+          "kind": "main",
+          "sessionId": "01a128c2-10ba-7647-9c7a-b8c782b5def6"
+        },
+        "startedAt": 1791685655144,
+        "updatedAt": 1791709376073,
+        "expiresAt": 1791709391073
+      },
+      "version": 20880,
+      "updatedAt": 1791709376074,
+      "updatedBy": {
+        "id": "session:01a128c2-10ba-7647-9c7a-b8c782b5def6",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a128c2-10ba-7647-9c7a-b8c782b5def6"
+      }
+    },
+    "sessions/01a13fdd-51d5-71cb-bbce-fcba73e553ba": {
+      "key": "sessions/01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+      "value": {
+        "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "name": "HER-3",
+        "label": "HER-3",
+        "kind": "peer",
+        "status": "idle",
+        "runner": "pi",
+        "transport": "host",
+        "cwd": "G:\\project\\HeroTavern",
+        "sessionId": "01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "model": "kimi-coding/k3-256k",
+        "thinking": "high",
+        "startedAt": 1792072889972,
+        "updatedAt": 1792073781448,
+        "pendingMessages": false,
+        "local": false
+      },
+      "version": 31239,
+      "updatedAt": 1792073781455,
+      "updatedBy": {
+        "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a13fdd-51d5-71cb-bbce-fcba73e553ba"
+      }
+    },
+    "topology/participants/c2b932ca2d9402ea6f997aef630e079ed095b12b20e00877558a9a6b63c462ac": {
+      "key": "topology/participants/c2b932ca2d9402ea6f997aef630e079ed095b12b20e00877558a9a6b63c462ac",
+      "value": {
+        "format": 1,
+        "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "kind": "root",
+        "rootId": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "ownerHostId": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "ownerIdentityId": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "name": "main",
+        "status": "idle",
+        "runner": "pi",
+        "transport": "host",
+        "capabilities": [
+          "steer",
+          "followUp",
+          "fabric"
+        ],
+        "cwd": "G:\\project\\HeroTavern",
+        "sessionId": "01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "model": "kimi-coding/k3-256k",
+        "thinking": "high",
+        "startedAt": 1792072889972,
+        "updatedAt": 1792073781448,
+        "pendingMessages": false,
+        "controlProtocol": "v1",
+        "ownerIncarnation": "9b828d83-aaa8-48c2-8eb5-d5ff69f316ba",
+        "label": "HER-3"
+      },
+      "version": 31240,
+      "updatedAt": 1792073781465,
+      "updatedBy": {
+        "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a13fdd-51d5-71cb-bbce-fcba73e553ba"
+      }
+    },
+    "topology/hosts/c2b932ca2d9402ea6f997aef630e079ed095b12b20e00877558a9a6b63c462ac": {
+      "key": "topology/hosts/c2b932ca2d9402ea6f997aef630e079ed095b12b20e00877558a9a6b63c462ac",
+      "value": {
+        "format": 1,
+        "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "rootId": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "identity": {
+          "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+          "name": "main",
+          "kind": "main",
+          "sessionId": "01a13fdd-51d5-71cb-bbce-fcba73e553ba"
+        },
+        "startedAt": 1792072889972,
+        "updatedAt": 1792073781468,
+        "expiresAt": 1792073796468
+      },
+      "version": 31241,
+      "updatedAt": 1792073781471,
+      "updatedBy": {
+        "id": "session:01a13fdd-51d5-71cb-bbce-fcba73e553ba",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a13fdd-51d5-71cb-bbce-fcba73e553ba"
+      }
+    }
+  },
+  "highWater": 31647,
+  "versions": {
+    "topology/peer-seq": 3,
+    "sessions/01a12147-9ded-7286-9dba-ba77f9761a73": 5267,
+    "topology/participants/2688032e548f2fdb5ebe2da3ae0596fbd10a2c756bdca6d82e6638c3b9ac4661": 5268,
+    "topology/hosts/2688032e548f2fdb5ebe2da3ae0596fbd10a2c756bdca6d82e6638c3b9ac4661": 5269,
+    "sessions/01a128c2-10ba-7647-9c7a-b8c782b5def6": 20878,
+    "topology/participants/f8c58825fae67a76e9fe66cd6ccc984a60684c0191243e4dc28f185aaf613b35": 20879,
+    "topology/hosts/f8c58825fae67a76e9fe66cd6ccc984a60684c0191243e4dc28f185aaf613b35": 20880,
+    "sessions/01a13fdd-51d5-71cb-bbce-fcba73e553ba": 31239,
+    "topology/participants/c2b932ca2d9402ea6f997aef630e079ed095b12b20e00877558a9a6b63c462ac": 31240,
+    "topology/hosts/c2b932ca2d9402ea6f997aef630e079ed095b12b20e00877558a9a6b63c462ac": 31241
+  },
+  "tombstoneOrder": []
+}
