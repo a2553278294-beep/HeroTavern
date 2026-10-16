@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "files": [
     {
       "file": "Resources/Characters/character_c_idle_body_01_a_1.png",
@@ -2861,6 +2861,888 @@
       "size": [
         128,
         128
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_a_1.png",
+      "bytes": 4317,
+      "sha256": "74216bba18598e50aa6ad2520da47b212707991bfed5fa43c4b36f60e00f4744",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_a_2.png",
+      "bytes": 4379,
+      "sha256": "be4a482b8b976f74e5efdf84c6967a66b59b2634bf49b66acea0637ffb9fd649",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_b_1.png",
+      "bytes": 4458,
+      "sha256": "92a361a8c559c3ce6986fc05bd9966e478ead85a641f2f86593e396176cef1ba",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_b_2.png",
+      "bytes": 4416,
+      "sha256": "203c8500fc6907832bab719a6fd80b2312df1f906e326289f904365353fac4a8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_c_1.png",
+      "bytes": 4462,
+      "sha256": "72f6b863760812cbb8d05675976a556678705d6b86baeb1b460234e4f0a9a6c1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_c_2.png",
+      "bytes": 4542,
+      "sha256": "0e9753425babe507de61efecf2ef1d31d4569ca244349493f6a0c95b9eeebb3c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_d_1.png",
+      "bytes": 4446,
+      "sha256": "c0eb87596807d324add8b34f38dc712c3d73c56c77543f5f906afcbd2ec76a6d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_d_2.png",
+      "bytes": 4402,
+      "sha256": "0cbd01ab1fe067843752a726bb05552d8921809f8eb314c44fd66bbe2f3285e0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_a_1.png",
+      "bytes": 4536,
+      "sha256": "22c8cad024ea01ffe5eab3d526bd1a2f8d63d61c5dd806b5764b0436129b61f0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_a_2.png",
+      "bytes": 4412,
+      "sha256": "e255cedd96f0b77cf9f23fc4ed38ed2a7ecbf407e77c8e04aed7a5f461ef34b9",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_b_1.png",
+      "bytes": 4431,
+      "sha256": "5b3da197793cfddb4306653e1a4f608cf952caaca4dfb6cfe4e3bf490bb1ed30",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_b_2.png",
+      "bytes": 4431,
+      "sha256": "25fedfc954f7d426f4dae28e2f76cf36f9b7b07349836c683987c0cc3b87260b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_c_1.png",
+      "bytes": 4426,
+      "sha256": "d52ea379c6649a958dc784c26d558b22134413311d28a9b0a87162d8a499a17e",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_c_2.png",
+      "bytes": 4426,
+      "sha256": "02162046a214ad9fa24bf582ca3e4bfde39897cd39b9f5fd2bcc18a38c5195f4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_d_1.png",
+      "bytes": 4294,
+      "sha256": "0e826b3306f13ac9d604cb2984600c96ae77b35d9192546d81086541bd38fee6",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_d_2.png",
+      "bytes": 4412,
+      "sha256": "e35192b75f70826a8e34ac44baacee7e91665906b0e6c80e83e87289134a978c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_a_1.png",
+      "bytes": 5037,
+      "sha256": "5b4932510be275acdbad60a48a9f8638fefd96c64f9ac9c7a505828a85d44c33",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_a_2.png",
+      "bytes": 4915,
+      "sha256": "5305b5ffd1b507e2d39dd5f526aa3f19d1a8ccd1497e0fdbb34996df0991a9de",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_b_1.png",
+      "bytes": 4871,
+      "sha256": "e829521b0dc9c75c3649d796416f5d7a635115c6f0849b49595332a358ebf4b0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_b_2.png",
+      "bytes": 4874,
+      "sha256": "5daab12205255b02b34116ccb72d1ada466cce4faf3fa649822887503061ee7e",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_c_1.png",
+      "bytes": 4832,
+      "sha256": "cef95ae5f6e5090d3b784512d3371f0904d03f4d8d3af68d27448214d8ad5b0c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_c_2.png",
+      "bytes": 4835,
+      "sha256": "7a6163228e2046f6b0cb8361e152252a8942c76c28123c2759029653cb9bc537",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_d_1.png",
+      "bytes": 5127,
+      "sha256": "feb4a5afe08bf56401550d98e752cab0cbfd464605524887ba899124c40d4179",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_d_2.png",
+      "bytes": 5127,
+      "sha256": "c8cc261f612c195fe64316ece23fa95c29fe9a6f81672787708cbe78122c7463",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_a_1.png",
+      "bytes": 4627,
+      "sha256": "49711c63a0eeba76db4d567f561a677044610f4fab70091c52334109fd28af83",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_a_2.png",
+      "bytes": 4684,
+      "sha256": "285d412547db2c8fa3032dbeb40d983a65f59f457eb36cae23dcf97c6a955d61",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_b_1.png",
+      "bytes": 4690,
+      "sha256": "a7a660114cba63b6b4acac6b0129969138f709e4e3f0a9e88e71b8a08ee06857",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_b_2.png",
+      "bytes": 4694,
+      "sha256": "7f76af32539eeeda773b80f07952a5705d4ec0ceb4aa3726b13ffd117dd8df9a",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_c_1.png",
+      "bytes": 4688,
+      "sha256": "7cb9c80f2726a662f8ede37a9ea9ac55dbeabf54b4f29740f6b1605b49f9ed4c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_c_2.png",
+      "bytes": 4695,
+      "sha256": "dec2b16339747e37c139fa21dfca21916a35553e8ecc86ac5cc4ac1cb3e0ed90",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_d_1.png",
+      "bytes": 4548,
+      "sha256": "fecccbc10937de5f35ffcc9600cb70f50cd66b035c5e29461bd47c55e92162aa",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_d_2.png",
+      "bytes": 4535,
+      "sha256": "f8babf0a52b200a9f6e5fff635bc1938c534c5ae45da22769f3ed510b5685b6d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_a_1.png",
+      "bytes": 4536,
+      "sha256": "1d025cd5f412d13169c95cb61d856e4652eb36ca83eb897f4fd84c4b52f7ce9e",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_a_2.png",
+      "bytes": 4411,
+      "sha256": "487546afae4ba587e0e15a7c1eddef1b57bf11b133977050b4a973268b78e7b3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_b_1.png",
+      "bytes": 4431,
+      "sha256": "ce1ed2514fe62701c5e27f173b8170a494025222cc0fd4f91a0c64206243ec2c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_b_2.png",
+      "bytes": 4431,
+      "sha256": "2492a4d83bf54be12db8d654867e5c56c3eebf7a1b0870bc8224aee87571a9da",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_c_1.png",
+      "bytes": 4426,
+      "sha256": "6cd76f50c4d1ffd32d8580178ac6752dc0f0c99cbf77210a14b346ec86a580b6",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_c_2.png",
+      "bytes": 4426,
+      "sha256": "ebcc592776090a43deea7d34dd0b5745853569de5af79972239e50ef36ca21df",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_d_1.png",
+      "bytes": 4294,
+      "sha256": "94ba734336d69003dc72731bacf7c804396648ba9740951f2edb56e16ebebdfc",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_d_2.png",
+      "bytes": 4411,
+      "sha256": "fa4574031a9f05fd2e77e152541835161b7a6f817a8e41ee12be6c03fd07637b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_a_1.png",
+      "bytes": 5323,
+      "sha256": "35aee2a70e07a71609f883d4fb0c13e1b450d95888cf888cc7e631322a7ad970",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_a_2.png",
+      "bytes": 5200,
+      "sha256": "23147abd9d71a3a7b003dcdc33c38619ca36cab041375e486279da42bb65af33",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_b_1.png",
+      "bytes": 5157,
+      "sha256": "dc6b21debd6942d540818f9333d7c239d9df0b7f92d3682fc657e5ad4c389df3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_b_2.png",
+      "bytes": 5161,
+      "sha256": "1936d32e2ea819eba3ac1f7fba67d4c5223e9eaba98bee52bb0acaf8802e75c9",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_c_1.png",
+      "bytes": 5118,
+      "sha256": "827e9f0a61f5863fbff2a69b6a2e24cf4023a87b0c24c1cb2b036625ccb5c44b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_c_2.png",
+      "bytes": 5121,
+      "sha256": "3724c3fc72cb604d18e52653b7b059c0ade29d005d2581945008231edfc0fa42",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_d_1.png",
+      "bytes": 5413,
+      "sha256": "fe78f17d6b05351f99130633f5658287a766440798a456b94d406de35236fec5",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_d_2.png",
+      "bytes": 5413,
+      "sha256": "869f25185f0befe1ef90005fd0b9e1e6206fa9f3f7d8f6b3e3da2bed213e2fd2",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_1.png",
+      "bytes": 4685,
+      "sha256": "2c11d04c6b661cbf027406cb5d356becc5ae9b73c4326de072457f36665ae843",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_2.png",
+      "bytes": 4675,
+      "sha256": "f281ff1548884ee557a758e1c17fce98dc33b7f55b497ca8a4269fd3c5696f88",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_3.png",
+      "bytes": 4645,
+      "sha256": "28932a66a46891986979177fd5bfe2becaf5a3d496b1226a4a80b557d6c43772",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_4.png",
+      "bytes": 4675,
+      "sha256": "4a0e31a363f4874069e53ebe8e3cbb3ccf55bc55549860e2656b4024f2017355",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_1.png",
+      "bytes": 4729,
+      "sha256": "ce53f768798d1595010c7c4696716cf5cd97b6383a6a8cd97079da8ae0490fc8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_2.png",
+      "bytes": 4721,
+      "sha256": "bb8821117dcbd8667434d20b0a67f32f50ce20785c2575a80258accf8894f4ee",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_3.png",
+      "bytes": 4729,
+      "sha256": "e2db8f5cc1e34ef973592e636d0094c14b1720c45a8e4f47624535d2a16e8e11",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_4.png",
+      "bytes": 4721,
+      "sha256": "af9c77e94f9401fbdc80b3b38e56f6f2d1ece159bf1b1cd6083d6093d3893c6c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_1.png",
+      "bytes": 4760,
+      "sha256": "244ba3173db1801582d311ee589c14ce2f368a1c798046039acc457a49c42c0b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_2.png",
+      "bytes": 4735,
+      "sha256": "10a8f9f6ddb5d5e6b184fad4a3781088d3dc601b5d6550d3c54f72d25f64ceb3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_3.png",
+      "bytes": 4760,
+      "sha256": "1a3c46dee042a598ccf2a3798e1a08408bb0e7f2f94270c168a8444951640e51",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_4.png",
+      "bytes": 4735,
+      "sha256": "42e4cdeae0645f452d964ef9aa3fbc6f8637248f0a92d52cd36ec1edf9cf9ec0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_1.png",
+      "bytes": 4710,
+      "sha256": "8bd4761f3cb18147759295f32b78a492189e000b481c9ec070b5cd04ec0531e7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_2.png",
+      "bytes": 4614,
+      "sha256": "c0efb1704e3ce7b508a28f3a28d84a1d95d3dbc3b9abed25ac444bca2f6261ad",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_3.png",
+      "bytes": 4710,
+      "sha256": "cfc040843c43796bf3d46d9c9b22093886cc0b36d37223082110216e9db7e3cb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_4.png",
+      "bytes": 4614,
+      "sha256": "5928bda181dd88b7618a786eeeca5a7d263132d927caf5b54d2cb1362c0e7018",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_1.png",
+      "bytes": 4452,
+      "sha256": "9c0180235ec86791b46ea635a9afdf500c17d9bf215c500d5f6de606dfceaacb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_2.png",
+      "bytes": 4412,
+      "sha256": "e8d51027d7708a99614595c5fe1ccbb56ead6fbc053647edafcc9a7da8c6ce62",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_3.png",
+      "bytes": 4411,
+      "sha256": "26679341d3e977a972add061ac5a7301c70fd5467b85e4485cd70b1141a909b7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_4.png",
+      "bytes": 4412,
+      "sha256": "f6eef5daf6b408a4757a7f1fddf8a72a3e101b6be59db83c033fd148e2425abc",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_1.png",
+      "bytes": 4431,
+      "sha256": "2e38b895fd5df3aea4a451b4b62321a724c57ebc0c5eec2c7d10e22f047da8e1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_2.png",
+      "bytes": 4431,
+      "sha256": "c514e4c1c5536475c64c066cebeb87c9647b5e9a5aeff4e480cf0d176233ddcf",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_3.png",
+      "bytes": 4431,
+      "sha256": "0bca8564f3a920c5d585999b36177304ae38d95e43f9519afe1be7ddc0d7a99a",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_4.png",
+      "bytes": 4431,
+      "sha256": "76f41cdc27dd8cfcf54e8e295923cf95725e78c6c1012f6bbebbb020b3f42a6b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_1.png",
+      "bytes": 4426,
+      "sha256": "f78d1fa45055c72232200766d33ebf021604c813d58e1afd8c8d4ae844fdd7ab",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_2.png",
+      "bytes": 4426,
+      "sha256": "208590b188609b0681e2e5f8de322f6f0b864804cccef0bc8cb531fed3b9c00c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_3.png",
+      "bytes": 4426,
+      "sha256": "0264bb759849d6cd60e6bc002b871a3392e461acdf1d5718bdfe47263e30c620",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_4.png",
+      "bytes": 4426,
+      "sha256": "395e7a1ac7b8706cadd0450640f2ba9403a099964559315eb81819f751cbda3d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_1.png",
+      "bytes": 4294,
+      "sha256": "a11e5b041952a4b1e6f95d24b875a137ade2f49cd2830bfccb4030bce809f919",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_2.png",
+      "bytes": 4294,
+      "sha256": "f80fa29f823b9f398707749bead73dccbc8cddcdff4407f587b8f50334c66750",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_3.png",
+      "bytes": 4294,
+      "sha256": "2a5bc17826f86b6c576874e3e67568689b6ea36437fb733608d5b96666efd037",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_4.png",
+      "bytes": 4294,
+      "sha256": "1e4eec43ad46d848de7cb48f3e0ead2ce6236b9669e480748fe41e710d4bad44",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_1.png",
+      "bytes": 5323,
+      "sha256": "8942ab206cdbb6e027c2cc6d1ab9314fe886a49715a07c031727e5c8ff675d1d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_2.png",
+      "bytes": 5201,
+      "sha256": "2f9ae5e4afe3868c061776dc66efe74b9199c824e1011a4fd299898d52eac607",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_3.png",
+      "bytes": 5226,
+      "sha256": "d474c16395a243920786173ac5eb5076aaff3f33fee6323bfe5a221b632dccc0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_4.png",
+      "bytes": 5201,
+      "sha256": "3265138b8d036c5717438b9c1c22b76b55181ad28c36b1b9b6ba1459042f9145",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_1.png",
+      "bytes": 5157,
+      "sha256": "9d7604eac99e9dd41d2f5b41c5a79d9e2fdc67221e544ba8bd5427c8c2ff3dff",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_2.png",
+      "bytes": 5159,
+      "sha256": "e4e876269720af5e89e556f8375882bc0cbf03fa78dca1b09ee37146f3b37cc5",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_3.png",
+      "bytes": 5157,
+      "sha256": "589b822b003347d9ae94c6035618c4db8b0e8b94ab0688311c76843ef9a8cebb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_4.png",
+      "bytes": 5159,
+      "sha256": "b1bd95e7ad5ff3fc058f32e612c913a5e31ba5ec88cf4b7523b42c189e696abe",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_1.png",
+      "bytes": 5118,
+      "sha256": "543df208f0392579d3860aec931112b00a2307d40aab32744a09a54f05799680",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_2.png",
+      "bytes": 5119,
+      "sha256": "15d51ec152ef886d4369e1967dddea44a8d3970768bbb25942772269b9aad9c4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_3.png",
+      "bytes": 5118,
+      "sha256": "1e1adb39257208149daab921b789933641e2a822bdbeaf8dcefeda9a9649a4a7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_4.png",
+      "bytes": 5119,
+      "sha256": "68cb8095ed315d46371c5d9810c3c92aafe42a81c03fbc0990bd53a3597bc701",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_1.png",
+      "bytes": 5413,
+      "sha256": "721f2f0537196af36b57d8c042f2ce021e9962ac576a556884e32276c7ad5750",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_2.png",
+      "bytes": 5413,
+      "sha256": "ac7f9d9d4fb6b40494b1aaa103c517d8423b5ce3a5fc7960466f0eabb644fbf3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_3.png",
+      "bytes": 5413,
+      "sha256": "6f8d39767724c8ff821288185582463a624d23950330cabe1b16f82cf69dd07f",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_4.png",
+      "bytes": 5413,
+      "sha256": "24e305eff7ed30a7de4e89e0a7f8d8da1f30bb9b07a9996fb492f0e0171356f1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_empty.png",
+      "bytes": 3932,
+      "sha256": "f777c1a187715d94694fc1120d7d6a0f9274d7007ead2ae7696389776040303c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_00.png",
+      "bytes": 39619,
+      "sha256": "5361bbc6d94d48a6c4633b70d6aaecacd7d3fec07d4676ecdcfb0dc95eb7191d",
+      "size": [
+        1024,
+        1024
       ]
     }
   ]
