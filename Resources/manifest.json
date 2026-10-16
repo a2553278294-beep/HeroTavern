@@ -3747,8 +3747,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_a_1.png",
-      "bytes": 9665,
-      "sha256": "b46adc1273857ae69b3e74992d32a9f062d4d2b9d309b87dd61ab96d716f74e4",
+      "bytes": 10842,
+      "sha256": "32da28ce0ce5ccb037e987f7563d6258976e52cebea5193a136e3f9e6d91a8ef",
       "size": [
         256,
         256
@@ -3756,8 +3756,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_a_2.png",
-      "bytes": 9240,
-      "sha256": "5d5e1a8c44e8d9c745a387cce60a6d17d48cd28e81dcf92c40a35f10d60f3530",
+      "bytes": 11705,
+      "sha256": "9d692bf09032c443b1c71e8614b09b2b61e0d1ba5ad8b9ea27edc43462a555fd",
       "size": [
         256,
         256
@@ -3765,8 +3765,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_b_1.png",
-      "bytes": 9556,
-      "sha256": "eefbaba82dfce6a5487b7edbd92f0aed63b1d97d648e9275fd5b0b85dbae1a2a",
+      "bytes": 10733,
+      "sha256": "5c332a32e687b2d3bd89bea36040a2c3b3d186935d7979b1a8de136fd9d18afb",
       "size": [
         256,
         256
@@ -3774,8 +3774,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_b_2.png",
-      "bytes": 9367,
-      "sha256": "8bc59a48269e22df6da41c643070e034c7448d8a933b5056e5d11a040a2d7794",
+      "bytes": 11330,
+      "sha256": "f999e50a5f200e1268bbd9ad017629c43dbad67c2799b8a99b7260496818a9a8",
       "size": [
         256,
         256
@@ -3783,8 +3783,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_c_1.png",
-      "bytes": 9810,
-      "sha256": "64722cdcdb65765549fec871865b2f259ba7349c3a00cc824aecf06977066014",
+      "bytes": 10987,
+      "sha256": "68c0ee4ba198f8221d344305ac8f5af902025929a5904db40be3ac5470736e7b",
       "size": [
         256,
         256
@@ -3792,8 +3792,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_c_2.png",
-      "bytes": 9603,
-      "sha256": "b74518857069475e63643f0f797860944a6f2e6220d0da5b3333b1df28cd8887",
+      "bytes": 11357,
+      "sha256": "128d6a29c79fc3bc176ddc925dc626e3042e2816e0685acbbcc06bdc07fad678",
       "size": [
         256,
         256
@@ -3801,8 +3801,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_d_1.png",
-      "bytes": 9383,
-      "sha256": "68797c14128069e0848f131ce2ef7894f94525a12bd967840c9ed1f96a2f4dd6",
+      "bytes": 10560,
+      "sha256": "e97f74d0ab6098fb5a960d142347f1bcd23aed8500ea661012fe82e5c80743d1",
       "size": [
         256,
         256
@@ -3810,8 +3810,8 @@
     },
     {
       "file": "Resources/Monsters/monster_01_d_2.png",
-      "bytes": 9136,
-      "sha256": "8ecd4aaed8274bab856b679f520f0963ce2156633c76ce7aecc83069d16533a0",
+      "bytes": 10663,
+      "sha256": "9a9265194f94657fd8c07707fb2fc4a82b157a6b5c935dc4f49cf41ed6465ec0",
       "size": [
         256,
         256
@@ -3819,8 +3819,8 @@
     },
     {
       "file": "Resources/Monsters/monster_02_a_1.png",
-      "bytes": 11200,
-      "sha256": "97d40873cb68af64ecfcb36d5fa46060801f6574673fc1cd968416ad41cc6f4d",
+      "bytes": 10454,
+      "sha256": "3f1be9c1f6d21a4fd67b9068f6b9d906a484fb519a20a32d863ffbcf6b056352",
       "size": [
         256,
         256
@@ -3828,8 +3828,8 @@
     },
     {
       "file": "Resources/Monsters/monster_02_a_2.png",
-      "bytes": 10939,
-      "sha256": "1046a0d9d877a8042c2e770db6d5d7426aa4024a96b41236c6d717a722af1069",
+      "bytes": 11413,
+      "sha256": "35e1c2efd3061d4c5423bfbc01940e94bead8a4b05f2c8320d8060af950c1190",
       "size": [
         256,
         256
@@ -3837,8 +3837,8 @@
     },
     {
       "file": "Resources/Monsters/monster_02_b_1.png",
-      "bytes": 10818,
-      "sha256": "d10d9649136b5b5e0955cbbc6012b6fc725c48a26109425626374a383c7ae8b3",
+      "bytes": 10584,
+      "sha256": "ef6b04330528e67b235d6ed91d12d878ffb69aadb5e49bb920b999ee88c415ff",
       "size": [
         256,
         256
@@ -3846,8 +3846,8 @@
     },
     {
       "file": "Resources/Monsters/monster_02_b_2.png",
-      "bytes": 10974,
-      "sha256": "b9e6206df52695adeff6d85899feb52c89fca5ee7d2493de4e3795720d94fdc8",
+      "bytes": 11448,
+      "sha256": "7a40a59045216b316a727d72fa94798edba960645775e9f8fb54ad58de12e4fc",
       "size": [
         256,
         256
@@ -3855,8 +3855,8 @@
     },
     {
       "file": "Resources/Monsters/monster_02_c_1.png",
-      "bytes": 10841,
-      "sha256": "7301ae34ed9cd2be886ef69f631f9320dcb8578b508824b4fbdd5f0412280665",
+      "bytes": 10786,
+      "sha256": "b1d3d43ad2a825d2a8db80d7940937fb2ae43bd9fdc1ce6771a9d0e7afb85018",
       "size": [
         256,
         256
@@ -3864,8 +3864,8 @@
     },
     {
       "file": "Resources/Monsters/monster_02_c_2.png",
-      "bytes": 11700,
-      "sha256": "cec78af952ddea9f80cab83802f8a22444907f0af58b4528d2b1985454f575b5",
+      "bytes": 12174,
+      "sha256": "68942b92dc361da42a8e9e19bed21f687747e2b86bb126c5007e340231a829fb",
       "size": [
         256,
         256
@@ -3873,8 +3873,8 @@
     },
     {
       "file": "Resources/Monsters/monster_02_d_1.png",
-      "bytes": 10139,
-      "sha256": "4df8b1337691b5159bf1c766373535a4f3149ed2b0cb5ab337785b98d01c7328",
+      "bytes": 10348,
+      "sha256": "4bf993ba246e6260294f6a484060816d6826facdb194212695a19ff5a65b1b87",
       "size": [
         256,
         256
@@ -3882,8 +3882,107 @@
     },
     {
       "file": "Resources/Monsters/monster_02_d_2.png",
-      "bytes": 10332,
-      "sha256": "2becbd6f57ab18b061bab5ed552bbf1af62324d4b21eb51a9d335a1b882644f0",
+      "bytes": 10806,
+      "sha256": "cf2ad352fbdcb750fa81aa74b9a826b4d208bb8a3b6fccdddd19a2f598d0d424",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_a_1.png",
+      "bytes": 11256,
+      "sha256": "3b6b376b0bc69264961a07df7ac072079f1aa71c6469ed8b6dcbbc73c18b2d34",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_a_2.png",
+      "bytes": 11696,
+      "sha256": "2e36ca2a1e95845215a442e41d0491abbdd8df4ba20bbef6aee6ca37a118afdf",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_b_1.png",
+      "bytes": 10985,
+      "sha256": "dcf027ec8c6e69332969fe8029c01a1a5e485391855a49eb7564843a4f31486b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_b_2.png",
+      "bytes": 11899,
+      "sha256": "0760a3720addc8729cc70cfaac0a255a8ca56a7febea8d9675881ff292ec868f",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_c_1.png",
+      "bytes": 11092,
+      "sha256": "4dab6011412e3edc52dc5569d7c2425bcf435014e7cf86ffc30acf2ef2d34f21",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_c_2.png",
+      "bytes": 12026,
+      "sha256": "8b5530938ead82dd74e3374feb95858d9b684bae72bd9f89eded68481ff283d4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_d_1.png",
+      "bytes": 11639,
+      "sha256": "ac8686f485c7fd4a47298ed79e50def59099b72f2ef3056480d80824ce768fd8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_d_2.png",
+      "bytes": 13391,
+      "sha256": "10bbd1a44c3dc330323399fb0d2e327ad7bc4341bb3a07a303104c25d47215f8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_04_a_1.png",
+      "bytes": 10975,
+      "sha256": "9efb37151795666dfebdae561b4f89d9b4cc0c00947eca86f54f45fcbffa6c2b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_04_b_1.png",
+      "bytes": 12976,
+      "sha256": "56fe6998b1b8692622ae02c07ebdd81567770c4844dacd2d27abd274493157c7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_04_c_1.png",
+      "bytes": 11900,
+      "sha256": "7f708173b0de31238810a60ff2d1d3fd68a72ebb71b2a9bc36b3ae4ecebe10b4",
       "size": [
         256,
         256

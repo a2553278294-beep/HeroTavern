@@ -1,0 +1,641 @@
+{
+  "date": "2026-10-16",
+  "baseCommit": "f8a62ae1502737eb6b46614cc81a4acb83860d1d",
+  "backupDirectory": "C:\\Users\\Lorcin\\Desktop\\聚光灯创意\\备份\\20261016-怪物追加更新前",
+  "authoredInEdgeFirst": true,
+  "updatedWorkbook": "Excel/moster.xlsx",
+  "changedRange": "moster!B4:M18",
+  "monsterIds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "idMapping": [
+    {
+      "name": "紫红史莱姆",
+      "oldId": 1,
+      "newId": 1
+    },
+    {
+      "name": "青蓝史莱姆",
+      "oldId": 4,
+      "newId": 2
+    },
+    {
+      "name": "叶芽史莱姆",
+      "oldId": 7,
+      "newId": 3
+    },
+    {
+      "name": "暗灰史莱姆",
+      "oldId": 10,
+      "newId": 4
+    },
+    {
+      "name": "浅绿史莱姆",
+      "oldId": 2,
+      "newId": 5
+    },
+    {
+      "name": "灰蓝史莱姆",
+      "oldId": 5,
+      "newId": 6
+    },
+    {
+      "name": "荆冠史莱姆",
+      "oldId": 8,
+      "newId": 7
+    },
+    {
+      "name": "黑影史莱姆",
+      "oldId": 13,
+      "newId": 8
+    }
+  ],
+  "newMonsterParameters": [
+    {
+      "name": "灰鼠",
+      "id": 9,
+      "numericTemplate": "紫红史莱姆",
+      "stage": 1,
+      "groupCount": 3
+    },
+    {
+      "name": "沙鼠",
+      "id": 10,
+      "numericTemplate": "青蓝史莱姆",
+      "stage": 2,
+      "groupCount": 3
+    },
+    {
+      "name": "赤焰鼠",
+      "id": 11,
+      "numericTemplate": "叶芽史莱姆",
+      "stage": 3,
+      "groupCount": 3
+    },
+    {
+      "name": "晶背鼠",
+      "id": 12,
+      "numericTemplate": "暗灰史莱姆",
+      "stage": 4,
+      "groupCount": 3
+    },
+    {
+      "name": "赤冠史莱姆",
+      "id": 13,
+      "numericTemplate": "叶芽史莱姆",
+      "stage": 3,
+      "groupCount": 1
+    },
+    {
+      "name": "双生史莱姆",
+      "id": 14,
+      "numericTemplate": "暗灰史莱姆",
+      "stage": 4,
+      "groupCount": 1
+    },
+    {
+      "name": "巨牙鼠",
+      "id": 15,
+      "numericTemplate": "黑影史莱姆",
+      "stage": 5,
+      "groupCount": 1
+    }
+  ],
+  "numericDefaultsApprovedByUser": true,
+  "externalMonsterReferences": [
+    {
+      "file": "Dialogue.xlsx",
+      "sheet": "Event",
+      "header": "J2",
+      "values": [
+        {
+          "cell": "J3",
+          "value": "int#range=[0,]"
+        },
+        {
+          "cell": "J4",
+          "value": "c"
+        },
+        {
+          "cell": "J5",
+          "value": 0
+        },
+        {
+          "cell": "J6",
+          "value": 0
+        },
+        {
+          "cell": "J7",
+          "value": 0
+        },
+        {
+          "cell": "J8",
+          "value": 0
+        },
+        {
+          "cell": "J9",
+          "value": 0
+        },
+        {
+          "cell": "J10",
+          "value": 0
+        },
+        {
+          "cell": "J11",
+          "value": 0
+        },
+        {
+          "cell": "J12",
+          "value": 0
+        },
+        {
+          "cell": "J13",
+          "value": 0
+        },
+        {
+          "cell": "J14",
+          "value": 0
+        },
+        {
+          "cell": "J15",
+          "value": 0
+        },
+        {
+          "cell": "J16",
+          "value": 0
+        },
+        {
+          "cell": "J17",
+          "value": 0
+        },
+        {
+          "cell": "J18",
+          "value": 0
+        },
+        {
+          "cell": "J19",
+          "value": 0
+        },
+        {
+          "cell": "J20",
+          "value": 0
+        },
+        {
+          "cell": "J21",
+          "value": 0
+        },
+        {
+          "cell": "J22",
+          "value": 0
+        },
+        {
+          "cell": "J23",
+          "value": 0
+        },
+        {
+          "cell": "J24",
+          "value": 0
+        },
+        {
+          "cell": "J25",
+          "value": 0
+        },
+        {
+          "cell": "J26",
+          "value": 0
+        },
+        {
+          "cell": "J27",
+          "value": 0
+        },
+        {
+          "cell": "J28",
+          "value": 0
+        },
+        {
+          "cell": "J29",
+          "value": 0
+        },
+        {
+          "cell": "J30",
+          "value": 0
+        },
+        {
+          "cell": "J31",
+          "value": 0
+        },
+        {
+          "cell": "J32",
+          "value": 0
+        },
+        {
+          "cell": "J33",
+          "value": 0
+        },
+        {
+          "cell": "J34",
+          "value": 0
+        },
+        {
+          "cell": "J35",
+          "value": 0
+        },
+        {
+          "cell": "J36",
+          "value": 0
+        },
+        {
+          "cell": "J37",
+          "value": 0
+        },
+        {
+          "cell": "J38",
+          "value": 0
+        },
+        {
+          "cell": "J39",
+          "value": 0
+        },
+        {
+          "cell": "J40",
+          "value": 0
+        },
+        {
+          "cell": "J41",
+          "value": 0
+        },
+        {
+          "cell": "J42",
+          "value": 0
+        },
+        {
+          "cell": "J43",
+          "value": 0
+        },
+        {
+          "cell": "J44",
+          "value": 0
+        },
+        {
+          "cell": "J45",
+          "value": 0
+        },
+        {
+          "cell": "J46",
+          "value": 0
+        },
+        {
+          "cell": "J47",
+          "value": 0
+        },
+        {
+          "cell": "J48",
+          "value": 0
+        },
+        {
+          "cell": "J49",
+          "value": 0
+        },
+        {
+          "cell": "J50",
+          "value": 0
+        },
+        {
+          "cell": "J51",
+          "value": 0
+        },
+        {
+          "cell": "J52",
+          "value": 0
+        },
+        {
+          "cell": "J53",
+          "value": 0
+        },
+        {
+          "cell": "J54",
+          "value": 0
+        },
+        {
+          "cell": "J55",
+          "value": 0
+        },
+        {
+          "cell": "J56",
+          "value": 0
+        },
+        {
+          "cell": "J57",
+          "value": 0
+        },
+        {
+          "cell": "J58",
+          "value": 0
+        },
+        {
+          "cell": "J59",
+          "value": 0
+        },
+        {
+          "cell": "J60",
+          "value": 0
+        },
+        {
+          "cell": "J61",
+          "value": 0
+        },
+        {
+          "cell": "J62",
+          "value": 0
+        },
+        {
+          "cell": "J63",
+          "value": 0
+        },
+        {
+          "cell": "J64",
+          "value": 0
+        },
+        {
+          "cell": "J65",
+          "value": 0
+        },
+        {
+          "cell": "J66",
+          "value": 0
+        },
+        {
+          "cell": "J67",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "workbookCellsChanged": 144,
+  "workbookStylesPreserved": true,
+  "workbookValidationAndFreezePanesPreserved": true,
+  "assets": [
+    {
+      "file": "Resources/Monsters/monster_01_a_1.png",
+      "operation": "replace",
+      "sha256": "32da28ce0ce5ccb037e987f7563d6258976e52cebea5193a136e3f9e6d91a8ef"
+    },
+    {
+      "file": "Resources/Monsters/monster_01_a_2.png",
+      "operation": "replace",
+      "sha256": "9d692bf09032c443b1c71e8614b09b2b61e0d1ba5ad8b9ea27edc43462a555fd"
+    },
+    {
+      "file": "Resources/Monsters/monster_01_b_1.png",
+      "operation": "replace",
+      "sha256": "5c332a32e687b2d3bd89bea36040a2c3b3d186935d7979b1a8de136fd9d18afb"
+    },
+    {
+      "file": "Resources/Monsters/monster_01_b_2.png",
+      "operation": "replace",
+      "sha256": "f999e50a5f200e1268bbd9ad017629c43dbad67c2799b8a99b7260496818a9a8"
+    },
+    {
+      "file": "Resources/Monsters/monster_01_c_1.png",
+      "operation": "replace",
+      "sha256": "68c0ee4ba198f8221d344305ac8f5af902025929a5904db40be3ac5470736e7b"
+    },
+    {
+      "file": "Resources/Monsters/monster_01_c_2.png",
+      "operation": "replace",
+      "sha256": "128d6a29c79fc3bc176ddc925dc626e3042e2816e0685acbbcc06bdc07fad678"
+    },
+    {
+      "file": "Resources/Monsters/monster_01_d_1.png",
+      "operation": "replace",
+      "sha256": "e97f74d0ab6098fb5a960d142347f1bcd23aed8500ea661012fe82e5c80743d1"
+    },
+    {
+      "file": "Resources/Monsters/monster_01_d_2.png",
+      "operation": "replace",
+      "sha256": "9a9265194f94657fd8c07707fb2fc4a82b157a6b5c935dc4f49cf41ed6465ec0"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_a_1.png",
+      "operation": "replace",
+      "sha256": "3f1be9c1f6d21a4fd67b9068f6b9d906a484fb519a20a32d863ffbcf6b056352"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_a_2.png",
+      "operation": "replace",
+      "sha256": "35e1c2efd3061d4c5423bfbc01940e94bead8a4b05f2c8320d8060af950c1190"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_b_1.png",
+      "operation": "replace",
+      "sha256": "ef6b04330528e67b235d6ed91d12d878ffb69aadb5e49bb920b999ee88c415ff"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_b_2.png",
+      "operation": "replace",
+      "sha256": "7a40a59045216b316a727d72fa94798edba960645775e9f8fb54ad58de12e4fc"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_c_1.png",
+      "operation": "replace",
+      "sha256": "b1d3d43ad2a825d2a8db80d7940937fb2ae43bd9fdc1ce6771a9d0e7afb85018"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_c_2.png",
+      "operation": "replace",
+      "sha256": "68942b92dc361da42a8e9e19bed21f687747e2b86bb126c5007e340231a829fb"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_d_1.png",
+      "operation": "replace",
+      "sha256": "4bf993ba246e6260294f6a484060816d6826facdb194212695a19ff5a65b1b87"
+    },
+    {
+      "file": "Resources/Monsters/monster_02_d_2.png",
+      "operation": "replace",
+      "sha256": "cf2ad352fbdcb750fa81aa74b9a826b4d208bb8a3b6fccdddd19a2f598d0d424"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_a_1.png",
+      "operation": "add",
+      "sha256": "3b6b376b0bc69264961a07df7ac072079f1aa71c6469ed8b6dcbbc73c18b2d34"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_a_2.png",
+      "operation": "add",
+      "sha256": "2e36ca2a1e95845215a442e41d0491abbdd8df4ba20bbef6aee6ca37a118afdf"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_b_1.png",
+      "operation": "add",
+      "sha256": "dcf027ec8c6e69332969fe8029c01a1a5e485391855a49eb7564843a4f31486b"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_b_2.png",
+      "operation": "add",
+      "sha256": "0760a3720addc8729cc70cfaac0a255a8ca56a7febea8d9675881ff292ec868f"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_c_1.png",
+      "operation": "add",
+      "sha256": "4dab6011412e3edc52dc5569d7c2425bcf435014e7cf86ffc30acf2ef2d34f21"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_c_2.png",
+      "operation": "add",
+      "sha256": "8b5530938ead82dd74e3374feb95858d9b684bae72bd9f89eded68481ff283d4"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_d_1.png",
+      "operation": "add",
+      "sha256": "ac8686f485c7fd4a47298ed79e50def59099b72f2ef3056480d80824ce768fd8"
+    },
+    {
+      "file": "Resources/Monsters/monster_03_d_2.png",
+      "operation": "add",
+      "sha256": "10bbd1a44c3dc330323399fb0d2e327ad7bc4341bb3a07a303104c25d47215f8"
+    },
+    {
+      "file": "Resources/Monsters/monster_04_a_1.png",
+      "operation": "add",
+      "sha256": "9efb37151795666dfebdae561b4f89d9b4cc0c00947eca86f54f45fcbffa6c2b"
+    },
+    {
+      "file": "Resources/Monsters/monster_04_b_1.png",
+      "operation": "add",
+      "sha256": "56fe6998b1b8692622ae02c07ebdd81567770c4844dacd2d27abd274493157c7"
+    },
+    {
+      "file": "Resources/Monsters/monster_04_c_1.png",
+      "operation": "add",
+      "sha256": "7f708173b0de31238810a60ff2d1d3fd68a72ebb71b2a9bc36b3ae4ecebe10b4"
+    }
+  ],
+  "allResourceHashesVerified": 443,
+  "strictLuban": {
+    "passed": true,
+    "exitCode": 0,
+    "tables": 14,
+    "rows": 696
+  },
+  "runtimeGameTest": false,
+  "generatedMonsterMatchesSource": true,
+  "unchangedGeneratedTables": 13,
+  "resourceReferenceFiles": 27,
+  "allMonsterResourcesReferenced": true,
+  "visualReviewPassed": true,
+  "tableSummary": [
+    {
+      "table": "TbCharacter",
+      "input": "Character@Character.xlsx",
+      "rows": 5,
+      "jsonSha256": "4eac4ee95860d798cc6bdea2aec84108de4ba97441a1e745493b2c024b29adaf",
+      "binarySha256": "c5a366d3f9fde5c5b566822a1b004c6fb2cd8a3c0ae2f7a405f77bd0e5cc0363"
+    },
+    {
+      "table": "TbRelationship",
+      "input": "Relationship@Character.xlsx",
+      "rows": 3,
+      "jsonSha256": "40a1af45af764e9cd31b882c5e6019d0517d6f482bf1aadad062ae7002dbb2ad",
+      "binarySha256": "ae23900b5e109e54f33fcf403760dc73a33118cbe8be5006b6798757525b3ec1"
+    },
+    {
+      "table": "TbCharacterPart",
+      "input": "CharacterPart@CharacterPart.xlsx",
+      "rows": 390,
+      "jsonSha256": "cd676d26d849a6f326d7377233b3ded52aa875c508fddbf5e01365ea41f22ac2",
+      "binarySha256": "55fddfc6a9cf05a9a29fc9e5be48aaa214a0c5a69a05adc45accb1c3aaa1f2ac"
+    },
+    {
+      "table": "TbDialogue",
+      "input": "Dialogue@Dialogue.xlsx",
+      "rows": 107,
+      "jsonSha256": "c79be13dc2a7957b814726e86e875d684b0afec4eae7bd9e199a6dcdffc44cf1",
+      "binarySha256": "efee16add7d43b98df9568521e5180790dbe4e2de8630ace39d9d7752e7d4deb"
+    },
+    {
+      "table": "TbEvent",
+      "input": "Event@Dialogue.xlsx",
+      "rows": 63,
+      "jsonSha256": "97a5a71652bd53d9398b7fa359a27c71571dc681a07b236736fabd8b5cfb313b",
+      "binarySha256": "ffd6fb4c711a1c7056465c7f49f11e2171ecb94d70110a21a9feb3b0b25d6a78"
+    },
+    {
+      "table": "TbDialogue01",
+      "input": "Dialogue@Dialogue01.xlsx",
+      "rows": 10,
+      "jsonSha256": "43ce1795d1dbe88a8c2fbbf52fd9d2ad707429674abd7ddce70ad9a57a294cf2",
+      "binarySha256": "80889bc1be393a159d38d7f83184a6a083e997a1dc05176726f9c1dbc5b93a7b"
+    },
+    {
+      "table": "TbGlobal",
+      "input": "工作表1@global.xlsx",
+      "rows": 6,
+      "jsonSha256": "d9b802d85fc0a7c7b0d758c1e6d07bab9108389e79eea4b3ad04113878721e6b",
+      "binarySha256": "b5eb05fc841b8bd752f2aa1182cd2357b334adce464b78ee9af36fecd7c26317"
+    },
+    {
+      "table": "TbItem",
+      "input": "Item@Item.xlsx",
+      "rows": 57,
+      "jsonSha256": "5279aa7844dcdf18262689e0d8f551be395be2a63ba73b5596da99fc5211b294",
+      "binarySha256": "4d3cf42fdac8b8c46254025e18ccab0c3b3efbf973f9ae23940d1fe1ae19a460"
+    },
+    {
+      "table": "TbItemTag",
+      "input": "标签对照@Item.xlsx",
+      "rows": 11,
+      "jsonSha256": "a688ca4b51fd2dee2a232c6083e449cad0c758ea056fec113c313e77b34f0dae",
+      "binarySha256": "79757889a40896ef6b0c0c97a7fb82c8108266bc618337cab4c5a70cf67ed9a9"
+    },
+    {
+      "table": "TbItemParameter",
+      "input": "参数对照@Item.xlsx",
+      "rows": 7,
+      "jsonSha256": "84191a8a43b0ed1e4cd8f9835bdaf6a942bda1f775967874eb94c7472c022dde",
+      "binarySha256": "8c0fc0a526d74b9d259897e0ad5f95f8a6d47ed540b340dd20ac6fae4cae4b73"
+    },
+    {
+      "table": "TbMap",
+      "input": "工作表1@map.xlsx",
+      "rows": 7,
+      "jsonSha256": "c574981047e1e8f9998447cad32480c25c030f0dac9b3ed069a866ec2df4fe5e",
+      "binarySha256": "4e5b8bdb54db04a24bf2ceb15c022f47df9103e0a0285ba5f2bb0e58dff69758"
+    },
+    {
+      "table": "TbMonster",
+      "input": "moster@moster.xlsx",
+      "rows": 15,
+      "jsonSha256": "c1d645d38ed77771e8986aa831953857e882f81d2445499c51deb9e7b26b15f0",
+      "binarySha256": "d309ab15dd113e4ad887263f15507992a0b1fef11800f6b8934b54c78dc102b7"
+    },
+    {
+      "table": "TbName",
+      "input": "工作表1@NAME.xlsx",
+      "rows": 8,
+      "jsonSha256": "e88881f3831562a5770c5cdf3464eb3cf59cff4769d4d45e0d4aa767e72ddcb4",
+      "binarySha256": "1a640334965ef13a3b6f8972539a7bbb268a4f498d13545e77b78ddb96d2c5f1"
+    },
+    {
+      "table": "TbProfession",
+      "input": "Profession@Profession.xlsx",
+      "rows": 7,
+      "jsonSha256": "8338ace9721f0c3913ad524dea8b83422a5b5f2175ab6326f3cc1d5825a22ce1",
+      "binarySha256": "48d2c0da5322cb1d4bcd64ec7dd528bdb288d4ce64d07e93b111d1663703cf6b"
+    }
+  ]
+}
