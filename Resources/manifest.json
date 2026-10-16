@@ -3744,6 +3744,150 @@
         1024,
         1024
       ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_a_1.png",
+      "bytes": 9665,
+      "sha256": "b46adc1273857ae69b3e74992d32a9f062d4d2b9d309b87dd61ab96d716f74e4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_a_2.png",
+      "bytes": 9240,
+      "sha256": "5d5e1a8c44e8d9c745a387cce60a6d17d48cd28e81dcf92c40a35f10d60f3530",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_b_1.png",
+      "bytes": 9556,
+      "sha256": "eefbaba82dfce6a5487b7edbd92f0aed63b1d97d648e9275fd5b0b85dbae1a2a",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_b_2.png",
+      "bytes": 9367,
+      "sha256": "8bc59a48269e22df6da41c643070e034c7448d8a933b5056e5d11a040a2d7794",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_c_1.png",
+      "bytes": 9810,
+      "sha256": "64722cdcdb65765549fec871865b2f259ba7349c3a00cc824aecf06977066014",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_c_2.png",
+      "bytes": 9603,
+      "sha256": "b74518857069475e63643f0f797860944a6f2e6220d0da5b3333b1df28cd8887",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_d_1.png",
+      "bytes": 9383,
+      "sha256": "68797c14128069e0848f131ce2ef7894f94525a12bd967840c9ed1f96a2f4dd6",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_d_2.png",
+      "bytes": 9136,
+      "sha256": "8ecd4aaed8274bab856b679f520f0963ce2156633c76ce7aecc83069d16533a0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_a_1.png",
+      "bytes": 11200,
+      "sha256": "97d40873cb68af64ecfcb36d5fa46060801f6574673fc1cd968416ad41cc6f4d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_a_2.png",
+      "bytes": 10939,
+      "sha256": "1046a0d9d877a8042c2e770db6d5d7426aa4024a96b41236c6d717a722af1069",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_b_1.png",
+      "bytes": 10818,
+      "sha256": "d10d9649136b5b5e0955cbbc6012b6fc725c48a26109425626374a383c7ae8b3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_b_2.png",
+      "bytes": 10974,
+      "sha256": "b9e6206df52695adeff6d85899feb52c89fca5ee7d2493de4e3795720d94fdc8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_c_1.png",
+      "bytes": 10841,
+      "sha256": "7301ae34ed9cd2be886ef69f631f9320dcb8578b508824b4fbdd5f0412280665",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_c_2.png",
+      "bytes": 11700,
+      "sha256": "cec78af952ddea9f80cab83802f8a22444907f0af58b4528d2b1985454f575b5",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_d_1.png",
+      "bytes": 10139,
+      "sha256": "4df8b1337691b5159bf1c766373535a4f3149ed2b0cb5ab337785b98d01c7328",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_d_2.png",
+      "bytes": 10332,
+      "sha256": "2becbd6f57ab18b061bab5ed552bbf1af62324d4b21eb51a9d335a1b882644f0",
+      "size": [
+        256,
+        256
+      ]
     }
   ]
 }

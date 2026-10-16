@@ -5,13 +5,14 @@
 | 目录 | 内容 |
 | --- | --- |
 | [Resources/Characters](Resources/Characters/) | 角色立绘、Q 版角色、动作图及对应 Mask |
+| [Resources/Monsters](Resources/Monsters/) | 怪物单只图及对应群组图 |
 | [Resources/Icons](Resources/Icons/) | 物品图标 |
 | [Excel](Excel/) | 配置表及文档索引 |
 | [Word](Word/) | 系统策划文档 |
 | [Luban](Luban/) | 配置定义、枚举、来源清单与校验记录 |
 | [Tools/Luban](Tools/Luban/) | Luban 生成工具 |
 
-当前美术资源共 318 张 PNG：角色主图 147 张、Mask 147 张、物品图标 24 张。Q 版采用按动作、方向和帧拆分的 PNG；立绘仍使用单张主图及配套 Mask。资源命名、配置表对应关系及后续目录规划见 [美术资源说明](Resources/README.md)。
+当前美术资源共 432 张 PNG：角色资源 392 张、怪物资源 16 张、物品图标 24 张。Q 版按动作、方向和帧拆分；本期怪物为 8 种外观的单只图及对应群组图。资源命名、配置表对应关系及后续目录规划见 [美术资源说明](Resources/README.md)。
 
 在已有工作副本中获取最新内容：
 
