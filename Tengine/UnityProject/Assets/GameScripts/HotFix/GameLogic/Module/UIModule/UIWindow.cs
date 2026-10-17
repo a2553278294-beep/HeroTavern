@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using TEngine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +15,11 @@ namespace GameLogic
         #region Propreties
 
         private SetUISafeFitHelper _setUISafeFitHelper;
+
+        /// <summary>html 烘焙窗口适配状态：设计分辨率、宿主画布 RectTransform 与上次适配时的画布尺寸。</summary>
+        private Vector2 _htmlDesignResolution;
+        private RectTransform _htmlParentRect;
+        private Rect _lastHtmlParentRect;
 
         private System.Action<UIWindow> _prepareCallback;
 
@@ -360,6 +367,12 @@ namespace GameLogic
                 return false;
             }
 
+            // 画布尺寸变化（窗口拖拽/分辨率切换）时重算烘焙窗口的等比缩放，避免框体脱离。
+            if (_htmlParentRect != null && _htmlParentRect.rect != _lastHtmlParentRect)
+            {
+                FitHtmlBakeWindow();
+            }
+
             List<UIWidget> listNextUpdateChild = null;
             if (ListChild != null && ListChild.Count > 0)
             {
@@ -480,11 +493,21 @@ namespace GameLogic
             _panel = panel;
             _panel.transform.localPosition = Vector3.zero;
 
-            // 获取组件
+            // UICamera 只剔除 UI 层；html-to-ugui 烘焙产物节点层为 Default，会被相机剔除导致整窗不可见
+            // （框架原生 prefab 如 LoginUI 逐节点携带 UI 层）。整棵子树迁到 UI 层，原生 prefab 亦幂等。
+            var uiLayer = LayerMask.NameToLayer("UI");
+            if (uiLayer >= 0)
+            {
+                SetLayerRecursively(panel.transform, uiLayer);
+            }
+
+            // 获取组件；html-to-ugui 烘焙产物按约定不带临时 Canvas（apply scope：
+            // "Prefab contains no temporary Canvas; wire canvasIntegration onto the host Canvas"），
+            // 运行时在窗口根补齐，等价于手工 prefab（LoginUI 等）的根 Canvas + Raycaster。
             _canvas = _panel.GetComponent<Canvas>();
             if (_canvas == null)
             {
-                throw new Exception($"Not found {nameof(Canvas)} in panel {WindowName}");
+                _canvas = _panel.AddComponent<Canvas>();
             }
 
             _canvas.overrideSorting = true;
@@ -493,14 +516,121 @@ namespace GameLogic
 
             // 获取组件
             _raycaster = _panel.GetComponent<GraphicRaycaster>();
+            if (_raycaster == null)
+            {
+                _raycaster = _panel.AddComponent<GraphicRaycaster>();
+            }
             _childCanvas = _panel.GetComponentsInChildren<Canvas>(true);
             _childRaycaster = _panel.GetComponentsInChildren<GraphicRaycaster>(true);
+
+            ApplyHtmlBakeFixup();
 
             // 通知UI管理器
             IsPrepare = true;
             _prepareCallback?.Invoke(this);
         }
         
+        /// <summary>
+        /// html-to-ugui 设计分辨率（宽/高像素）。非零时 <see cref="Handle_Completed"/> 把窗口根改为
+        /// 「中心锚点 + 固定设计尺寸 + 等比缩放适配宿主画布」，替代嵌套 CanvasScaler（嵌套下不生效）。
+        /// </summary>
+        protected virtual Vector2 DesignResolution => Vector2.zero;
+
+        private static TMP_FontAsset _htmlTmpFont;
+
+        /// <summary>
+        /// html-to-ugui 烘焙产物运行时修复：
+        /// 1) 烘焙不产出 TMP 字体资产（m_fontAsset=null 的文本完全不渲染），从 Resources/Fonts/zpix.ttf
+        ///    惰性创建动态 TMP 字体补挂到缺字体的文本；
+        /// 2) 宿主 UICanvas 是 1920×1080 横屏参考（宽高各半匹配）的相机画布，烘焙布局按设计分辨率绝对定位，
+        ///    拉伸根会整体溢出；改为居中 + 固定设计尺寸 + 等比缩放（contain，窄屏上下留边）。
+        /// </summary>
+        private void ApplyHtmlBakeFixup()
+        {
+            var texts = _panel.GetComponentsInChildren<TMP_Text>(true);
+            if (texts.Length > 0)
+            {
+                if (_htmlTmpFont == null)
+                {
+                    // 工程引入了 TMP 包但从未生成 TMP Settings 资产；CreateFontAsset 内部访问
+                    // TMP_Settings.instance 会 NRE。运行时兜底创建内存实例（不写资产文件）。
+                    if (TMP_Settings.instance == null)
+                    {
+                        var settings = ScriptableObject.CreateInstance<TMP_Settings>();
+                        typeof(TMP_Settings)
+                            .GetField("s_Instance", BindingFlags.Static | BindingFlags.NonPublic)
+                            ?.SetValue(null, settings);
+                    }
+                    var font = Resources.Load<Font>("Fonts/zpix");
+                    if (font != null)
+                    {
+                        _htmlTmpFont = TMP_FontAsset.CreateFontAsset(font);
+                        _htmlTmpFont.atlasPopulationMode = AtlasPopulationMode.Dynamic;
+                        // 编辑器下 TMP 给动态字体加新字形时会尝试把图集纹理 AddObjectToAsset 进这个
+                        // 内存资产 → 断言 kDontSaveInEditor（首次点出气泡/新文字时报红）。标记 DontSave 跳过持久化。
+                        _htmlTmpFont.hideFlags = HideFlags.DontSave;
+                    }
+                    else
+                    {
+                        Log.Error("UIWindow: 缺少 Resources/Fonts/zpix.ttf，烘焙窗口文本无法渲染");
+                    }
+                }
+                if (_htmlTmpFont != null)
+                {
+                    // 注意 t.font 此时很少为 null：TMP 在 Awake 会把 null 字体替换为 TMP_Settings
+                    // 默认字体（LiberationSans SDF，无 CJK→豆腐块）。因此 null 或等于默认字体都要换成 zpix。
+                    var defaultFont = TMP_Settings.defaultFontAsset;
+                    foreach (var t in texts)
+                    {
+                        if (t.font == null || t.font == defaultFont)
+                        {
+                            t.font = _htmlTmpFont;
+                        }
+                    }
+                }
+            }
+
+            var design = DesignResolution;
+            if (design.x > 0f && design.y > 0f && _panel.transform.parent is RectTransform parentRt)
+            {
+                _htmlDesignResolution = design;
+                _htmlParentRect = parentRt;
+                FitHtmlBakeWindow();
+            }
+        }
+
+        /// <summary>
+        /// html 烘焙窗口的 contain 适配：中心锚点 + 固定设计尺寸 + 等比缩放（随宿主画布尺寸）。
+        /// 抽成独立方法是因为窗口化拖拽/分辨率切换会改变画布尺寸，需要重算，否则框体脱离屏幕。
+        /// </summary>
+        private void FitHtmlBakeWindow()
+        {
+            if (_htmlParentRect == null || _panel == null)
+            {
+                return;
+            }
+
+            var rt = (RectTransform)_panel.transform;
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = _htmlDesignResolution;
+            rt.anchoredPosition = Vector2.zero;
+            var parentRect = _htmlParentRect.rect;
+            _lastHtmlParentRect = parentRect;
+            float scale = Mathf.Min(parentRect.width / _htmlDesignResolution.x, parentRect.height / _htmlDesignResolution.y);
+            rt.localScale = new Vector3(scale, scale, 1f);
+        }
+
+        private static void SetLayerRecursively(Transform root, int layer)
+        {
+            root.gameObject.layer = layer;
+            foreach (Transform child in root)
+            {
+                SetLayerRecursively(child, layer);
+            }
+        }
+
         protected virtual void Hide()
         {
             UIModule.Instance.HideUI(this.GetType());

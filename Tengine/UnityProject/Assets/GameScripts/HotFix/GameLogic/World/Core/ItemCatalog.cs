@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GameLogic.World
 {
     /// <summary>物品类别（仓库三类口径：售出用的酒、调酒材料、装备；调酒材料再分基酒/配料/冰块）。</summary>
@@ -59,7 +61,11 @@ namespace GameLogic.World
         }
     }
 
-    /// <summary>物品与配方目录（占位条目，Item/配方配置表落地后替换）。</summary>
+    /// <summary>
+    /// 物品与配方目录。id 常量（BaseVodka / IceCube 等）是代码占位，始终有效；
+    /// 条目数据默认取内置占位表（<see cref="Defaults"/> / <see cref="DefaultRecipes"/>），
+    /// 配置目录 <see cref="GameConfigCatalog"/> 就绪后调用 <see cref="ReloadFromConfig"/> 换成配置数据。
+    /// </summary>
     public static class ItemCatalog
     {
         // 基酒
@@ -78,7 +84,8 @@ namespace GameLogic.World
         public const int WineTequilaSunrise = 103;
         public const int WineHoneyVodka = 104;
 
-        public static readonly ItemDef[] Items =
+        /// <summary>内置物品占位表（配置回退占位）。</summary>
+        private static readonly ItemDef[] Defaults =
         {
             new ItemDef(BaseVodka, "伏特加", ItemKind.BaseWine, 10, 0, "伏特加"),
             new ItemDef(BaseRum, "朗姆酒", ItemKind.BaseWine, 10, 0, "朗姆"),
@@ -93,19 +100,71 @@ namespace GameLogic.World
             new ItemDef(WineHoneyVodka, "蜜糖伏特加", ItemKind.Wine, 25, 120, "伏特加", "蜂蜜"),
         };
 
-        public static readonly RecipeDef[] Recipes =
+        /// <summary>内置配方占位表（配置回退占位）。</summary>
+        private static readonly RecipeDef[] DefaultRecipes =
         {
             new RecipeDef(1, "龙舌兰日出配方", BaseTequila, IngLemon, IngMint, false, WineTequilaSunrise),
             new RecipeDef(2, "蜜糖伏特加配方", BaseVodka, IngHoney, IngHoney, true, WineHoneyVodka),
         };
 
+        /// <summary>当前生效的物品列表：初始指向 <see cref="Defaults"/>，重载后指向配置目录。</summary>
+        private static IReadOnlyList<ItemDef> _items = Defaults;
+
+        /// <summary>当前生效的配方列表：初始指向 <see cref="DefaultRecipes"/>，重载后指向配置目录。</summary>
+        private static IReadOnlyList<RecipeDef> _recipes = DefaultRecipes;
+
+        /// <summary>当前生效的物品列表（配置回退占位：未重载时为内置占位表）。</summary>
+        public static IReadOnlyList<ItemDef> Items
+        {
+            get { return _items; }
+        }
+
+        /// <summary>当前生效的调酒配方列表（配置回退占位：配置未提供配方时保留内置占位配方）。</summary>
+        public static IReadOnlyList<RecipeDef> Recipes
+        {
+            get { return _recipes; }
+        }
+
+        /// <summary>
+        /// 用 <see cref="GameConfigCatalog"/> 的数据替换占位条目。
+        /// 目录未 Init 或物品列表为空时维持占位（配置回退占位）；
+        /// 配置配方为空时同样保留内置占位配方，保证调酒系统始终可用。
+        /// </summary>
+        public static void ReloadFromConfig()
+        {
+            var config = GameConfigCatalog.Instance;
+            if (config == null)
+            {
+                // 配置回退占位：未 Init，保持内置占位表。
+                return;
+            }
+
+            var configItems = config.AllItems;
+            if (configItems == null || configItems.Count == 0)
+            {
+                // 配置回退占位：表未落地或解析为空，保持内置占位表。
+                return;
+            }
+
+            _items = configItems;
+
+            var configRecipes = config.GetRecipes();
+            if (configRecipes != null && configRecipes.Length > 0)
+            {
+                _recipes = configRecipes;
+            }
+
+            // 配置回退占位：配置未提供配方，_recipes 保留内置占位配方。
+        }
+
         public static ItemDef Get(int id)
         {
-            for (int i = 0; i < Items.Length; i++)
+            var items = _items;
+            for (int i = 0; i < items.Count; i++)
             {
-                if (Items[i].Id == id)
+                if (items[i].Id == id)
                 {
-                    return Items[i];
+                    return items[i];
                 }
             }
 

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>TradeUI - 交易</title>
+<style>
+  @font-face { font-family: 'zpix'; src: url('../Assets/AssetRaw/Fonts/zpix.ttf'); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'zpix', sans-serif; }
+</style>
+</head>
+<body>
+<!-- 交易窗口（对照 Resources/ui01/shop/ui交易1.png；角色系统 3.4）：
+     大羊皮纸面板 + 「交易」页签 + 右上关闭；左玩家栏/右 NPC 栏各 6x3 格；
+     底部左右出价条（价值 + 5 出价槽，右侧另有好感与增减预览）；中下确认交易藤按钮。
+     格子=羊皮纸底+lv角花（按稀有度换 lv 框）；无物品美术，格内以名称占位；右下角堆叠数角标。 -->
+<div data-u-type="div" data-u-name="m_trade" data-u-layout="stretch"
+     style="width:1960px; height:1080px; position:relative; background-color:#00000000;">
+
+  <div data-u-type="div" data-u-name="m_panel"
+       style="position:absolute; left:218px; top:190px; width:1524px; height:738px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_01.png'); background-size:100% 100%;">
+
+    <span data-u-type="text" data-u-name="m_textPlayerGold"
+          style="position:absolute; left:40px; top:35px; width:500px; height:44px;
+                 color:#6d5a2a; font-size:30px; text-align:left; line-height:44px;">玩家金币数 0</span>
+    <span data-u-type="text" data-u-name="m_textNpcGold"
+          style="position:absolute; left:967px; top:35px; width:500px; height:44px;
+                 color:#6d5a2a; font-size:30px; text-align:right; line-height:44px;">金币数 0</span>
+
+    <!-- 玩家物品栏 6x3 -->
+
+      <button data-u-type="button" data-u-name="m_pSlot0"
+              style="position:absolute; left:40px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame0" data-u-fit="stretch"
+           style="position:absolute; left:40px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName0"
+            style="position:absolute; left:40px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount0"
+            style="position:absolute; left:99px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot1"
+              style="position:absolute; left:155px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame1" data-u-fit="stretch"
+           style="position:absolute; left:155px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName1"
+            style="position:absolute; left:155px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount1"
+            style="position:absolute; left:214px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot2"
+              style="position:absolute; left:270px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame2" data-u-fit="stretch"
+           style="position:absolute; left:270px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName2"
+            style="position:absolute; left:270px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount2"
+            style="position:absolute; left:329px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot3"
+              style="position:absolute; left:385px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame3" data-u-fit="stretch"
+           style="position:absolute; left:385px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName3"
+            style="position:absolute; left:385px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount3"
+            style="position:absolute; left:444px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot4"
+              style="position:absolute; left:500px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame4" data-u-fit="stretch"
+           style="position:absolute; left:500px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName4"
+            style="position:absolute; left:500px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount4"
+            style="position:absolute; left:559px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot5"
+              style="position:absolute; left:615px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame5" data-u-fit="stretch"
+           style="position:absolute; left:615px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName5"
+            style="position:absolute; left:615px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount5"
+            style="position:absolute; left:674px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot6"
+              style="position:absolute; left:40px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame6" data-u-fit="stretch"
+           style="position:absolute; left:40px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName6"
+            style="position:absolute; left:40px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount6"
+            style="position:absolute; left:99px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot7"
+              style="position:absolute; left:155px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame7" data-u-fit="stretch"
+           style="position:absolute; left:155px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName7"
+            style="position:absolute; left:155px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount7"
+            style="position:absolute; left:214px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot8"
+              style="position:absolute; left:270px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame8" data-u-fit="stretch"
+           style="position:absolute; left:270px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName8"
+            style="position:absolute; left:270px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount8"
+            style="position:absolute; left:329px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot9"
+              style="position:absolute; left:385px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame9" data-u-fit="stretch"
+           style="position:absolute; left:385px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName9"
+            style="position:absolute; left:385px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount9"
+            style="position:absolute; left:444px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot10"
+              style="position:absolute; left:500px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame10" data-u-fit="stretch"
+           style="position:absolute; left:500px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName10"
+            style="position:absolute; left:500px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount10"
+            style="position:absolute; left:559px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot11"
+              style="position:absolute; left:615px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame11" data-u-fit="stretch"
+           style="position:absolute; left:615px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName11"
+            style="position:absolute; left:615px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount11"
+            style="position:absolute; left:674px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot12"
+              style="position:absolute; left:40px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame12" data-u-fit="stretch"
+           style="position:absolute; left:40px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName12"
+            style="position:absolute; left:40px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount12"
+            style="position:absolute; left:99px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot13"
+              style="position:absolute; left:155px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame13" data-u-fit="stretch"
+           style="position:absolute; left:155px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName13"
+            style="position:absolute; left:155px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount13"
+            style="position:absolute; left:214px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot14"
+              style="position:absolute; left:270px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame14" data-u-fit="stretch"
+           style="position:absolute; left:270px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName14"
+            style="position:absolute; left:270px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount14"
+            style="position:absolute; left:329px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot15"
+              style="position:absolute; left:385px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame15" data-u-fit="stretch"
+           style="position:absolute; left:385px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName15"
+            style="position:absolute; left:385px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount15"
+            style="position:absolute; left:444px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot16"
+              style="position:absolute; left:500px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame16" data-u-fit="stretch"
+           style="position:absolute; left:500px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName16"
+            style="position:absolute; left:500px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount16"
+            style="position:absolute; left:559px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_pSlot17"
+              style="position:absolute; left:615px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_pSlotFrame17" data-u-fit="stretch"
+           style="position:absolute; left:615px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_pSlotName17"
+            style="position:absolute; left:615px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_pSlotCount17"
+            style="position:absolute; left:674px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+    <!-- NPC 物品栏 6x3 -->
+
+      <button data-u-type="button" data-u-name="m_nSlot0"
+              style="position:absolute; left:785px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame0" data-u-fit="stretch"
+           style="position:absolute; left:785px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName0"
+            style="position:absolute; left:785px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount0"
+            style="position:absolute; left:844px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot1"
+              style="position:absolute; left:900px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame1" data-u-fit="stretch"
+           style="position:absolute; left:900px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName1"
+            style="position:absolute; left:900px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount1"
+            style="position:absolute; left:959px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot2"
+              style="position:absolute; left:1015px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame2" data-u-fit="stretch"
+           style="position:absolute; left:1015px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName2"
+            style="position:absolute; left:1015px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount2"
+            style="position:absolute; left:1074px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot3"
+              style="position:absolute; left:1130px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame3" data-u-fit="stretch"
+           style="position:absolute; left:1130px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName3"
+            style="position:absolute; left:1130px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount3"
+            style="position:absolute; left:1189px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot4"
+              style="position:absolute; left:1245px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame4" data-u-fit="stretch"
+           style="position:absolute; left:1245px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName4"
+            style="position:absolute; left:1245px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount4"
+            style="position:absolute; left:1304px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot5"
+              style="position:absolute; left:1360px; top:95px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame5" data-u-fit="stretch"
+           style="position:absolute; left:1360px; top:95px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName5"
+            style="position:absolute; left:1360px; top:129px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount5"
+            style="position:absolute; left:1419px; top:172px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot6"
+              style="position:absolute; left:785px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame6" data-u-fit="stretch"
+           style="position:absolute; left:785px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName6"
+            style="position:absolute; left:785px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount6"
+            style="position:absolute; left:844px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot7"
+              style="position:absolute; left:900px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame7" data-u-fit="stretch"
+           style="position:absolute; left:900px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName7"
+            style="position:absolute; left:900px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount7"
+            style="position:absolute; left:959px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot8"
+              style="position:absolute; left:1015px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame8" data-u-fit="stretch"
+           style="position:absolute; left:1015px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName8"
+            style="position:absolute; left:1015px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount8"
+            style="position:absolute; left:1074px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot9"
+              style="position:absolute; left:1130px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame9" data-u-fit="stretch"
+           style="position:absolute; left:1130px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName9"
+            style="position:absolute; left:1130px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount9"
+            style="position:absolute; left:1189px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot10"
+              style="position:absolute; left:1245px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame10" data-u-fit="stretch"
+           style="position:absolute; left:1245px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName10"
+            style="position:absolute; left:1245px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount10"
+            style="position:absolute; left:1304px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot11"
+              style="position:absolute; left:1360px; top:225px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame11" data-u-fit="stretch"
+           style="position:absolute; left:1360px; top:225px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName11"
+            style="position:absolute; left:1360px; top:259px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount11"
+            style="position:absolute; left:1419px; top:302px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot12"
+              style="position:absolute; left:785px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame12" data-u-fit="stretch"
+           style="position:absolute; left:785px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName12"
+            style="position:absolute; left:785px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount12"
+            style="position:absolute; left:844px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot13"
+              style="position:absolute; left:900px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame13" data-u-fit="stretch"
+           style="position:absolute; left:900px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName13"
+            style="position:absolute; left:900px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount13"
+            style="position:absolute; left:959px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot14"
+              style="position:absolute; left:1015px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame14" data-u-fit="stretch"
+           style="position:absolute; left:1015px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName14"
+            style="position:absolute; left:1015px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount14"
+            style="position:absolute; left:1074px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot15"
+              style="position:absolute; left:1130px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame15" data-u-fit="stretch"
+           style="position:absolute; left:1130px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName15"
+            style="position:absolute; left:1130px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount15"
+            style="position:absolute; left:1189px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot16"
+              style="position:absolute; left:1245px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame16" data-u-fit="stretch"
+           style="position:absolute; left:1245px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName16"
+            style="position:absolute; left:1245px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount16"
+            style="position:absolute; left:1304px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_nSlot17"
+              style="position:absolute; left:1360px; top:355px; width:105px; height:105px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_nSlotFrame17" data-u-fit="stretch"
+           style="position:absolute; left:1360px; top:355px; width:105px; height:105px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_nSlotName17"
+            style="position:absolute; left:1360px; top:389px; width:105px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_nSlotCount17"
+            style="position:absolute; left:1419px; top:432px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+
+    <!-- 左出价条 -->
+    <div data-u-type="div" data-u-name="m_leftStrip"
+         style="position:absolute; left:37px; top:510px; width:590px; height:210px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_frame_02.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textLeftValue"
+            style="position:absolute; left:20px; top:12px; width:300px; height:42px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:42px;">价值 0</span>
+
+      <button data-u-type="button" data-u-name="m_poSlot0"
+              style="position:absolute; left:20px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_poSlotFrame0" data-u-fit="stretch"
+           style="position:absolute; left:20px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_poSlotName0"
+            style="position:absolute; left:20px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_poSlotCount0"
+            style="position:absolute; left:74px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_poSlot1"
+              style="position:absolute; left:126px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_poSlotFrame1" data-u-fit="stretch"
+           style="position:absolute; left:126px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_poSlotName1"
+            style="position:absolute; left:126px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_poSlotCount1"
+            style="position:absolute; left:180px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_poSlot2"
+              style="position:absolute; left:232px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_poSlotFrame2" data-u-fit="stretch"
+           style="position:absolute; left:232px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_poSlotName2"
+            style="position:absolute; left:232px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_poSlotCount2"
+            style="position:absolute; left:286px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_poSlot3"
+              style="position:absolute; left:338px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_poSlotFrame3" data-u-fit="stretch"
+           style="position:absolute; left:338px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_poSlotName3"
+            style="position:absolute; left:338px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_poSlotCount3"
+            style="position:absolute; left:392px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_poSlot4"
+              style="position:absolute; left:444px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_poSlotFrame4" data-u-fit="stretch"
+           style="position:absolute; left:444px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_poSlotName4"
+            style="position:absolute; left:444px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_poSlotCount4"
+            style="position:absolute; left:498px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+    </div>
+
+    <!-- 右出价条 -->
+    <div data-u-type="div" data-u-name="m_rightStrip"
+         style="position:absolute; left:897px; top:510px; width:590px; height:210px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_frame_02.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textRightValue"
+            style="position:absolute; left:20px; top:12px; width:220px; height:42px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:42px;">价值 0</span>
+      <span data-u-type="text" data-u-name="m_textFavor"
+            style="position:absolute; left:280px; top:12px; width:140px; height:42px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:42px;">好感 0</span>
+      <div data-u-type="div" data-u-name="m_favorDeltaBox"
+           style="position:absolute; left:470px; top:6px; width:100px; height:50px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_frame_02.png'); background-size:100% 100%;">
+        <span data-u-type="text" data-u-name="m_textFavorDelta"
+              style="position:absolute; left:0px; top:0px; width:100px; height:50px;
+                     color:#8a8259; font-size:26px; text-align:center; line-height:50px;"></span>
+      </div>
+
+      <button data-u-type="button" data-u-name="m_noSlot0"
+              style="position:absolute; left:20px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_noSlotFrame0" data-u-fit="stretch"
+           style="position:absolute; left:20px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_noSlotName0"
+            style="position:absolute; left:20px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_noSlotCount0"
+            style="position:absolute; left:74px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_noSlot1"
+              style="position:absolute; left:126px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_noSlotFrame1" data-u-fit="stretch"
+           style="position:absolute; left:126px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_noSlotName1"
+            style="position:absolute; left:126px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_noSlotCount1"
+            style="position:absolute; left:180px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_noSlot2"
+              style="position:absolute; left:232px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_noSlotFrame2" data-u-fit="stretch"
+           style="position:absolute; left:232px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_noSlotName2"
+            style="position:absolute; left:232px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_noSlotCount2"
+            style="position:absolute; left:286px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_noSlot3"
+              style="position:absolute; left:338px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_noSlotFrame3" data-u-fit="stretch"
+           style="position:absolute; left:338px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_noSlotName3"
+            style="position:absolute; left:338px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_noSlotCount3"
+            style="position:absolute; left:392px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+      <button data-u-type="button" data-u-name="m_noSlot4"
+              style="position:absolute; left:444px; top:62px; width:100px; height:100px;
+                     background-color:#f7f3e0; border:none;"></button>
+      <div data-u-type="image" data-u-name="m_noSlotFrame4" data-u-fit="stretch"
+           style="position:absolute; left:444px; top:62px; width:100px; height:100px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%; pointer-events:none;"></div>
+      <span data-u-type="text" data-u-name="m_noSlotName4"
+            style="position:absolute; left:444px; top:96px; width:100px; height:36px;
+                   color:#6d5a2a; font-size:22px; text-align:center; line-height:36px; pointer-events:none;"></span>
+      <span data-u-type="text" data-u-name="m_noSlotCount4"
+            style="position:absolute; left:498px; top:134px; width:46px; height:26px;
+                   color:#9a9470; font-size:20px; text-align:right; line-height:26px; pointer-events:none;"></span>
+    </div>
+
+    <!-- 确认交易（藤条绿按钮） -->
+    <button data-u-type="button" data-u-name="m_btnConfirm"
+            style="position:absolute; left:628px; top:570px; width:268px; height:115px;
+                   background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_btn_01.png'); background-size:100% 100%;
+                   background-color:#00000000; border:none; color:#f5f2e6; font-size:36px;">确认交易</button>
+
+    <span data-u-type="text" data-u-name="m_textResult"
+          style="position:absolute; left:388px; top:690px; width:748px; height:36px;
+                 color:#9a9470; font-size:24px; text-align:center; line-height:36px;"></span>
+  </div>
+
+  <!-- 标题页签 -->
+  <div data-u-type="div" data-u-name="m_titleTab"
+       style="position:absolute; left:786px; top:165px; width:387px; height:75px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/talk/ui_talk_frame_01.png'); background-size:100% 100%;">
+    <span data-u-type="text" data-u-name="m_textTitle"
+          style="position:absolute; left:0px; top:0px; width:387px; height:75px;
+                 color:#6d7a4a; font-size:38px; text-align:center; line-height:75px;">交　易</span>
+  </div>
+
+  <button data-u-type="button" data-u-name="m_btnClose"
+          style="position:absolute; left:1664px; top:185px; width:78px; height:78px;
+                 background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_btn_close.png'); background-size:100% 100%;
+                 background-color:#00000000; border:none;"></button>
+
+  <!-- 物品详情浮层（交易2；运行时定位到鼠标旁，默认隐藏） -->
+  <div data-u-type="div" data-u-name="m_tooltip"
+       style="position:absolute; left:1200px; top:350px; width:300px; height:330px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_frame_01.png'); background-size:100% 100%;">
+    <span data-u-type="text" data-u-name="m_textTipName"
+          style="position:absolute; left:20px; top:12px; width:180px; height:40px;
+                 color:#6d5a2a; font-size:28px; text-align:left; line-height:40px;">物品名</span>
+    <span data-u-type="text" data-u-name="m_textTipKind"
+          style="position:absolute; left:190px; top:16px; width:90px; height:36px;
+                 color:#8a7ab8; font-size:22px; text-align:right; line-height:36px;">饰品</span>
+    <span data-u-type="text" data-u-name="m_textTipValue"
+          style="position:absolute; left:20px; top:62px; width:260px; height:36px;
+                 color:#8a8259; font-size:24px; text-align:left; line-height:36px;">价值：0</span>
+    <span data-u-type="text" data-u-name="m_textTipDesc"
+          style="position:absolute; left:20px; top:104px; width:260px; height:130px;
+                 color:#9a9470; font-size:22px; text-align:left; line-height:32px;">描述</span>
+    <span data-u-type="text" data-u-name="m_textTipTags"
+          style="position:absolute; left:20px; top:240px; width:260px; height:80px;
+                 color:#9fb24a; font-size:22px; text-align:left; line-height:30px;">标签</span>
+  </div>
+
+  <!-- 拆分弹窗（交易3；默认隐藏） -->
+  <div data-u-type="div" data-u-name="m_splitPopup"
+       style="position:absolute; left:0px; top:0px; width:1960px; height:1080px;">
+    <div data-u-type="div" data-u-name="m_splitDim"
+         style="position:absolute; left:0px; top:0px; width:1960px; height:1080px; background-color:rgba(0,0,0,0.35);"></div>
+    <div data-u-type="div" data-u-name="m_splitFrame"
+         style="position:absolute; left:800px; top:430px; width:360px; height:270px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_frame_02.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textSplitTitle"
+            style="position:absolute; left:0px; top:18px; width:360px; height:40px;
+                   color:#6d5a2a; font-size:26px; text-align:center; line-height:40px;">拆分数量</span>
+      <button data-u-type="button" data-u-name="m_btnSplitMinus"
+              style="position:absolute; left:30px; top:110px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_02.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <span data-u-type="text" data-u-name="m_textSplitCount"
+            style="position:absolute; left:90px; top:110px; width:180px; height:48px;
+                   color:#6d5a2a; font-size:30px; text-align:center; line-height:48px;">1</span>
+      <button data-u-type="button" data-u-name="m_btnSplitPlus"
+              style="position:absolute; left:282px; top:110px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_03.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <button data-u-type="button" data-u-name="m_btnSplitOk"
+              style="position:absolute; left:90px; top:190px; width:180px; height:64px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_btn_01.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none; color:#f5f2e6; font-size:26px;">确　定</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

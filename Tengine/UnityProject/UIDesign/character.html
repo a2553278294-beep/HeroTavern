@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>CharacterUI - 角色查看</title>
+<style>
+  @font-face { font-family: 'zpix'; src: url('../Assets/AssetRaw/Fonts/zpix.ttf'); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'zpix', sans-serif; }
+</style>
+</head>
+<body>
+<!-- 角色查看（角色系统 3.5）：标题页签=角色名；属性/背包两页签（绿色选中/灰色未选中）；
+     属性页：立绘占位+好感度+角色信息+战斗属性+分数摘要；背包页：小人占位+金币+装备三槽+物品网格。 -->
+<div data-u-type="div" data-u-name="m_character" data-u-layout="stretch"
+     style="width:1960px; height:1080px; position:relative; background-color:#00000000;">
+
+  <div data-u-type="div" data-u-name="m_panel"
+       style="position:absolute; left:560px; top:150px; width:840px; height:780px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_01.png'); background-size:100% 100%;">
+
+    <!-- 页签：属性 / 背包 -->
+    <button data-u-type="button" data-u-name="m_btnTabAttr"
+            style="position:absolute; left:30px; top:30px; width:130px; height:52px; background-color:#9fb24a; border:none;">
+      <span data-u-type="text" data-u-name="m_textTabAttr"
+            style="position:absolute; left:0px; top:0px; width:130px; height:52px; color:#f5f2e6; font-size:28px; text-align:center; line-height:52px; pointer-events:none;">属　性</span>
+    </button>
+    <button data-u-type="button" data-u-name="m_btnTabBag"
+            style="position:absolute; left:172px; top:30px; width:130px; height:52px; background-color:#c9c4ae; border:none;">
+      <span data-u-type="text" data-u-name="m_textTabBag"
+            style="position:absolute; left:0px; top:0px; width:130px; height:52px; color:#f5f2e6; font-size:28px; text-align:center; line-height:52px; pointer-events:none;">背　包</span>
+    </button>
+
+    <!-- ========== 属性页 ========== -->
+    <div data-u-type="div" data-u-name="m_pageAttr"
+         style="position:absolute; left:0px; top:95px; width:840px; height:660px; background-color:#00000000;">
+
+      <!-- 立绘占位 -->
+      <div data-u-type="div" data-u-name="m_portraitSlot"
+           style="position:absolute; left:40px; top:20px; width:220px; height:220px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_imgPortraitFrame" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:220px; height:220px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_textPortrait"
+              style="position:absolute; left:0px; top:90px; width:220px; height:40px;
+                     color:#9a9470; font-size:26px; text-align:center; line-height:40px;">立绘占位</span>
+      </div>
+
+      <!-- 好感度 -->
+      <div data-u-type="div" data-u-name="m_favorBlock"
+           style="position:absolute; left:290px; top:20px; width:500px; height:86px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_frame_02.png'); background-size:100% 100%;">
+        <span data-u-type="text" data-u-name="m_textFavorLabel"
+              style="position:absolute; left:20px; top:8px; width:200px; height:32px;
+                     color:#8a8259; font-size:24px; text-align:left; line-height:32px;">好感度</span>
+        <span data-u-type="text" data-u-name="m_textFavor"
+              style="position:absolute; left:20px; top:42px; width:460px; height:36px;
+                     color:#6d5a2a; font-size:28px; text-align:left; line-height:36px;">0 / 100</span>
+      </div>
+
+      <!-- 角色信息 + 战斗属性（多行文本） -->
+      <span data-u-type="text" data-u-name="m_textInfo"
+            style="position:absolute; left:290px; top:125px; width:500px; height:250px;
+                   color:#6d5a2a; font-size:26px; text-align:left; line-height:44px;">角色信息</span>
+
+      <!-- 分数摘要 -->
+      <div data-u-type="div" data-u-name="m_scoreBlock"
+           style="position:absolute; left:40px; top:410px; width:750px; height:130px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/shop/ui_shop_frame_02.png'); background-size:100% 100%;">
+        <span data-u-type="text" data-u-name="m_textScoreTitle"
+              style="position:absolute; left:20px; top:10px; width:200px; height:32px;
+                     color:#8a8259; font-size:24px; text-align:left; line-height:32px;">分数摘要</span>
+        <span data-u-type="text" data-u-name="m_textScores"
+              style="position:absolute; left:20px; top:44px; width:710px; height:76px;
+                     color:#6d5a2a; font-size:26px; text-align:left; line-height:38px;"></span>
+      </div>
+    </div>
+
+    <!-- ========== 背包页 ========== -->
+    <div data-u-type="div" data-u-name="m_pageBag"
+         style="position:absolute; left:0px; top:95px; width:840px; height:660px; background-color:#00000000;">
+
+      <!-- 小人占位 -->
+      <div data-u-type="div" data-u-name="m_dollSlot"
+           style="position:absolute; left:40px; top:20px; width:180px; height:180px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_imgDollFrame" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:180px; height:180px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_textDoll"
+              style="position:absolute; left:0px; top:72px; width:180px; height:36px;
+                     color:#9a9470; font-size:24px; text-align:center; line-height:36px;">小人占位</span>
+      </div>
+
+      <span data-u-type="text" data-u-name="m_textBagGold"
+            style="position:absolute; left:40px; top:215px; width:220px; height:36px;
+                   color:#6d5a2a; font-size:26px; text-align:left; line-height:36px;">金币：0</span>
+
+      <span data-u-type="text" data-u-name="m_textEquip"
+            style="position:absolute; left:40px; top:260px; width:230px; height:150px;
+                   color:#6d5a2a; font-size:24px; text-align:left; line-height:42px;">装备</span>
+
+      <!-- 物品网格 6x4 -->
+
+      <div data-u-type="div" data-u-name="m_bagSlot0"
+           style="position:absolute; left:290px; top:95px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame0" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName0"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount0"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot1"
+           style="position:absolute; left:382px; top:95px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame1" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName1"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount1"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot2"
+           style="position:absolute; left:474px; top:95px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame2" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName2"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount2"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot3"
+           style="position:absolute; left:566px; top:95px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame3" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName3"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount3"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot4"
+           style="position:absolute; left:658px; top:95px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame4" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName4"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount4"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot5"
+           style="position:absolute; left:750px; top:95px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame5" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName5"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount5"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot6"
+           style="position:absolute; left:290px; top:187px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame6" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName6"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount6"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot7"
+           style="position:absolute; left:382px; top:187px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame7" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName7"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount7"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot8"
+           style="position:absolute; left:474px; top:187px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame8" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName8"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount8"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot9"
+           style="position:absolute; left:566px; top:187px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame9" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName9"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount9"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot10"
+           style="position:absolute; left:658px; top:187px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame10" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName10"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount10"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot11"
+           style="position:absolute; left:750px; top:187px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame11" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName11"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount11"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot12"
+           style="position:absolute; left:290px; top:279px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame12" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName12"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount12"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot13"
+           style="position:absolute; left:382px; top:279px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame13" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName13"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount13"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot14"
+           style="position:absolute; left:474px; top:279px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame14" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName14"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount14"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot15"
+           style="position:absolute; left:566px; top:279px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame15" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName15"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount15"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot16"
+           style="position:absolute; left:658px; top:279px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame16" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName16"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount16"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot17"
+           style="position:absolute; left:750px; top:279px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame17" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName17"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount17"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot18"
+           style="position:absolute; left:290px; top:371px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame18" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName18"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount18"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot19"
+           style="position:absolute; left:382px; top:371px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame19" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName19"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount19"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot20"
+           style="position:absolute; left:474px; top:371px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame20" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName20"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount20"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot21"
+           style="position:absolute; left:566px; top:371px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame21" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName21"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount21"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot22"
+           style="position:absolute; left:658px; top:371px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame22" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName22"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount22"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+      <div data-u-type="div" data-u-name="m_bagSlot23"
+           style="position:absolute; left:750px; top:371px; width:84px; height:84px; background-color:#f7f3e0;">
+        <div data-u-type="image" data-u-name="m_bagSlotFrame23" data-u-fit="stretch"
+             style="position:absolute; left:0px; top:0px; width:84px; height:84px; background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+        <span data-u-type="text" data-u-name="m_bagSlotName23"
+              style="position:absolute; left:0px; top:26px; width:84px; height:32px;
+                     color:#6d5a2a; font-size:18px; text-align:center; line-height:32px;"></span>
+        <span data-u-type="text" data-u-name="m_bagSlotCount23"
+              style="position:absolute; left:44px; top:60px; width:38px; height:22px;
+                     color:#9a9470; font-size:18px; text-align:right; line-height:22px;"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 标题页签（角色名） -->
+  <div data-u-type="div" data-u-name="m_titleTab"
+       style="position:absolute; left:786px; top:125px; width:387px; height:75px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/talk/ui_talk_frame_01.png'); background-size:100% 100%;">
+    <span data-u-type="text" data-u-name="m_textTitle"
+          style="position:absolute; left:0px; top:0px; width:387px; height:75px;
+                 color:#6d7a4a; font-size:36px; text-align:center; line-height:75px;">角色</span>
+  </div>
+
+  <button data-u-type="button" data-u-name="m_btnClose"
+          style="position:absolute; left:1310px; top:160px; width:78px; height:78px;
+                 background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_btn_close.png'); background-size:100% 100%;
+                 background-color:#00000000; border:none;"></button>
+</div>
+</body>
+</html>

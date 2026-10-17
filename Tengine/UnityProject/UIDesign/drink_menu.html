@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>DrinkMenuUI - 酒单</title>
+<style>
+  @font-face { font-family: 'zpix'; src: url('../Assets/AssetRaw/Fonts/zpix.ttf'); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'zpix', sans-serif; }
+</style>
+</head>
+<body>
+<!-- 酒单（对照 Resources/ui01/mixology/ui酒单.png）：
+     非全屏面板，不遮挡顶部 UI；6 上架槽 3列x2行；标题页签「酒单」居中压面板顶边；右上关闭。
+     +/- 按钮切片自带符号（btn_03=+，btn_02=-）；lv 框为角花装饰，下垫羊皮纸槽底。 -->
+<div data-u-type="div" data-u-name="m_drinkMenu" data-u-layout="stretch"
+     style="width:1960px; height:1080px; position:relative; background-color:#00000000;">
+
+  <div data-u-type="div" data-u-name="m_panel"
+       style="position:absolute; left:218px; top:190px; width:1524px; height:738px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_01.png'); background-size:100% 100%;">
+
+    <!-- 卡片 0 -->
+    <div data-u-type="div" data-u-name="m_card0"
+         style="position:absolute; left:102px; top:85px; width:405px; height:267px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_frame_01.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textName0"
+            style="position:absolute; left:22px; top:12px; width:180px; height:46px;
+                   color:#6d5a2a; font-size:34px; text-align:left; line-height:46px;">麦酒</span>
+      <div data-u-type="div" data-u-name="m_tagBg0"
+           style="position:absolute; left:275px; top:15px; width:105px; height:42px; background-color:#9fb24a;">
+        <span data-u-type="text" data-u-name="m_textTag0"
+              style="position:absolute; left:0px; top:0px; width:105px; height:42px;
+                     color:#f5f2e6; font-size:26px; text-align:center; line-height:42px;">解腻</span>
+      </div>
+      <div data-u-type="div" data-u-name="m_iconSlotBg0"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px; background-color:#f7f3e0;"></div>
+      <div data-u-type="image" data-u-name="m_imgIconFrame0" data-u-fit="stretch"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+      <span data-u-type="text" data-u-name="m_textStatus0"
+            style="position:absolute; left:270px; top:80px; width:110px; height:40px;
+                   color:#9a9470; font-size:26px; text-align:left; line-height:40px;">已上架</span>
+      <span data-u-type="text" data-u-name="m_textPrice0"
+            style="position:absolute; left:150px; top:135px; width:230px; height:44px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:44px;">售价：30G</span>
+      <button data-u-type="button" data-u-name="m_btnPlus0"
+              style="position:absolute; left:28px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_03.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <span data-u-type="text" data-u-name="m_textCount0"
+            style="position:absolute; left:82px; top:196px; width:70px; height:48px;
+                   color:#6d5a2a; font-size:30px; text-align:center; line-height:48px;">10</span>
+      <button data-u-type="button" data-u-name="m_btnMinus0"
+              style="position:absolute; left:158px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_02.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <button data-u-type="button" data-u-name="m_btnShelf0"
+              style="position:absolute; left:285px; top:196px; width:96px; height:51px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_01_s1.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+    </div>
+
+    <!-- 卡片 1 -->
+    <div data-u-type="div" data-u-name="m_card1"
+         style="position:absolute; left:567px; top:85px; width:405px; height:267px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_frame_01.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textName1"
+            style="position:absolute; left:22px; top:12px; width:180px; height:46px;
+                   color:#6d5a2a; font-size:34px; text-align:left; line-height:46px;">麦酒</span>
+      <div data-u-type="div" data-u-name="m_tagBg1"
+           style="position:absolute; left:275px; top:15px; width:105px; height:42px; background-color:#9fb24a;">
+        <span data-u-type="text" data-u-name="m_textTag1"
+              style="position:absolute; left:0px; top:0px; width:105px; height:42px;
+                     color:#f5f2e6; font-size:26px; text-align:center; line-height:42px;">解腻</span>
+      </div>
+      <div data-u-type="div" data-u-name="m_iconSlotBg1"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px; background-color:#f7f3e0;"></div>
+      <div data-u-type="image" data-u-name="m_imgIconFrame1" data-u-fit="stretch"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+      <span data-u-type="text" data-u-name="m_textStatus1"
+            style="position:absolute; left:270px; top:80px; width:110px; height:40px;
+                   color:#9a9470; font-size:26px; text-align:left; line-height:40px;">已上架</span>
+      <span data-u-type="text" data-u-name="m_textPrice1"
+            style="position:absolute; left:150px; top:135px; width:230px; height:44px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:44px;">售价：30G</span>
+      <button data-u-type="button" data-u-name="m_btnPlus1"
+              style="position:absolute; left:28px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_03.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <span data-u-type="text" data-u-name="m_textCount1"
+            style="position:absolute; left:82px; top:196px; width:70px; height:48px;
+                   color:#6d5a2a; font-size:30px; text-align:center; line-height:48px;">10</span>
+      <button data-u-type="button" data-u-name="m_btnMinus1"
+              style="position:absolute; left:158px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_02.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <button data-u-type="button" data-u-name="m_btnShelf1"
+              style="position:absolute; left:285px; top:196px; width:96px; height:51px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_01_s1.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+    </div>
+
+    <!-- 卡片 2 -->
+    <div data-u-type="div" data-u-name="m_card2"
+         style="position:absolute; left:1032px; top:85px; width:405px; height:267px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_frame_01.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textName2"
+            style="position:absolute; left:22px; top:12px; width:180px; height:46px;
+                   color:#6d5a2a; font-size:34px; text-align:left; line-height:46px;">麦酒</span>
+      <div data-u-type="div" data-u-name="m_tagBg2"
+           style="position:absolute; left:275px; top:15px; width:105px; height:42px; background-color:#9fb24a;">
+        <span data-u-type="text" data-u-name="m_textTag2"
+              style="position:absolute; left:0px; top:0px; width:105px; height:42px;
+                     color:#f5f2e6; font-size:26px; text-align:center; line-height:42px;">解腻</span>
+      </div>
+      <div data-u-type="div" data-u-name="m_iconSlotBg2"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px; background-color:#f7f3e0;"></div>
+      <div data-u-type="image" data-u-name="m_imgIconFrame2" data-u-fit="stretch"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+      <span data-u-type="text" data-u-name="m_textStatus2"
+            style="position:absolute; left:270px; top:80px; width:110px; height:40px;
+                   color:#9a9470; font-size:26px; text-align:left; line-height:40px;">已上架</span>
+      <span data-u-type="text" data-u-name="m_textPrice2"
+            style="position:absolute; left:150px; top:135px; width:230px; height:44px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:44px;">售价：30G</span>
+      <button data-u-type="button" data-u-name="m_btnPlus2"
+              style="position:absolute; left:28px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_03.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <span data-u-type="text" data-u-name="m_textCount2"
+            style="position:absolute; left:82px; top:196px; width:70px; height:48px;
+                   color:#6d5a2a; font-size:30px; text-align:center; line-height:48px;">10</span>
+      <button data-u-type="button" data-u-name="m_btnMinus2"
+              style="position:absolute; left:158px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_02.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <button data-u-type="button" data-u-name="m_btnShelf2"
+              style="position:absolute; left:285px; top:196px; width:96px; height:51px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_01_s1.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+    </div>
+
+    <!-- 卡片 3 -->
+    <div data-u-type="div" data-u-name="m_card3"
+         style="position:absolute; left:102px; top:385px; width:405px; height:267px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_frame_01.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textName3"
+            style="position:absolute; left:22px; top:12px; width:180px; height:46px;
+                   color:#6d5a2a; font-size:34px; text-align:left; line-height:46px;">麦酒</span>
+      <div data-u-type="div" data-u-name="m_tagBg3"
+           style="position:absolute; left:275px; top:15px; width:105px; height:42px; background-color:#9fb24a;">
+        <span data-u-type="text" data-u-name="m_textTag3"
+              style="position:absolute; left:0px; top:0px; width:105px; height:42px;
+                     color:#f5f2e6; font-size:26px; text-align:center; line-height:42px;">解腻</span>
+      </div>
+      <div data-u-type="div" data-u-name="m_iconSlotBg3"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px; background-color:#f7f3e0;"></div>
+      <div data-u-type="image" data-u-name="m_imgIconFrame3" data-u-fit="stretch"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+      <span data-u-type="text" data-u-name="m_textStatus3"
+            style="position:absolute; left:270px; top:80px; width:110px; height:40px;
+                   color:#9a9470; font-size:26px; text-align:left; line-height:40px;">已上架</span>
+      <span data-u-type="text" data-u-name="m_textPrice3"
+            style="position:absolute; left:150px; top:135px; width:230px; height:44px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:44px;">售价：30G</span>
+      <button data-u-type="button" data-u-name="m_btnPlus3"
+              style="position:absolute; left:28px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_03.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <span data-u-type="text" data-u-name="m_textCount3"
+            style="position:absolute; left:82px; top:196px; width:70px; height:48px;
+                   color:#6d5a2a; font-size:30px; text-align:center; line-height:48px;">10</span>
+      <button data-u-type="button" data-u-name="m_btnMinus3"
+              style="position:absolute; left:158px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_02.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <button data-u-type="button" data-u-name="m_btnShelf3"
+              style="position:absolute; left:285px; top:196px; width:96px; height:51px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_01_s1.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+    </div>
+
+    <!-- 卡片 4 -->
+    <div data-u-type="div" data-u-name="m_card4"
+         style="position:absolute; left:567px; top:385px; width:405px; height:267px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_frame_01.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textName4"
+            style="position:absolute; left:22px; top:12px; width:180px; height:46px;
+                   color:#6d5a2a; font-size:34px; text-align:left; line-height:46px;">麦酒</span>
+      <div data-u-type="div" data-u-name="m_tagBg4"
+           style="position:absolute; left:275px; top:15px; width:105px; height:42px; background-color:#9fb24a;">
+        <span data-u-type="text" data-u-name="m_textTag4"
+              style="position:absolute; left:0px; top:0px; width:105px; height:42px;
+                     color:#f5f2e6; font-size:26px; text-align:center; line-height:42px;">解腻</span>
+      </div>
+      <div data-u-type="div" data-u-name="m_iconSlotBg4"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px; background-color:#f7f3e0;"></div>
+      <div data-u-type="image" data-u-name="m_imgIconFrame4" data-u-fit="stretch"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+      <span data-u-type="text" data-u-name="m_textStatus4"
+            style="position:absolute; left:270px; top:80px; width:110px; height:40px;
+                   color:#9a9470; font-size:26px; text-align:left; line-height:40px;">已上架</span>
+      <span data-u-type="text" data-u-name="m_textPrice4"
+            style="position:absolute; left:150px; top:135px; width:230px; height:44px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:44px;">售价：30G</span>
+      <button data-u-type="button" data-u-name="m_btnPlus4"
+              style="position:absolute; left:28px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_03.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <span data-u-type="text" data-u-name="m_textCount4"
+            style="position:absolute; left:82px; top:196px; width:70px; height:48px;
+                   color:#6d5a2a; font-size:30px; text-align:center; line-height:48px;">10</span>
+      <button data-u-type="button" data-u-name="m_btnMinus4"
+              style="position:absolute; left:158px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_02.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <button data-u-type="button" data-u-name="m_btnShelf4"
+              style="position:absolute; left:285px; top:196px; width:96px; height:51px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_01_s1.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+    </div>
+
+    <!-- 卡片 5 -->
+    <div data-u-type="div" data-u-name="m_card5"
+         style="position:absolute; left:1032px; top:385px; width:405px; height:267px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_frame_01.png'); background-size:100% 100%;">
+      <span data-u-type="text" data-u-name="m_textName5"
+            style="position:absolute; left:22px; top:12px; width:180px; height:46px;
+                   color:#6d5a2a; font-size:34px; text-align:left; line-height:46px;">麦酒</span>
+      <div data-u-type="div" data-u-name="m_tagBg5"
+           style="position:absolute; left:275px; top:15px; width:105px; height:42px; background-color:#9fb24a;">
+        <span data-u-type="text" data-u-name="m_textTag5"
+              style="position:absolute; left:0px; top:0px; width:105px; height:42px;
+                     color:#f5f2e6; font-size:26px; text-align:center; line-height:42px;">解腻</span>
+      </div>
+      <div data-u-type="div" data-u-name="m_iconSlotBg5"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px; background-color:#f7f3e0;"></div>
+      <div data-u-type="image" data-u-name="m_imgIconFrame5" data-u-fit="stretch"
+           style="position:absolute; left:22px; top:68px; width:114px; height:114px;
+                  background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_frame_lv1.png'); background-size:100% 100%;"></div>
+      <span data-u-type="text" data-u-name="m_textStatus5"
+            style="position:absolute; left:270px; top:80px; width:110px; height:40px;
+                   color:#9a9470; font-size:26px; text-align:left; line-height:40px;">已上架</span>
+      <span data-u-type="text" data-u-name="m_textPrice5"
+            style="position:absolute; left:150px; top:135px; width:230px; height:44px;
+                   color:#8a8259; font-size:30px; text-align:left; line-height:44px;">售价：30G</span>
+      <button data-u-type="button" data-u-name="m_btnPlus5"
+              style="position:absolute; left:28px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_03.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <span data-u-type="text" data-u-name="m_textCount5"
+            style="position:absolute; left:82px; top:196px; width:70px; height:48px;
+                   color:#6d5a2a; font-size:30px; text-align:center; line-height:48px;">10</span>
+      <button data-u-type="button" data-u-name="m_btnMinus5"
+              style="position:absolute; left:158px; top:196px; width:48px; height:48px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_02.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+      <button data-u-type="button" data-u-name="m_btnShelf5"
+              style="position:absolute; left:285px; top:196px; width:96px; height:51px;
+                     background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/mixology/ui_mixology_btn_01_s1.png'); background-size:100% 100%;
+                     background-color:#00000000; border:none;"></button>
+    </div>
+
+    <span data-u-type="text" data-u-name="m_textFooter"
+          style="position:absolute; left:200px; top:670px; width:1124px; height:50px;
+                 color:#9a9470; font-size:30px; text-align:center; line-height:50px;">当日成本预估：0G</span>
+  </div>
+
+  <!-- 标题页签（共用 talk 页签切片）压面板顶边居中 -->
+  <div data-u-type="div" data-u-name="m_titleTab"
+       style="position:absolute; left:786px; top:165px; width:387px; height:75px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/talk/ui_talk_frame_01.png'); background-size:100% 100%;">
+    <span data-u-type="text" data-u-name="m_textTitle"
+          style="position:absolute; left:0px; top:0px; width:387px; height:75px;
+                 color:#6d7a4a; font-size:38px; text-align:center; line-height:75px;">酒　单</span>
+  </div>
+
+  <!-- 关闭按钮 -->
+  <button data-u-type="button" data-u-name="m_btnClose"
+          style="position:absolute; left:1664px; top:185px; width:78px; height:78px;
+                 background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/common/ui_common_btn_close.png'); background-size:100% 100%;
+                 background-color:#00000000; border:none;"></button>
+</div>
+</body>
+</html>

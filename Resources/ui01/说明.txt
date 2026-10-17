@@ -1,0 +1,6 @@
+common为通用框，unity内用九宫格的方式拼其他界面。
+ui_common_frame_lv1到lv4是icon等级框。
+ui_main_icon_01_s1是选中态，ui_main_icon_01_s2是未选中态。
+ui_mixology_btn_01_s1是可选择，ui_mixology_btn_01_s2是不可选择。
+
+icon尺寸均需适配100x100像素

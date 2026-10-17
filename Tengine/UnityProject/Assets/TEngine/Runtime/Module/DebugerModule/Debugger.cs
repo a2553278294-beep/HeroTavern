@@ -236,12 +236,18 @@ namespace TEngine
 
         private void Update()
         {
+            // Initialize() 在模块缺失时会提前返回，_fpsCounter 保持 null，避免每帧 NRE 刷屏。
+            if (_fpsCounter == null)
+            {
+                return;
+            }
+
             _fpsCounter.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
 
         private void OnGUI()
         {
-            if (_debuggerModule == null || !_debuggerModule.ActiveWindow)
+            if (_debuggerModule == null || !_debuggerModule.ActiveWindow || _fpsCounter == null)
             {
                 return;
             }

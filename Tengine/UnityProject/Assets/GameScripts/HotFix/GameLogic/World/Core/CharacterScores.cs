@@ -13,10 +13,14 @@ namespace GameLogic.World
             return c.Gold;
         }
 
-        /// <summary>战斗分 = 力量² + 智力² + 防御。</summary>
+        /// <summary>
+        /// 战斗分 = 力量² + 智力² + 防御。M7：三项都取<strong>有效属性</strong>
+        /// （<see cref="CharacterData.EffStr"/> / <see cref="CharacterData.EffInt"/> / <see cref="CharacterData.EffDef"/>，
+        /// 含装备加成），装备变化会即时反映到战斗分。
+        /// </summary>
         public static int Combat(CharacterData c)
         {
-            return c.Str * c.Str + c.Int * c.Int + c.Def;
+            return c.EffStr * c.EffStr + c.EffInt * c.EffInt + c.EffDef;
         }
 
         /// <summary>体力分 = 体力值。</summary>

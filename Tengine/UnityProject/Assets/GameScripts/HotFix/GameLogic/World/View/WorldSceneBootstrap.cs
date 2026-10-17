@@ -6,65 +6,216 @@ using UnityEngine;
 namespace GameLogic
 {
     /// <summary>
-    /// 酒馆主场景引导（可玩原型）：运行时代码构建 9×9 城镇网格、酒馆/厨房/悬赏栏、酒保与 NPC 视图，
+    /// 酒馆主场景引导：以 sence_base_01 整图插画（1960×1080）为场景底景，正交相机正视；
+    /// 9×9 逻辑网格继续驱动模拟，网格坐标经「双线形映射 + 关键格点像素标定」换算到画面位置
+    /// （任务 20261016-main-ui-scene-rework：替换方块素模场景）。
     /// 每帧驱动 WorldModule.Tick（1 真实秒 = 1 游戏分钟，五档加速），失去焦点自动暂停。
-    /// 正式场景资产化与 TEngine UIWindow 化待 Unity CLI 可用后重做（任务 20261011-main-scene-bootstrap）。
     /// </summary>
     public sealed class WorldSceneBootstrap : SingletonBehaviour<WorldSceneBootstrap>
     {
         private readonly Dictionary<int, CharacterView> _views = new Dictionary<int, CharacterView>();
-        private readonly Dictionary<int, int> _orderCooldowns = new Dictionary<int, int>();
         private Camera _camera;
         private WorldHud _hud;
-        private Renderer _bartenderRenderer;
+        private SpriteRenderer[] _bartenderParts;
 
-        /// <summary>可被虚化的建筑渲染器（遮挡 NPC 时半透明）。</summary>
-        private readonly HashSet<Renderer> _occludables = new HashSet<Renderer>();
+        // ==================== 画面标定（对照 Resources/ui01/sence/sence_base_01.png） ====================
 
-        /// <summary>当前处于虚化状态的渲染器。</summary>
-        private readonly HashSet<Renderer> _faded = new HashSet<Renderer>();
+        /// <summary>底图设计分辨率（像素），sprite ppu=100。</summary>
+        private const float DesignWidth = 1960f;
+        private const float DesignHeight = 1080f;
+        private const float PixelsPerUnit = 100f;
 
-        /// <summary>虚化后的不透明度。</summary>
-        private const float FadeAlpha = 0.25f;
+        /// <summary>底图世界尺寸（单位）。</summary>
+        private const float WorldWidth = DesignWidth / PixelsPerUnit;   // 19.6
+        private const float WorldHeight = DesignHeight / PixelsPerUnit; // 10.8
+
+        /// <summary>
+        /// 网格 → 像素的双线形映射四角（插图视角：网格 x=0 在画面右侧厨房一端，x=8 在左侧悬赏板一端；
+        /// y=0 是靠墙里侧，y=8 是近镜头前排）。四角取地板可见范围的近似边界。
+        /// </summary>
+        private static readonly Vector2 QuadA = new Vector2(1650f, 280f);  // (0,0)
+        private static readonly Vector2 QuadB = new Vector2(560f, 330f);   // (8,0)
+        private static readonly Vector2 QuadC = new Vector2(1900f, 1060f); // (0,8)
+        private static readonly Vector2 QuadD = new Vector2(250f, 1060f);  // (8,8)
+
+        /// <summary>纵深伽马：插画透视把后半场压缩到画面上部，v 取 v^gamma 后再插值。</summary>
+        private const float PerspectiveGamma = 1.7f;
+
+        /// <summary>
+        /// 关键格点的像素覆盖（插图不是严格等距网格，交互点按图手工标定；键为网格 x,y）。
+        /// 吧台/悬赏板/厨房锚点由摆件切图模板匹配得出（sence_item_01/04 等），桌子对齐可见桌位。
+        /// </summary>
+        private static readonly Dictionary<long, Vector2> PixelOverrides = new Dictionary<long, Vector2>
+        {
+            [Key(6, 4)] = new Vector2(560f, 460f),   // 悬赏布告栏前
+            [Key(5, 4)] = new Vector2(1150f, 620f),  // 吧台前（客人点单位）
+            [Key(4, 4)] = new Vector2(1380f, 430f),  // 吧台主体（阻挡格，仅视觉锚点）
+            [Key(2, 4)] = new Vector2(1820f, 600f),  // 厨房料理台前（画面最右侧绿桌台）
+            [Key(1, 2)] = new Vector2(781f, 590f),   // 圆桌（左）
+            [Key(3, 2)] = new Vector2(1023f, 850f),  // 长桌（中）
+            [Key(5, 2)] = new Vector2(1573f, 980f),  // 圆桌（右下）
+            [Key(1, 6)] = new Vector2(1150f, 560f),  // 吧台凳位 1
+            [Key(3, 6)] = new Vector2(1330f, 600f),  // 吧台凳位 2
+            [Key(5, 6)] = new Vector2(1510f, 620f),  // 吧台凳位 3
+        };
+
+        private static long Key(int x, int y)
+        {
+            return ((long)x << 32) | (uint)y;
+        }
+
+        /// <summary>
+        /// M13：当前订阅整点事件的世界实例。<see cref="WorldModule.Restart"/> 会先 Unhook 旧实例再 StartNewGame，
+        /// <c>GameModule.World.Sim</c> 因此指向<b>新实例</b>；本类若不换绑，<c>HourChanged</c>（酒保着色）
+        /// 就一直挂在已作废的旧实例上（重开后酒保不再变色）。换绑由 <see cref="EnsureSimHooked"/> 每帧检出。
+        /// </summary>
+        private WorldSimulation _hookedSim;
 
         public WorldSimulation Sim => GameModule.World.Sim;
         public Camera SceneCamera => _camera;
+
+        /// <summary>OnGUI 残留面板宿主（厨房/悬赏板/对话/交易/查看/破产遮罩）；顶栏与气泡在 <see cref="MainHudUI"/>。</summary>
+        public WorldHud Hud => _hud;
         public IReadOnlyDictionary<int, CharacterView> Views => _views;
 
-        /// <summary>网格坐标 → 世界坐标（x→X，y→Z，平面 y=0）。</summary>
+        /// <summary>
+        /// 网格坐标 → 像素坐标（底图 1960×1080，原点左上，y 向下）：
+        /// 优先取 <see cref="PixelOverrides"/> 手工标定，否则双线形映射（纵深伽马校正）。
+        /// </summary>
+        public static Vector2 CellToPixel(GridPos pos)
+        {
+            if (PixelOverrides.TryGetValue(Key(pos.X, pos.Y), out var px))
+            {
+                return px;
+            }
+
+            float u = Mathf.Clamp01(pos.X / 8f);
+            float v = Mathf.Pow(Mathf.Clamp01(pos.Y / 8f), PerspectiveGamma);
+            Vector2 back = Vector2.Lerp(QuadA, QuadB, u);
+            Vector2 front = Vector2.Lerp(QuadC, QuadD, u);
+            return Vector2.Lerp(back, front, v);
+        }
+
+        /// <summary>像素坐标 → 世界坐标（底图中心为原点，y 向上；z 按纵深排序：越靠下越贴近镜头）。</summary>
+        public static Vector3 PixelToWorld(Vector2 pixel)
+        {
+            float x = (pixel.x - DesignWidth * 0.5f) / PixelsPerUnit;
+            float y = (DesignHeight * 0.5f - pixel.y) / PixelsPerUnit;
+            return new Vector3(x, y, DepthFromWorldY(y));
+        }
+
+        /// <summary>像素 y（世界 y）→ z：画面下方（世界 y 小）的物体更靠近相机，压住上方物体。</summary>
+        private static float DepthFromWorldY(float worldY)
+        {
+            return worldY * 0.1f - 1.0f;
+        }
+
+        /// <summary>
+        /// 网格坐标 → 世界坐标（新视觉：映射到底图平面 z≈-1 一层，height 参数保留兼容、不再使用）。
+        /// </summary>
         public static Vector3 CellToWorld(GridPos pos, float height = 0f)
         {
-            return new Vector3(pos.X, height, pos.Y);
+            return PixelToWorld(CellToPixel(pos));
         }
 
         protected override void OnLoad()
         {
             BuildScene();
             _hud = new WorldHud(this);
-            if (Sim != null)
-            {
-                Sim.HourChanged += OnHourChanged;
-            }
+            AttachSim(Sim);
+
+            // 预热角色染色贴图（walk/idle 全方向全帧），分帧摊派；
+            // 否则首个整点全员切 walk 时几十次 Bake 挤在一帧，表现为「第一次移动卡顿」。
+            StartCoroutine(PrewarmCharacterSprites());
+
+            // 顶栏 HUD（uGUI）：暂停/档位/日期/钟摆/金币/结算分栏/NPC 交互气泡。
+            GameModule.UI.ShowUIAsync<MainHudUI>();
 
             Log.Info("WorldSceneBootstrap 场景构建完成");
         }
 
         protected override void OnDestroy()
         {
-            if (Sim != null)
+            // 用缓存实例解绑：销毁时 Sim 可能已被 WorldModule 换掉或清空（OnRelease），否则会漏解绑。
+            if (_hookedSim != null)
             {
-                Sim.HourChanged -= OnHourChanged;
+                _hookedSim.HourChanged -= OnHourChanged;
+                _hookedSim = null;
             }
+
+            GameModule.UI.CloseUI<MainHudUI>();
 
             base.OnDestroy();
         }
 
+        /// <summary>
+        /// M13：把整点事件绑到指定的世界实例（先解绑旧实例再绑新的）。
+        /// <see cref="WorldModule.Restart"/> 换了新实例后由 <see cref="EnsureSimHooked"/> 每帧检出并重绑。
+        /// 换实例同时清空按旧实例缓存的展示层状态（角色视图 / HUD 选中面板），避免旧对局的 NPC 残影与悬空引用。
+        /// </summary>
+        private void AttachSim(WorldSimulation sim)
+        {
+            if (_hookedSim != null)
+            {
+                _hookedSim.HourChanged -= OnHourChanged;
+            }
+
+            _hookedSim = sim;
+
+            // 角色视图按 CharacterData 建立，新对局的人口是全新对象，旧视图不可复用：整体销毁并清表。
+            foreach (var pair in _views)
+            {
+                if (pair.Value != null)
+                {
+                    Object.Destroy(pair.Value.gameObject);
+                }
+            }
+
+            _views.Clear();
+
+            // HUD 可能还握着上一局选中的 CharacterData，先关面板，避免面板残留已销毁视图的数据。
+            _hud?.ClosePanels();
+
+            // 酒保回到待命色：上一局的「制作中」属于旧实例的 Tavern 状态。
+            SetBartenderTint(Color.white);
+
+            if (sim != null)
+            {
+                sim.HourChanged += OnHourChanged;
+            }
+        }
+
+        /// <summary>M13：每帧检出 <see cref="WorldModule.Restart"/> 换过世界实例并重新绑定事件。</summary>
+        private void EnsureSimHooked()
+        {
+            if (!ReferenceEquals(_hookedSim, Sim))
+            {
+                AttachSim(Sim);
+            }
+        }
+
         private void Update()
         {
+            // M13：重开对局后世界实例会换新，先确认事件与视图缓存仍绑在当前实例上。
+            EnsureSimHooked();
+
             GameModule.World.Tick(Time.deltaTime);
+            FitCamera(); // 窗口拉伸时保持整图完整可见
             SyncCharacterViews();
-            UpdateOcclusion();
             HandleWorldClick();
+        }
+
+        /// <summary>
+        /// 等模拟就绪（<c>WorldModule.EnsureConfigReady</c> 已跑、配色表可取色）后再启动分帧预热。
+        /// </summary>
+        private System.Collections.IEnumerator PrewarmCharacterSprites()
+        {
+            while (Sim == null || !Sim.IsRunning)
+            {
+                yield return null;
+            }
+
+            yield return SpriteCharacterLibrary.PrewarmCache();
         }
 
         private void OnApplicationFocus(bool hasFocus)
@@ -83,172 +234,82 @@ namespace GameLogic
         private void BuildScene()
         {
             // 禁用演示场景既有相机，避免双相机渲染冲突。
+            // 注意不能误伤 UICamera：ScreenSpaceCamera 画布的相机被禁用会导致全部 uGUI 窗口不渲染。
             foreach (var cam in Object.FindObjectsByType<Camera>(FindObjectsSortMode.None))
             {
                 cam.enabled = false;
+            }
+            foreach (var canvas in Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None))
+            {
+                if (canvas.renderMode != RenderMode.ScreenSpaceOverlay && canvas.worldCamera != null)
+                {
+                    canvas.worldCamera.enabled = true; // UI 相机恢复渲染
+                }
             }
 
             var camGo = new GameObject("WorldCamera");
             _camera = camGo.AddComponent<Camera>();
             _camera.orthographic = true;
             _camera.clearFlags = CameraClearFlags.SolidColor;
-            _camera.backgroundColor = new Color(0.16f, 0.13f, 0.1f); // 羊皮纸底色
-            // 2.5D 对角俯视（立项：2.5D 中世纪羊皮纸风；经营案主界面：45° 等距俯视）。
-            // 正交 + 俯仰 45° + 偏航 45°，网格呈菱形对角构图；原型用 3D 素模近似，正式版为 2.5D 精灵。
-            camGo.transform.rotation = Quaternion.Euler(45f, 45f, 0f);
-            camGo.transform.position = new Vector3(4f, 0f, 4f) - camGo.transform.forward * 16f;
-            // 9×9 网格对角投影高约 9（俯仰 45° 下对角 12.7×sin45°），留边取 5.5。
-            _camera.orthographicSize = 5.5f;
+            _camera.backgroundColor = new Color(0.13f, 0.16f, 0.10f); // 黑边与藤蔓框同色系
+            // 正视底图：相机沿 +Z 方向看 z=0 平面，contain 适配（窄屏上下留边，宽屏左右留边）。
+            camGo.transform.position = new Vector3(0f, 0f, -10f);
+            camGo.transform.rotation = Quaternion.identity;
+            _camera.nearClipPlane = 0.1f;
+            _camera.farClipPlane = 50f;
+            FitCamera();
 
-            var lightGo = new GameObject("WorldLight");
-            var light = lightGo.AddComponent<Light>();
-            light.type = LightType.Directional;
-            light.color = new Color(1f, 0.95f, 0.85f);
-            lightGo.transform.rotation = Quaternion.Euler(50f, 30f, 0f);
-            RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(0.55f, 0.5f, 0.45f);
-
-            // 9×9 地面格子。
-            var map = Sim?.Map.GetMap(WorldMapIds.Town);
-            int w = map != null ? GridMap.Width : 9;
-            int h = map != null ? GridMap.Height : 9;
-            for (int x = 0; x < w; x++)
+            // 场景底景：sence_base_01 整图插画（吧台/桌椅/悬赏板/厨房已全部烘焙在底图内，
+            // sence_item_01~10 为同位置摆件切图，预留给悬停高亮等交互表现，本期不重复摆放）。
+            var backdropGo = new GameObject("SceneBackdrop");
+            var backdrop = backdropGo.AddComponent<SpriteRenderer>();
+            backdrop.sprite = Resources.Load<Sprite>("ui01/sence/sence_base_01");
+            if (backdrop.sprite == null)
             {
-                for (int y = 0; y < h; y++)
-                {
-                    var tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    tile.name = $"Tile_{x}_{y}";
-                    tile.transform.position = new Vector3(x, -0.05f, y);
-                    tile.transform.localScale = new Vector3(0.96f, 0.1f, 0.96f);
-                    bool alt = (x + y) % 2 == 0;
-                    tile.GetComponent<Renderer>().material.color = alt
-                        ? new Color(0.76f, 0.68f, 0.5f)
-                        : new Color(0.7f, 0.62f, 0.45f);
-                }
+                Log.Error("WorldSceneBootstrap: 缺少场景底图 Resources/ui01/sence/sence_base_01");
+            }
+            else
+            {
+                // 用 sprite 实际包围盒居中，不假设 pivot（导入 pivot 为中心而非左下角，
+                // 直接 -w/2 平移会把底图错到左下象限——实机截图证实）。
+                var b = backdrop.sprite.bounds;
+                backdropGo.transform.position = new Vector3(-b.center.x, -b.center.y, 0f);
             }
 
-            // 建筑：酒馆 / 厨房 / 悬赏布告栏。
-            CreateBuilding("Tavern", WorldMap.TavernPos, new Vector3(1.6f, 1.2f, 1.6f), new Color(0.45f, 0.28f, 0.15f));
-            CreateBuilding("Kitchen", WorldMap.KitchenPos, new Vector3(0.8f, 0.7f, 0.8f), new Color(0.5f, 0.5f, 0.55f));
-            CreateBuilding("BountyBoard", WorldMap.BountyBoardPos, new Vector3(0.7f, 0.9f, 0.15f), new Color(0.85f, 0.75f, 0.4f));
+            backdrop.sortingOrder = -100;
 
-            // 6 张桌子：坐标以核心地图登记为准（阻挡移动与视觉一致）。
-            var town = Sim?.Map.GetMap(WorldMapIds.Town);
-            if (town != null)
+            // uGUI 交互前提：演示场景若没带 EventSystem 就补一个。
+            if (UnityEngine.EventSystems.EventSystem.current == null)
             {
-                foreach (var building in town.Buildings)
-                {
-                    if (building.Id.StartsWith("table"))
-                    {
-                        CreateBuilding("Table", building.Pos, new Vector3(0.5f, 0.35f, 0.5f), new Color(0.55f, 0.38f, 0.22f));
-                    }
-                }
+                var esGo = new GameObject("EventSystem");
+                esGo.AddComponent<UnityEngine.EventSystems.EventSystem>();
+                esGo.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
             }
 
-            // 酒保（吧台位，酒馆格内偏移）。
-            var bartender = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            bartender.name = "Bartender";
-            bartender.transform.position = CellToWorld(WorldMap.TavernPos, 0.5f) + new Vector3(0.3f, 0f, 0.3f);
-            bartender.transform.localScale = new Vector3(0.35f, 0.5f, 0.35f);
-            _bartenderRenderer = bartender.GetComponent<Renderer>();
-            _bartenderRenderer.material.color = new Color(0.9f, 0.85f, 0.7f);
+            // 光照已移除：底图与角色（body/face/hair 分层贴图）全走 Sprites/Default 不受光。
+
+            // 酒保贴图形象（seed 7 → 03 号发型 + body 配色 02，与客人 01 配色区分）：站在吧台内弧空地。
+            var bartenderGo = SpriteCharacterBuilder.Build("Bartender", 7);
+            bartenderGo.transform.position = PixelToWorld(new Vector2(1580f, 400f)); // 吧台内弧空地（紫晶地面区），pivot=脚底
+            _bartenderParts = bartenderGo.GetComponentsInChildren<SpriteRenderer>();
+            SetBartenderTint(Color.white);
         }
 
-        private void CreateBuilding(string name, GridPos pos, Vector3 scale, Color color)
-        {
-            var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            go.name = name;
-            go.transform.position = CellToWorld(pos, scale.y / 2f);
-            go.transform.localScale = scale;
-            var renderer = go.GetComponent<Renderer>();
-            renderer.material.color = color;
-            _occludables.Add(renderer); // 建筑/桌子参与遮挡虚化
-        }
-
-        // ==================== 遮挡虚化（2.5D 对角俯视：NPC 在建筑后时建筑半透明） ====================
-
-        private void UpdateOcclusion()
+        /// <summary>正交相机 contain 适配 1960×1080 底图（任何宽高比下整图完整可见）。</summary>
+        private void FitCamera()
         {
             if (_camera == null)
             {
                 return;
             }
 
-            // 找出当前帧所有挡在 NPC 与相机之间的建筑。
-            var occluding = new HashSet<Renderer>();
-            Vector3 camPos = _camera.transform.position;
-            foreach (var pair in _views)
-            {
-                var view = pair.Value;
-                if (view == null || view.Data == null || !view.Data.IsAlive)
-                {
-                    continue;
-                }
-
-                Vector3 targetPos = view.transform.position;
-                Vector3 dir = targetPos - camPos;
-                float dist = dir.magnitude;
-                foreach (var hit in Physics.RaycastAll(camPos, dir / dist, dist))
-                {
-                    var renderer = hit.collider.GetComponent<Renderer>();
-                    if (renderer != null && _occludables.Contains(renderer))
-                    {
-                        occluding.Add(renderer);
-                    }
-                }
-            }
-
-            // 恢复不再遮挡的，虚化新遮挡的。
-            foreach (var renderer in _faded)
-            {
-                if (!occluding.Contains(renderer) && renderer != null)
-                {
-                    SetFade(renderer, false);
-                }
-            }
-
-            _faded.RemoveWhere(r => !occluding.Contains(r));
-            foreach (var renderer in occluding)
-            {
-                if (_faded.Add(renderer))
-                {
-                    SetFade(renderer, true);
-                }
-            }
+            float halfH = WorldHeight * 0.5f;
+            float halfW = WorldWidth * 0.5f;
+            _camera.orthographicSize = Mathf.Max(halfH, halfW / _camera.aspect);
         }
 
-        /// <summary>内置 Standard shader 的透明/不透明模式切换（运行时素模材质均为实例，可直接改）。</summary>
-        private static void SetFade(Renderer renderer, bool fade)
-        {
-            var mat = renderer.material;
-            var color = mat.color;
-            if (fade)
-            {
-                mat.SetFloat("_Mode", 3f);
-                mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                mat.SetInt("_ZWrite", 0);
-                mat.DisableKeyword("_ALPHATEST_ON");
-                mat.EnableKeyword("_ALPHABLEND_ON");
-                mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                mat.renderQueue = 3000;
-                color.a = FadeAlpha;
-            }
-            else
-            {
-                color.a = 1f;
-                mat.SetFloat("_Mode", 0f);
-                mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-                mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-                mat.SetInt("_ZWrite", 1);
-                mat.DisableKeyword("_ALPHATEST_ON");
-                mat.DisableKeyword("_ALPHABLEND_ON");
-                mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                mat.renderQueue = -1;
-            }
-
-            mat.color = color;
-        }
+        // 遮挡说明：新视觉为整图插画，遮挡关系已由美术烘焙进底图；NPC 经 z 纵深排序
+        // （DepthFromWorldY：画面下方更靠近镜头），不再需要 3D 射线虚化。
 
         // ==================== NPC 视图同步（轮询人口，核心暂无“角色加入”事件） ====================
 
@@ -279,6 +340,7 @@ namespace GameLogic
                 }
 
                 _views.Remove(id);
+                MainHudUI.Current?.OnCharacterRemoved(id);
                 if (_hud != null && _hud.SelectedCharacter != null && _hud.SelectedCharacter.Id == id)
                 {
                     _hud.ClosePanels();
@@ -298,7 +360,30 @@ namespace GameLogic
             }
         }
 
-        // ==================== 占位环境驱动（行为系统落地前让经营闭环可观察） ====================
+        // ==================== 整点表现 ====================
+
+        /// <summary>
+        /// 整点只做<b>表现层</b>刷新：酒保按「待命 / 制作中」着色。
+        /// <b>客源由 CharacterBehaviorSystem 驱动（M11）</b>：谁走向酒馆、到店点哪杯酒、什么时候回城待机，
+        /// 全部由 <c>CharacterBehaviorSystem.TickHour</c> 按权重决策产出（接线见 <c>WorldSimulation.StartNewGame</c>），
+        /// 因此本文件不再保留任何占位的点单冷却 / 随机落点 / 手动下达移动目标逻辑。
+        /// </summary>
+        /// <summary>酒保分层贴图整体染色（SpriteRenderer.color 正片叠底；白色=原色）。</summary>
+        private void SetBartenderTint(Color color)
+        {
+            if (_bartenderParts == null)
+            {
+                return;
+            }
+
+            foreach (var part in _bartenderParts)
+            {
+                if (part != null)
+                {
+                    part.color = color;
+                }
+            }
+        }
 
         private void OnHourChanged(int dayOverall, int hour)
         {
@@ -307,74 +392,33 @@ namespace GameLogic
                 return;
             }
 
-            var residents = Sim.Population.Residents;
-            for (int i = 0; i < residents.Count; i++)
-            {
-                var c = residents[i];
-                if (_orderCooldowns.TryGetValue(c.Id, out int cd) && cd > 0)
-                {
-                    _orderCooldowns[c.Id] = cd - 1;
-                }
-            }
-
-            // 空闲居民走向酒馆；到店随机点一杯后离开。
-            foreach (var c in residents)
-            {
-                if (!c.IsAlive || c.ActionLockDays > 0 || c.MoveTarget.HasValue)
-                {
-                    continue;
-                }
-
-                // 建筑阻挡移动：客人在吧台位（酒馆相邻服务格）点单，随后离开。
-                if (c.Position == WorldMap.TavernBarPos)
-                {
-                    if (!_orderCooldowns.TryGetValue(c.Id, out int cd) || cd <= 0)
-                    {
-                        if (Sim.Tavern.GuestOrderRandom(c, SimRandom) >= 0)
-                        {
-                            _orderCooldowns[c.Id] = 3;
-                        }
-                    }
-
-                    Sim.SetMoveTarget(c, RandomFreeCell());
-                    continue;
-                }
-
-                // 少量居民每小时动身，避免全镇同步移动。
-                if (SimRandom.Next(0, 100) < 25)
-                {
-                    Sim.SetMoveTarget(c, WorldMap.TavernBarPos);
-                }
-            }
-
-            // 酒保三态着色：待命（浅）/制作中（暖）。
-            if (_bartenderRenderer != null)
-            {
-                _bartenderRenderer.material.color = Sim.Tavern.IsMaking
-                    ? new Color(1f, 0.75f, 0.3f)
-                    : new Color(0.9f, 0.85f, 0.7f);
-            }
+            // 酒保两态染色：待命（原色）/制作中（暖色调染）。
+            SetBartenderTint(Sim.Tavern.IsMaking ? new Color(1f, 0.8f, 0.55f) : Color.white);
         }
 
-        private IRandomSource _simRandom;
-        private IRandomSource SimRandom => _simRandom ??= new SystemRandomSource(System.Environment.TickCount);
+        // ==================== 世界点击（正交正视：屏幕点 → 底图像素 → 交互锚点） ====================
 
-        private GridPos RandomFreeCell()
+        /// <summary>悬赏布告栏点击锚点（底图像素，由 sence_item_01 模板匹配定位）与半径。</summary>
+        private static readonly Vector2 BoardAnchorPixel = new Vector2(549f, 300f);
+        private const float BoardPickRadius = 170f;
+
+        /// <summary>厨房料理台点击锚点（底图右侧绿桌台区域）与半径。</summary>
+        private static readonly Vector2 KitchenAnchorPixel = new Vector2(1830f, 480f);
+        private const float KitchenPickRadius = 190f;
+
+        /// <summary>世界坐标 → 底图像素（<see cref="PixelToWorld"/> 的逆运算）。</summary>
+        public static Vector2 WorldToPixel(Vector3 world)
         {
-            var map = Sim.Map.GetMap(WorldMapIds.Town);
-            for (int i = 0; i < 10; i++)
-            {
-                var cell = new GridPos(WorldMapIds.Town, SimRandom.Next(0, GridMap.Width), SimRandom.Next(0, GridMap.Height));
-                if (map == null || map.IsWalkable(cell.X, cell.Y))
-                {
-                    return cell;
-                }
-            }
-
-            return WorldMap.TownCenter;
+            return new Vector2(world.x * PixelsPerUnit + DesignWidth * 0.5f, DesignHeight * 0.5f - world.y * PixelsPerUnit);
         }
 
-        // ==================== 世界点击（射线-平面求交，不依赖 Physics） ====================
+        /// <summary>点到线段的距离（NPC 纵向命中判定用）。</summary>
+        private static float DistancePointToSegment(Vector2 p, Vector2 a, Vector2 b)
+        {
+            var ab = b - a;
+            float t = ab.sqrMagnitude < 1e-6f ? 0f : Mathf.Clamp01(Vector2.Dot(p - a, ab) / ab.sqrMagnitude);
+            return Vector2.Distance(p, a + ab * t);
+        }
 
         private void HandleWorldClick()
         {
@@ -384,23 +428,35 @@ namespace GameLogic
             }
 
             Vector2 mouse = Input.mousePosition;
-            if (_hud != null && _hud.IsPointerOverPanel(mouse))
+
+            // uGUI（顶栏/气泡/结算分栏）拦截：指针落在 UI 上不穿透到世界。
+            var es = UnityEngine.EventSystems.EventSystem.current;
+            if (es != null && es.IsPointerOverGameObject())
             {
-                return; // 点击在面板上，不穿透到世界。
+                Log.Info("[ClickProbe] 被 uGUI 拦截（IsPointerOverGameObject=true）");
+                return;
             }
 
-            // 优先拾取 NPC（屏幕距离 40px 内最近者）。
+            if (_hud != null && _hud.IsPointerOverPanel(mouse))
+            {
+                Log.Info("[ClickProbe] 被 OnGUI 面板拦截");
+                return; // 点击在 OnGUI 面板上，不穿透到世界。
+            }
+
+            // 优先拾取 NPC：以「脚底→头顶」线段做命中（角色约 110px 高、pivot 在脚底，
+            // 原来只对脚底点取 60px 半径，点上半身经常落空——实证「点击范围太小」）。
             CharacterView picked = null;
-            float best = 40f;
+            float best = 70f; // 横向命中半径（屏幕 px）
             foreach (var pair in _views)
             {
-                Vector3 sp = _camera.WorldToScreenPoint(pair.Value.transform.position);
-                if (sp.z <= 0f)
+                Vector3 spFeet = _camera.WorldToScreenPoint(pair.Value.transform.position);
+                if (spFeet.z <= 0f)
                 {
                     continue;
                 }
 
-                float dist = Vector2.Distance(mouse, new Vector2(sp.x, sp.y));
+                Vector3 spHead = _camera.WorldToScreenPoint(pair.Value.transform.position + Vector3.up * 1.1f);
+                float dist = DistancePointToSegment(mouse, new Vector2(spFeet.x, spFeet.y), new Vector2(spHead.x, spHead.y));
                 if (dist < best)
                 {
                     best = dist;
@@ -410,26 +466,27 @@ namespace GameLogic
 
             if (picked != null)
             {
-                _hud.OpenCharacterPanel(picked.Data);
+                // 角色系统 3.2：点 NPC 弹交互气泡（交流/交易/查看），气泡由 MainHudUI 承载。
+                Log.Info($"[ClickProbe] 点中 NPC {picked.Data.Name}（MainHudUI.Current={(MainHudUI.Current != null ? "在" : "为null")}）");
+                if (MainHudUI.Current != null)
+                {
+                    MainHudUI.Current.ShowBubble(picked.Data);
+                }
+
                 return;
             }
 
-            // 格子拾取：射线与 y=0 平面求交。
-            Ray ray = _camera.ScreenPointToRay(mouse);
-            if (Mathf.Abs(ray.direction.y) < 1e-5f)
-            {
-                return;
-            }
+            Log.Info("[ClickProbe] 未点中任何 NPC（60px 内无角色）");
 
-            float t = -ray.origin.y / ray.direction.y;
-            Vector3 hit = ray.origin + ray.direction * t;
-            var cell = new GridPos(WorldMapIds.Town, Mathf.RoundToInt(hit.x), Mathf.RoundToInt(hit.z));
+            // 正交相机正视 z=0 平面：屏幕点直接反投影到底图平面，再换算到底图像素。
+            Vector3 world = _camera.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, -_camera.transform.position.z));
+            Vector2 pixel = WorldToPixel(world);
 
-            if (cell == WorldMap.KitchenPos)
+            if (Vector2.Distance(pixel, KitchenAnchorPixel) <= KitchenPickRadius)
             {
                 _hud.OpenKitchenChoice();
             }
-            else if (cell == WorldMap.BountyBoardPos)
+            else if (Vector2.Distance(pixel, BoardAnchorPixel) <= BoardPickRadius)
             {
                 _hud.OpenBoardPanel();
             }

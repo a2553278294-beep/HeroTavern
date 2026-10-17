@@ -1,34 +1,54 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameLogic.UI;
 using GameLogic.World;
 using UnityEngine;
 
 namespace GameLogic
 {
     /// <summary>
-    /// 主界面 HUD（OnGUI 原型实现，正式版按 html-to-ugui 流程重做为 TEngine UIWindow）。
-    /// 顶栏（时钟/档位/暂停）、货币、结算分栏（5 秒自动收起）、厨房采购/调酒、NPC 查看、悬赏栏情报、游戏结束遮罩。
+    /// 主界面 HUD（OnGUI 残留部分）：厨房酒单/调酒、悬赏板、交易/查看弹出面板、游戏结束遮罩。
+    /// 顶栏（时钟/档位/暂停）、货币、结算分栏、NPC 交互气泡已迁移到 <see cref="MainHudUI"/>（uGUI）；
+    /// 对话/交易已迁移到 <see cref="DialogueUI"/> / <see cref="TradeUI"/>（uGUI；对话销毁时回调 <see cref="OnDialogueClosed"/> 恢复走时）。
+    ///
+    /// 对话/交易/查看已迁移 <see cref="DialogueUI"/>/<see cref="TradeUI"/>/<see cref="CharacterUI"/>（uGUI）；
+    /// 剩余弹出面板（<see cref="BountyPanel"/>）遵循统一约定：<c>Open(...)</c> / <c>Close()</c> / <c>IsOpen</c> /
+    /// <c>Bounds</c> / <c>CloseRequested</c> / <c>AcknowledgeClose()</c>。
+    /// 面板自己只管画，<b>暂停 / 恢复走时由本文件做</b>（见 <see cref="HandlePanelCloseRequests"/>）。
     /// </summary>
     public sealed class WorldHud
     {
         private enum Panel
         {
             None,
-            KitchenChoice, // 经营案：点击厨房生成采购/调酒两个小型 UI
-            Purchase,
+            KitchenChoice, // 经营案：点击厨房浮现酒单/调酒两个小型 UI（无独立采购入口）
             Brew,
-            Character,
-            Board,
         }
 
         private readonly WorldSceneBootstrap _boot;
         private readonly List<Rect> _panelRects = new List<Rect>();
+
+        // 弹出面板实例（仅余悬赏板 OnGUI；对话/交易/查看已迁移 uGUI，关闭由窗口销毁回调处理）。
+        private readonly BountyPanel _bountyPanel = new BountyPanel();
         private Panel _panel = Panel.None;
         private CharacterData _selected;
         private SettlementReport _lastReport;
-        private float _reportUntil;
         private bool _gameOver;
+
+        // M13：当前绑定事件的世界实例。WorldModule.Restart 会换一个新实例，HUD 必须每帧检出并重绑，
+        // 否则结算分栏 / 破产遮罩会一直收上一局旧实例的事件（重开后不再刷新）。
+        private WorldSimulation _hookedSim;
+
+        // M13：破产瞬间的快照。破产后 Sim 仍会 Tick（Time 继续走），所以存活天数 / 总流水必须锁定在结束那一刻，
+        // 否则遮罩上的天数会一直往上跳。
+        private int _gameOverDay;
+        private long _gameOverRevenue;
+        private int _gameOverBountyCompleted;
+        private SettlementReport _gameOverReport;
+
+        // M13：重开按钮的防连点闩锁（点一次即进入新对局）。
+        private bool _gameOverRestarted;
 
         // 调酒面板选择状态。
         private int _baseIdx;
@@ -40,7 +60,39 @@ namespace GameLogic
         public WorldHud(WorldSceneBootstrap boot)
         {
             _boot = boot;
-            var sim = boot.Sim;
+            AttachSim(Sim);
+        }
+
+        /// <summary>
+        /// M13：把结算 / 破产事件绑到指定的世界实例（先解绑旧实例再绑新的）。
+        /// 构造时绑一次；<see cref="WorldModule.Restart"/> 换了新实例后由 <see cref="EnsureSimHooked"/> 每帧检出并重绑。
+        /// 换实例同时清空上一局的结算报告 / 破产快照与所有面板，避免旧对局的 UI 残留。
+        /// </summary>
+        private void AttachSim(WorldSimulation sim)
+        {
+            if (_hookedSim != null)
+            {
+                _hookedSim.SettlementReady -= OnSettlementReady;
+                _hookedSim.GameOver -= OnGameOver;
+            }
+
+            _hookedSim = sim;
+            _lastReport = null;
+            _gameOver = false;
+            _gameOverDay = 0;
+            _gameOverRevenue = 0L;
+            _gameOverBountyCompleted = 0;
+            _gameOverReport = null;
+            _gameOverRestarted = false;
+            _selected = null;
+            _panel = Panel.None;
+
+            // 只关面板、不动暂停位：新对局的暂停状态由新的 WorldSimulation 自己决定。
+            _bountyPanel.Close();
+            GameModule.UI.CloseUI<DialogueUI>();
+            GameModule.UI.CloseUI<TradeUI>();
+            GameModule.UI.CloseUI<CharacterUI>();
+
             if (sim != null)
             {
                 sim.SettlementReady += OnSettlementReady;
@@ -48,14 +100,41 @@ namespace GameLogic
             }
         }
 
+        /// <summary>M13：每帧检出 <see cref="WorldModule.Restart"/> 换过世界实例并重新绑定事件。</summary>
+        private void EnsureSimHooked()
+        {
+            if (!ReferenceEquals(_hookedSim, Sim))
+            {
+                AttachSim(Sim);
+            }
+        }
+
         public CharacterData SelectedCharacter => _selected;
 
         private WorldSimulation Sim => _boot.Sim;
 
-        public void OpenCharacterPanel(CharacterData character)
+        /// <summary>气泡「交流」：选中角色并开对话框（对话案 3.3 的「静止」侧由 StartDialogue 做）。</summary>
+        public void BeginInteractionTalk(CharacterData character)
         {
             _selected = character;
-            _panel = Panel.Character;
+            _panel = Panel.None;
+            StartDialogue();
+        }
+
+        /// <summary>气泡「交易」：开交易面板，不夺走走时。</summary>
+        public void BeginInteractionTrade(CharacterData character)
+        {
+            _selected = character;
+            _panel = Panel.None;
+            StartTrade();
+        }
+
+        /// <summary>气泡「查看」：开角色面板（属性 / 背包两页），不夺走走时。</summary>
+        public void BeginInteractionView(CharacterData character)
+        {
+            _selected = character;
+            _panel = Panel.None;
+            OpenCharacterDetail();
         }
 
         public void OpenKitchenChoice()
@@ -63,15 +142,37 @@ namespace GameLogic
             _panel = Panel.KitchenChoice;
         }
 
+        /// <summary>点悬赏栏建筑：开悬赏板，并把世界停住（悬赏案 2.1 的「静止」侧由本文件做）。</summary>
         public void OpenBoardPanel()
         {
-            _panel = Panel.Board;
+            _bountyPanel.Open();
+            GameModule.World.SetPaused(true);
         }
 
+        /// <summary>关掉所有 HUD 面板（点空白 / 面板上的「关闭」/ 选中角色离场）。</summary>
         public void ClosePanels()
         {
             _panel = Panel.None;
             _selected = null;
+            ClosePopupPanels();
+            MainHudUI.Current?.HideBubble();
+        }
+
+        /// <summary>
+        /// 关掉四个弹出面板；若刚才开着的是暂停类面板（悬赏板 / 对话）则顺手恢复走时，
+        /// 否则保持玩家自己的暂停选择（交易 / 查看面板本身不夺走走时）。
+        /// </summary>
+        private void ClosePopupPanels()
+        {
+            bool wasPausing = _bountyPanel.IsOpen || DialogueUI.Current != null;
+            _bountyPanel.Close();
+            GameModule.UI.CloseUI<DialogueUI>();
+            GameModule.UI.CloseUI<TradeUI>();
+            GameModule.UI.CloseUI<CharacterUI>();
+            if (wasPausing)
+            {
+                GameModule.World.SetPaused(false);
+            }
         }
 
         /// <summary>鼠标是否落在任一 HUD 面板上（防止穿透点击世界）。</summary>
@@ -86,7 +187,9 @@ namespace GameLogic
                 }
             }
 
-            return false;
+            // 四个面板的 Bounds 独立于 _panelRects（由面板自己刷新），按打开态纳入防穿透；
+            // 关掉的面板 Bounds 可能仍是上次的位置，故必须先看 IsOpen。
+            return _bountyPanel.IsOpen && _bountyPanel.Bounds.Contains(guiPos);
         }
 
         public void Draw()
@@ -98,121 +201,85 @@ namespace GameLogic
             }
 
             _panelRects.Clear();
-            DrawWorldLabels(sim);
-            DrawTopBar(sim);
-            DrawMoney(sim);
+
+            // M13：重开对局后世界实例会换新，先确认事件仍绑在当前实例上。
+            EnsureSimHooked();
+
+            // 先处理上一帧 GUI 里点出来的关闭请求，再画：面板 Draw 开头会把 CloseRequested 清零。
+            HandlePanelCloseRequests();
 
             switch (_panel)
             {
                 case Panel.KitchenChoice: DrawKitchenChoice(); break;
-                case Panel.Purchase: DrawPurchase(sim); break;
                 case Panel.Brew: DrawBrew(sim); break;
-                case Panel.Character: DrawCharacter(sim); break;
-                case Panel.Board: DrawBoard(sim); break;
             }
 
-            DrawSettlement(sim);
+            DrawPopupPanels(sim);
             if (_gameOver)
             {
                 DrawGameOver(sim);
             }
         }
 
-        // ==================== 顶栏 / 货币 ====================
-
-        private void DrawTopBar(WorldSimulation sim)
+        /// <summary>
+        /// 每帧检查四个面板的关闭请求（统一约定：面板只置位，宿主来关）。
+        /// - 悬赏板 / 对话：期间世界是停住的，关掉即 <c>SetPaused(false)</c> 恢复走时；
+        /// - 交易 / 查看：<b>不暂停</b>，收起面板时不动暂停位（经营案「暂停与否由玩家决定」，
+        ///   面板开着也能照常看时间，代价只是酒保不会来打断）。
+        /// </summary>
+        private void HandlePanelCloseRequests()
         {
-            var bar = new Rect(0, 0, Screen.width, 30);
-            GUI.Box(bar, GUIContent.none);
-            _panelRects.Add(bar);
-
-            // 点击时间暂停（经营案主界面规则）。
-            var t = sim.Time;
-            if (GUI.Button(new Rect(6, 3, 210, 24), $"第{t.Year}年 第{t.DayOfYear}天 {t.Hour:00}:{t.Minute:00}"))
+            if (_bountyPanel.CloseRequested)
             {
-                GameModule.World.SetPaused(!sim.IsPaused);
+                _bountyPanel.Close();
+                _bountyPanel.AcknowledgeClose();
+                GameModule.World.SetPaused(false);
             }
 
-            // 五档加速 ×1/×2/×4/×8/×16。
-            int mult = 1;
-            for (int level = 1; level <= WorldSimulation.MaxSpeedLevel; level++)
-            {
-                string label = (sim.SpeedLevel == level ? "[×" : "×") + mult + (sim.SpeedLevel == level ? "]" : "");
-                if (GUI.Button(new Rect(220 + (level - 1) * 46, 3, 42, 24), label))
-                {
-                    GameModule.World.SetSpeedLevel(level);
-                }
-
-                mult *= 2;
-            }
-
-            if (GUI.Button(new Rect(460, 3, 60, 24), sim.IsPaused ? "继续" : "暂停"))
-            {
-                GameModule.World.SetPaused(!sim.IsPaused);
-            }
-
-            GUI.Label(new Rect(530, 5, 320, 22),
-                $"人口 {sim.Population.Residents.Count}/{TownPopulation.MaxResidents}  暂住 {sim.Population.Visitors.Count}/{TownPopulation.MaxVisitors}  怪物 {sim.Monsters.Monsters.Count}  流水 {sim.Tavern.TotalRevenue}");
         }
 
-        private void DrawMoney(WorldSimulation sim)
+        /// <summary>画四个独立面板：矩形默认居中由面板自己的 DefaultArea 给，本文件只转发矩形与世界实例。</summary>
+        private void DrawPopupPanels(WorldSimulation sim)
         {
-            var rect = new Rect(Screen.width - 170, 34, 160, 26);
-            GUI.Box(rect, $"金币 {sim.Wallet.Currency}");
-            _panelRects.Add(rect);
+            if (_bountyPanel.IsOpen)
+            {
+                _bountyPanel.Draw(BountyPanel.DefaultArea(), sim);
+                AddPanelRect(_bountyPanel.Bounds);
+            }
+
         }
 
-        // ==================== 世界标签 ====================
-
-        private void DrawWorldLabels(WorldSimulation sim)
+        /// <summary>查看窗口（uGUI CharacterUI）销毁时回调：清选中角色（查看不暂停，无需恢复走时）。</summary>
+        public void OnCharacterPanelClosed()
         {
-            var cam = _boot.SceneCamera;
-            if (cam == null)
-            {
-                return;
-            }
-
-            foreach (var pair in _boot.Views)
-            {
-                var view = pair.Value;
-                if (view == null || view.Data == null)
-                {
-                    continue;
-                }
-
-                Vector3 sp = cam.WorldToScreenPoint(view.transform.position + Vector3.up * 0.7f);
-                if (sp.z <= 0f)
-                {
-                    continue;
-                }
-
-                var rect = new Rect(sp.x - 50, Screen.height - sp.y - 10, 100, 20);
-                var prev = GUI.color;
-                GUI.color = CharacterView.ProfessionColor(view.Data.Profession);
-                GUI.Label(rect, view.Data.Name);
-                GUI.color = prev;
-            }
-
-            // 酒保三态（送单中与制作中合并显示为制作中，原型口径）。
-            Vector3 bp = cam.WorldToScreenPoint(WorldSceneBootstrap.CellToWorld(WorldMap.TavernPos, 1.6f));
-            if (bp.z > 0f)
-            {
-                string state = sim.Tavern.IsMaking ? $"制作中(排队{sim.Tavern.PendingOrderCount})" : "待命";
-                GUI.Label(new Rect(bp.x - 60, Screen.height - bp.y, 140, 20), $"酒保：{state}");
-            }
-
-            GUI.Label(new Rect(8, 34, 400, 20), "点击：NPC=查看 厨房=采购/调酒 悬赏栏=怪物情报 空白=关闭 时钟=暂停");
+            _selected = null;
         }
 
-        // ==================== 厨房：采购 / 调酒 ====================
+        /// <summary>对话窗口（uGUI DialogueUI）销毁时回调：恢复走时（对话案 3.3「静止」侧收尾）。</summary>
+        public void OnDialogueClosed()
+        {
+            GameModule.World.SetPaused(false);
+        }
+
+        private void AddPanelRect(Rect rect)
+        {
+            if (rect.width > 0f && rect.height > 0f)
+            {
+                _panelRects.Add(rect);
+            }
+        }
+
+        // ==================== 厨房：酒单 / 调酒 ====================
 
         private void DrawKitchenChoice()
         {
             var rect = CenterRect(220, 90);
             BeginPanel(rect, "厨房");
-            if (GUI.Button(new Rect(20, 30, 80, 40), "采购"))
+            if (GUI.Button(new Rect(20, 30, 80, 40), "酒单"))
             {
-                _panel = Panel.Purchase;
+                // 经营案：酒单为独立窗口（uGUI DrinkMenuUI），营业中也可打开查看（锁定只读）。
+                _panel = Panel.None;
+                GameModule.UI.ShowUIAsync<DrinkMenuUI>();
             }
 
             if (GUI.Button(new Rect(120, 30, 80, 40), "调酒"))
@@ -220,77 +287,6 @@ namespace GameLogic
                 _panel = Panel.Brew;
             }
 
-            EndPanel();
-        }
-
-        private void DrawPurchase(WorldSimulation sim)
-        {
-            var rect = CenterRect(560, 320);
-            BeginPanel(rect, sim.Tavern.IsLockedToday ? "采购（今日 10:00 已锁定）" : "采购（10:00 前可修改份数）");
-            GUILayout.BeginArea(new Rect(10, 24, rect.width - 20, rect.height - 34));
-
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button("返回", GUILayout.Width(60)))
-            {
-                _panel = Panel.KitchenChoice;
-            }
-
-            if (GUILayout.Button("关闭", GUILayout.Width(60)))
-            {
-                ClosePanels();
-            }
-
-            GUILayout.EndHorizontal();
-
-            foreach (int wineId in sim.Brewing.UnlockedWines)
-            {
-                var def = ItemCatalog.Get(wineId);
-                if (def == null)
-                {
-                    continue;
-                }
-
-                GUILayout.BeginHorizontal();
-                bool onShelf = sim.Tavern.Shelf.Contains(wineId);
-                string toggle = onShelf ? "下架" : "上架";
-                if (GUILayout.Button(toggle, GUILayout.Width(50)))
-                {
-                    var shelf = new List<int>(sim.Tavern.Shelf);
-                    if (onShelf)
-                    {
-                        shelf.Remove(wineId);
-                    }
-                    else
-                    {
-                        shelf.Add(wineId);
-                    }
-
-                    if (!sim.Tavern.SetShelf(shelf))
-                    {
-                        _brewMessage = $"上架失败：槽位上限 {TavernSystem.ShelfSlotLimit} 或酒未解锁";
-                    }
-                }
-
-                GUILayout.Label($"{def.Name} 价{def.Price} 时长{def.MakeMinutes / 60}h 今日剩{sim.Tavern.RemainingCountOf(wineId)}", GUILayout.Width(280));
-
-                bool wasEnabled = GUI.enabled;
-                GUI.enabled = wasEnabled && !sim.Tavern.IsLockedToday && onShelf;
-                if (GUILayout.Button("-", GUILayout.Width(24)))
-                {
-                    sim.Tavern.SetPlannedCount(wineId, Math.Max(0, sim.Tavern.PlannedCountOf(wineId) - 1));
-                }
-
-                GUILayout.Label($"份数 {sim.Tavern.PlannedCountOf(wineId)}", GUILayout.Width(60));
-                if (GUILayout.Button("+", GUILayout.Width(24)))
-                {
-                    sim.Tavern.SetPlannedCount(wineId, sim.Tavern.PlannedCountOf(wineId) + 1);
-                }
-
-                GUI.enabled = wasEnabled;
-                GUILayout.EndHorizontal();
-            }
-
-            GUILayout.EndArea();
             EndPanel();
         }
 
@@ -432,113 +428,164 @@ namespace GameLogic
             return parts.Count > 0 ? string.Join("、", parts) : "（空）";
         }
 
-        // ==================== NPC 查看 ====================
-
-        private void DrawCharacter(WorldSimulation sim)
+        /// <summary>交谈：开对话框并停住世界（对话案 3.3 的「静止」侧由本文件做）。</summary>
+        private void StartDialogue()
         {
-            var rect = new Rect(Screen.width - 340, 70, 330, 380);
-            BeginPanel(rect, "角色查看");
-            GUILayout.BeginArea(new Rect(10, 24, rect.width - 20, rect.height - 34));
-            if (_selected == null || !_selected.IsAlive)
+            var sim = Sim;
+            if (sim == null || _selected == null)
             {
-                GUILayout.Label("（角色已不在）");
-            }
-            else
-            {
-                var c = _selected;
-                GUILayout.Label($"{_selected.Name}（#{c.Id} {c.Profession} {c.Personality}）");
-                GUILayout.Label($"年龄 {c.Age}  好感 {c.FavorToPlayer}/100  社交 {CharacterScores.Social(sim.Population, c)}");
-                GUILayout.Label($"生命 {c.Hp}/{c.MaxHp}  力量 {c.Str}  智力 {c.Int}  防御 {c.Def}");
-                GUILayout.Label($"金币 {c.Gold}  体力 {c.Stamina}  精神 {c.Spirit}  健康分 {c.HealthScore}");
-                GUILayout.Label($"荣誉 {c.HonorScore}  信息 {c.InfoScore}  战斗分 {CharacterScores.Combat(c)}");
-                GUILayout.Label($"位置 {c.Position}" + (c.MoveTarget.HasValue ? $" → {c.MoveTarget.Value}" : string.Empty));
-                GUILayout.Label(c.ActionLockDays > 0 ? $"受伤休养中（剩 {c.ActionLockDays} 天）" : "行动正常");
+                return;
             }
 
-            if (GUILayout.Button("关闭"))
-            {
-                ClosePanels();
-            }
-
-            GUILayout.EndArea();
-            EndPanel();
+            _panel = Panel.None;
+            DialogueUI.PendingSession = sim.Dialogue.StartChat(_selected, sim.Time.DayOverall);
+            DialogueUI.PendingNpc = _selected;
+            GameModule.UI.ShowUIAsync<DialogueUI>();
+            GameModule.World.SetPaused(true);
         }
 
-        // ==================== 悬赏栏（怪物情报占位，悬赏系统缺失） ====================
-
-        private void DrawBoard(WorldSimulation sim)
+        /// <summary>交易：开交易面板，不夺走走时（玩家可自己决定要不要先暂停）。</summary>
+        private void StartTrade()
         {
-            var rect = new Rect(10, 70, 360, 300);
-            BeginPanel(rect, "悬赏布告栏");
-            GUILayout.BeginArea(new Rect(10, 24, rect.width - 20, rect.height - 34));
-            if (sim.Monsters.Monsters.Count == 0)
+            var sim = Sim;
+            if (sim == null || _selected == null)
             {
-                GUILayout.Label("（暂无可接取的悬赏——悬赏系统待落地）");
+                return;
             }
 
-            foreach (var m in sim.Monsters.Monsters)
-            {
-                if (!m.IsAlive)
-                {
-                    continue;
-                }
+            _panel = Panel.None;
+            TradeUI.PendingNpc = _selected;
+            GameModule.UI.ShowUIAsync<TradeUI>();
+        }
 
-                var map = sim.Map.GetMap(m.Position.MapId);
-                string where = map != null ? map.Name : m.Position.MapId.ToString();
-                GUILayout.Label($"{m.Def.Name}（{where}） HP {m.Hp}/{m.Def.Hp} 饱食 {m.Satiety} {(m.IsHunting ? "狩猎中!" : "潜伏")}");
+        /// <summary>查看：开角色面板（属性 / 背包两页），同样不夺走走时。</summary>
+        private void OpenCharacterDetail()
+        {
+            if (_selected == null)
+            {
+                return;
             }
 
-            if (GUILayout.Button("关闭"))
-            {
-                ClosePanels();
-            }
-
-            GUILayout.EndArea();
-            EndPanel();
+            _panel = Panel.None;
+            CharacterUI.PendingNpc = _selected;
+            GameModule.UI.ShowUIAsync<CharacterUI>();
         }
 
         // ==================== 结算分栏 / 游戏结束 ====================
 
         private void OnSettlementReady(SettlementReport report)
         {
+            // 仅留作破产遮罩快照（结算分栏展示已迁移到 MainHudUI）。
             _lastReport = report;
-            _reportUntil = Time.realtimeSinceStartup + 5f; // 经营案：保留 5 秒自动收起，期间不可收起。
         }
 
         private void OnGameOver()
         {
             _gameOver = true;
+            _gameOverRestarted = false;
+
+            // 锁定破产瞬间的快照：破产后 Sim 仍会 Tick，直接读 sim 会让天数 / 流水在遮罩上继续变化。
+            var sim = Sim;
+            _gameOverDay = sim != null && sim.Time != null ? sim.Time.DayOverall : 0;
+            _gameOverRevenue = sim != null && sim.Tavern != null ? sim.Tavern.TotalRevenue : 0L;
+            _gameOverBountyCompleted = sim != null && sim.Bounty != null ? sim.Bounty.CompletedCount : 0;
+            // 同一次 0:00 里 Tavern 先抛 Settled（报告已到 _lastReport）再抛 GameOver，此处取到的就是破产当天的报告。
+            _gameOverReport = _lastReport;
+
             GameModule.World.SetPaused(true);
         }
 
-        private void DrawSettlement(WorldSimulation sim)
+        /// <summary>把当日失败悬赏合并成一条文案（悬赏案 3.3-8：「悬赏名 + 发布费已返还」），供破产遮罩使用。</summary>
+        private static string BuildFailedBountyText(SettlementReport report)
         {
-            if (_lastReport == null || Time.realtimeSinceStartup > _reportUntil)
-            {
-                return;
-            }
-
-            var rect = new Rect(Screen.width / 2f - 180, Screen.height - 190, 360, 150);
-            BeginPanel(rect, $"第 {_lastReport.DayOverall} 天结算");
-            GUILayout.BeginArea(new Rect(10, 24, rect.width - 20, rect.height - 34));
-            GUILayout.Label($"收入：酒水 {_lastReport.Income} + 悬赏 {_lastReport.BountyReward}");
-            GUILayout.Label($"支出：酒保工资 {_lastReport.Wage}、营业成本 {_lastReport.Cost}");
-            GUILayout.Label($"余额：{_lastReport.BalanceAfter}");
-            GUILayout.EndArea();
-            EndPanel();
+            return string.Join("、", report.FailedBountyNames.ToArray())
+                   + $"：悬赏失败，发布费已返还 {report.BountyRefund} G。";
         }
 
+        /// <summary>
+        /// 破产遮罩（M13 结算评分）。口径：
+        /// - 评分 = 玩家酒馆<b>总流水</b> <see cref="TavernSystem.TotalRevenue"/>（立项规划「依据总流水评分」）；
+        /// - 分档阈值来自 master-plan M13 的<b>占位表</b>（《经营案》明确「总流水口径与评分表不在本篇」），
+        ///   常量上已标注「评分表未出，待策划」，正式定档后只改 <see cref="GradeRankS"/> 以下四个阈值即可；
+        /// - 存活天数取破产瞬间的 <see cref="GameTime.DayOverall"/> 快照（见 <see cref="OnGameOver"/>），
+        ///   不用会继续走动的当前时刻。
+        /// </summary>
         private void DrawGameOver(WorldSimulation sim)
         {
             var rect = new Rect(0, 0, Screen.width, Screen.height);
             _panelRects.Add(rect);
             GUI.Box(rect, GUIContent.none);
-            var center = CenterRect(420, 160);
+
+            var center = CenterRect(460, 300);
+            HudSkin.DrawFrame(center, "main/ui_main_frame_02"); // 贴图缺失时 HudSkin 回退 GUI.Box。
             GUI.Box(center, "游戏结束");
             GUILayout.BeginArea(new Rect(center.x + 20, center.y + 40, center.width - 40, center.height - 50));
-            GUILayout.Label($"酒馆无法支付工资与成本，经营失败。");
-            GUILayout.Label($"总流水：{sim.Tavern.TotalRevenue}（评分口径待结算系统）");
+
+            GUILayout.Label("酒馆无法支付工资与成本，经营失败。");
+            GUILayout.Label($"总流水：{_gameOverRevenue}");
+            GUILayout.Label($"经营评分：{GradeOf(_gameOverRevenue)}（评分表未出，待策划）");
+            GUILayout.Label($"存活天数：{_gameOverDay}");
+            GUILayout.Label($"累计悬赏完成：{_gameOverBountyCompleted} 条");
+
+            // 当日报告要点（破产当天的结算报告已由结算事件送到 _lastReport，同一次 OnDaySettled 里先发报告再发 GameOver）。
+            var report = _gameOverReport;
+            if (report != null)
+            {
+                GUILayout.Label($"末日要点（第 {report.DayOverall} 天）：售出 {report.SoldCups} 杯 / 未售 {report.UnsoldCups} 杯");
+                GUILayout.Label($"末日要点：酒水收入 {report.Income}，悬赏赏金 {report.BountyReward}，发布费返还 {report.BountyRefund}");
+                GUILayout.Label($"末日要点：营业成本 {report.Cost}，酒保工资 {report.Wage}");
+                if (report.FailedBountyNames != null && report.FailedBountyNames.Count > 0)
+                {
+                    GUILayout.Label(BuildFailedBountyText(report));
+                }
+            }
+
+            GUILayout.FlexibleSpace();
+            if (!_gameOverRestarted && GUI.Button(new Rect(0, center.height - 70, center.width - 40, 28), "重开一局（Restart）"))
+            {
+                _gameOverRestarted = true;
+                // M13：WorldModule.Restart = Unhook 现有事件 → StartNewGame 重开；
+                // 新实例会在下一帧 Draw 的 EnsureSimHooked 里被检出并重绑（AttachSim 已清空本局快照）。
+                GameModule.World.Restart();
+            }
+
             GUILayout.EndArea();
+        }
+
+        /// <summary>
+        /// 经营评分分档（<b>占位</b>）。出处《经营案》「总流水口径与评分表不在本篇」，
+        /// master-plan M13 给的占位档：S ≥ 10000 / A ≥ 5000 / B ≥ 2000 / C ≥ 1000 / D 以下。
+        /// 评分表未出，待策划定档。
+        /// </summary>
+        private const long GradeRankS = 10000;
+        private const long GradeRankA = 5000;
+        private const long GradeRankB = 2000;
+        private const long GradeRankC = 1000;
+
+        /// <summary>按总流水取档位字母（占位评分表，待策划）。</summary>
+        private static string GradeOf(long totalRevenue)
+        {
+            if (totalRevenue >= GradeRankS)
+            {
+                return "S";
+            }
+
+            if (totalRevenue >= GradeRankA)
+            {
+                return "A";
+            }
+
+            if (totalRevenue >= GradeRankB)
+            {
+                return "B";
+            }
+
+            if (totalRevenue >= GradeRankC)
+            {
+                return "C";
+            }
+
+            return "D";
         }
 
         // ==================== 工具 ====================
@@ -548,8 +595,17 @@ namespace GameLogic
             return new Rect(Screen.width / 2f - width / 2f, Screen.height / 2f - height / 2f, width, height);
         }
 
-        private void BeginPanel(Rect rect, string title)
+        /// <summary>
+        /// 画一块 HUD 面板：先按 <paramref name="framePath"/> 铺底框贴图（可空，缺贴图时 HudSkin 回退 GUI.Box），
+        /// 再叠标题框，最后把矩形登记进防穿透列表。
+        /// </summary>
+        private void BeginPanel(Rect rect, string title, string framePath = null)
         {
+            if (!string.IsNullOrEmpty(framePath))
+            {
+                HudSkin.DrawFrame(rect, framePath);
+            }
+
             GUI.Box(rect, title);
             _panelRects.Add(rect);
         }

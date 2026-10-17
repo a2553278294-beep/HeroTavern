@@ -129,6 +129,31 @@ namespace GameLogic.World
         }
 
         /// <summary>
+        /// M9：按职业查出城镇里的在岗 NPC（本地居民 + 暂住人口），<b>只返回存活且未隐藏</b>的角色。
+        /// 职业服务的调用方（<see cref="ProfessionService"/>）用它在城镇里定位厨师 / 商人 / 铁匠 / 农民 /
+        /// 战士 / 牧师 / 吟游诗人；隐藏口径与 <see cref="WorldSimulation"/> 的行动口径一致（M3 隐藏者不参与行动）。
+        /// 返回新列表（本地在前、暂住在后），调用方可自由持有。
+        /// </summary>
+        public List<CharacterData> FindByProfession(ProfessionType p)
+        {
+            var result = new List<CharacterData>();
+            AppendByProfession(_residents, p, result);
+            AppendByProfession(_visitors, p, result);
+            return result;
+        }
+
+        private static void AppendByProfession(IReadOnlyList<CharacterData> source, ProfessionType p, List<CharacterData> result)
+        {
+            for (int i = 0; i < source.Count; i++)
+            {
+                var character = source[i];
+                if (character != null && character.Profession == p && character.IsAlive && !character.IsHidden)
+                {
+                    result.Add(character);
+                }
+            }
+        }
+        /// <summary>
         /// 本地 NPC 死亡：移除并累计死亡人数（R4）。暂住 NPC 死亡不计入。
         /// </summary>
         public void OnCharacterDied(CharacterData character)

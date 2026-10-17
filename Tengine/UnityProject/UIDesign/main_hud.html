@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>MainHudUI - 主界面顶栏 HUD</title>
+<style>
+  @font-face {
+    font-family: 'zpix';
+    src: url('../Assets/AssetRaw/Fonts/zpix.ttf');
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'zpix', sans-serif; }
+</style>
+</head>
+<body>
+<!-- 主界面 HUD：对照 Resources/ui01/main/ui主界面.jpg（1960x1080）
+     藤蔓全屏框/绿条/表盘已烘焙在 ui_main_frame_01 中，本 DSL 只叠加图标与文字。 -->
+<div data-u-type="div" data-u-name="m_mainHud" data-u-layout="stretch"
+     style="width:1960px; height:1080px; position:relative; background-color:#00000000;">
+
+  <!-- 全屏藤蔓边框（含顶栏绿条与中央表盘底） -->
+  <div data-u-type="image" data-u-name="m_imgFrame" data-u-layout="stretch" data-u-fit="stretch"
+       style="position:absolute; left:0; top:0; width:1960px; height:1080px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_frame_01.png'); background-size:100% 100%;"></div>
+
+  <!-- 左上控制簇：绿条 x[89,347] y[33,95]，图标 39x39 等距（暂停/一倍/二倍/三倍） -->
+  <div data-u-type="image" data-u-name="m_imgBtnPause" data-u-fit="contain"
+       style="position:absolute; left:104px; top:45px; width:39px; height:39px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_icon_04_s1.png'); background-size:contain;"></div>
+  <div data-u-type="image" data-u-name="m_imgBtnSpeed1" data-u-fit="contain"
+       style="position:absolute; left:167px; top:45px; width:39px; height:39px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_icon_03_s2.png'); background-size:contain;"></div>
+  <div data-u-type="image" data-u-name="m_imgBtnSpeed2" data-u-fit="contain"
+       style="position:absolute; left:230px; top:45px; width:39px; height:39px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_icon_02_s2.png'); background-size:contain;"></div>
+  <div data-u-type="image" data-u-name="m_imgBtnSpeed3" data-u-fit="contain"
+       style="position:absolute; left:293px; top:45px; width:39px; height:39px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_icon_01_s2.png'); background-size:contain;"></div>
+
+  <!-- 日期 + 时间：绿条 x[410,887] y[33,95] -->
+  <span data-u-type="text" data-u-name="m_textDate"
+        style="position:absolute; left:430px; top:40px; width:280px; height:50px;
+               color:#f5f2e6; font-size:40px; text-align:left; line-height:50px;">91年12月23日</span>
+  <span data-u-type="text" data-u-name="m_textTime"
+        style="position:absolute; left:715px; top:40px; width:150px; height:50px;
+               color:#f5f2e6; font-size:40px; text-align:left; line-height:50px;">9:04</span>
+
+  <!-- 中央表盘钟摆（ui_main_clock 72x234，顶部为摆轴，C# 按游戏时刻摆动） -->
+  <div data-u-type="image" data-u-name="m_imgPendulum" data-u-fit="contain"
+       style="position:absolute; left:924px; top:18px; width:72px; height:234px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_clock.png'); background-size:contain;"></div>
+
+  <!-- 金币：绿条 x[1070,1361] y[33,95]，整条可点击切换结算分栏 -->
+  <span data-u-type="text" data-u-name="m_textMoney"
+        style="position:absolute; left:1070px; top:40px; width:291px; height:50px;
+               color:#f5f2e6; font-size:40px; text-align:center; line-height:50px;">999金币</span>
+
+  <!-- 结算分栏（对照 ui主界面2.jpg）：羊皮纸框 ui_main_frame_02 495x456，默认隐藏 -->
+  <div data-u-type="div" data-u-name="m_settlementPanel"
+       style="position:absolute; left:1063px; top:100px; width:495px; height:456px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_frame_02.png'); background-size:100% 100%;">
+    <span data-u-type="text" data-u-name="m_textSettleTitle"
+          style="position:absolute; left:60px; top:30px; width:200px; height:48px;
+                 color:#6d7a4a; font-size:38px; text-align:left; line-height:48px;">今日累计</span>
+    <span data-u-type="text" data-u-name="m_textSettleDay"
+          style="position:absolute; left:285px; top:30px; width:160px; height:48px;
+                 color:#6d7a4a; font-size:38px; text-align:right; line-height:48px;">第 9 天</span>
+    <span data-u-type="text" data-u-name="m_textSettleLabel0"
+          style="position:absolute; left:60px; top:120px; width:290px; height:44px;
+                 color:#8a8259; font-size:30px; text-align:left; line-height:44px;">累计营收·酒水付费</span>
+    <span data-u-type="text" data-u-name="m_textSettleValue0"
+          style="position:absolute; left:350px; top:120px; width:100px; height:44px;
+                 color:#9fb24a; font-size:30px; text-align:right; line-height:44px;">+202</span>
+    <span data-u-type="text" data-u-name="m_textSettleLabel1"
+          style="position:absolute; left:60px; top:185px; width:290px; height:44px;
+                 color:#8a8259; font-size:30px; text-align:left; line-height:44px;">累计营收</span>
+    <span data-u-type="text" data-u-name="m_textSettleValue1"
+          style="position:absolute; left:350px; top:185px; width:100px; height:44px;
+                 color:#9fb24a; font-size:30px; text-align:right; line-height:44px;">+202</span>
+    <span data-u-type="text" data-u-name="m_textSettleLabel2"
+          style="position:absolute; left:60px; top:250px; width:290px; height:44px;
+                 color:#8a8259; font-size:30px; text-align:left; line-height:44px;">累计支出</span>
+    <span data-u-type="text" data-u-name="m_textSettleValue2"
+          style="position:absolute; left:350px; top:250px; width:100px; height:44px;
+                 color:#b25a4a; font-size:30px; text-align:right; line-height:44px;">-202</span>
+    <span data-u-type="text" data-u-name="m_textSettleLabel3"
+          style="position:absolute; left:60px; top:315px; width:290px; height:44px;
+                 color:#8a8259; font-size:30px; text-align:left; line-height:44px;">悬赏收入</span>
+    <span data-u-type="text" data-u-name="m_textSettleValue3"
+          style="position:absolute; left:350px; top:315px; width:100px; height:44px;
+                 color:#9fb24a; font-size:30px; text-align:right; line-height:44px;">+202</span>
+    <div data-u-type="image" data-u-name="m_imgSettleLine" data-u-fit="stretch"
+         style="position:absolute; left:35px; top:385px; width:426px; height:3px;
+                background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_line_01.png'); background-size:100% 100%;"></div>
+    <span data-u-type="text" data-u-name="m_textSettleNote"
+          style="position:absolute; left:35px; top:400px; width:426px; height:44px;
+                 color:#9a9470; font-size:26px; text-align:center; line-height:44px;">每天 0:00 自动结出「本日流水」</span>
+  </div>
+
+  <!-- NPC 交互气泡（对照 ui主界面3.jpg）：ui_main_frame_03 210x201，C# 定位到 NPC 头顶，默认隐藏 -->
+  <div data-u-type="div" data-u-name="m_interactBubble"
+       style="position:absolute; left:700px; top:430px; width:210px; height:201px;
+              background-image:url('../Assets/GameScripts/HotFix/Resources/ui01/main/ui_main_frame_03.png'); background-size:100% 100%;">
+    <button data-u-type="button" data-u-name="m_btnTalk"
+            style="position:absolute; left:30px; top:18px; width:150px; height:52px;
+                   background-color:#00000000; color:#7a6a3a; font-size:32px; border:none;">交流</button>
+    <button data-u-type="button" data-u-name="m_btnTrade"
+            style="position:absolute; left:30px; top:74px; width:150px; height:52px;
+                   background-color:#00000000; color:#7a6a3a; font-size:32px; border:none;">交易</button>
+    <button data-u-type="button" data-u-name="m_btnView"
+            style="position:absolute; left:30px; top:130px; width:150px; height:52px;
+                   background-color:#00000000; color:#7a6a3a; font-size:32px; border:none;">查看</button>
+  </div>
+</div>
+</body>
+</html>

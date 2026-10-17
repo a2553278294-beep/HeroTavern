@@ -10,7 +10,7 @@ namespace GameLogic.World
         NewDiscovery,
         /// <summary>命中已研发：材料全额返还，不产出。</summary>
         AlreadyKnown,
-        /// <summary>未命中：不扣材料，生成神秘鸡尾酒 ×1。</summary>
+        /// <summary>未命中（或命中新酒但材料不足）：不扣任何材料，生成神秘鸡尾酒 ×1。</summary>
         Failed,
     }
 
@@ -60,6 +60,7 @@ namespace GameLogic.World
         /// <summary>
         /// 合成判定。槽位内容：1 基酒 + 2 配料（允许同款两份，不区分槽位顺序）+ 加冰开关。
         /// 调用前需保证仓库中材料充足（界面层按钮置灰）；不足时按未命中处理并返回 Failed（不扣料）。
+        /// 扣料为原子操作：先按基酒 ×1 / 配料 ×2（同款合并计数）/ 冰块 ×1 整体校验，任一项不足则一份都不扣。
         /// </summary>
         public BrewResult Brew(Inventory inventory, int baseWineId, int ingredientA, int ingredientB, bool useIce)
         {
@@ -89,19 +90,57 @@ namespace GameLogic.World
             }
 
             // 首次命中：扣基酒 1 + 配料 2（加冰另扣冰块 1），unlock 置 1，成品酒 ×1 入仓。
-            if (!inventory.TryRemove(baseWineId, 1)
-                || !inventory.TryRemove(ingredientA, 1)
-                || !inventory.TryRemove(ingredientB, 1)
-                || (useIce && !inventory.TryRemove(ItemCatalog.IceCube, 1)))
+            // FindRecipe 已保证 recipe.NeedIce == useIce，这里取二者与运算作为最终是否扣冰的口径。
+            bool needIce = recipe.NeedIce && useIce;
+
+            // 扣料前先用 Inventory.Count 整体校验（配料同款需 2 份，按 id 合并计数）：
+            // 任一项不足则不执行任何 TryRemove，直接按 Failed（未命中）语义返回并给神秘鸡尾酒，
+            // 避免逐个 TryRemove 扣到一半失败留下半扣库存。
+            if (!HasAllMaterials(inventory, baseWineId, ingredientA, ingredientB, needIce))
             {
                 string tags = MergeTags(baseDef, defA, defB);
                 inventory.AddMysteryCocktail(tags, 1);
                 return new BrewResult(BrewOutcome.Failed, null, tags);
             }
 
+            // 校验已通过，此处连续扣料必定成功。
+            inventory.TryRemove(baseWineId, 1);
+            inventory.TryRemove(ingredientA, 1);
+            inventory.TryRemove(ingredientB, 1);
+            if (needIce)
+            {
+                inventory.TryRemove(ItemCatalog.IceCube, 1);
+            }
+
             _unlockedWines.Add(recipe.ProductWineId);
             inventory.Add(recipe.ProductWineId, 1);
             return new BrewResult(BrewOutcome.NewDiscovery, recipe, null);
+        }
+
+        /// <summary>
+        /// 扣料前置校验：基酒 ×1、配料 ×2（配料 A 与 B 同款时需同一种库存 ≥2，按 id 合并计数）、
+        /// needIce 时冰块 ×1。全部充足返回 true；任一不足返回 false，调用方不得执行任何扣料。
+        /// </summary>
+        private static bool HasAllMaterials(Inventory inventory, int baseWineId, int ingredientA, int ingredientB, bool needIce)
+        {
+            if (inventory.Count(baseWineId) < 1)
+            {
+                return false;
+            }
+
+            if (ingredientA == ingredientB)
+            {
+                if (inventory.Count(ingredientA) < 2)
+                {
+                    return false;
+                }
+            }
+            else if (inventory.Count(ingredientA) < 1 || inventory.Count(ingredientB) < 1)
+            {
+                return false;
+            }
+
+            return !needIce || inventory.Count(ItemCatalog.IceCube) >= 1;
         }
 
         private static RecipeDef FindRecipe(int baseWineId, int ingredientA, int ingredientB, bool useIce)
