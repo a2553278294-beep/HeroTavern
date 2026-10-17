@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module name="">
+  <table name="TbCharacter" value="Character" readSchemaFromFile="1" index="id" input="Character@Character.xlsx" />
+  <table name="TbRelationship" value="Relationship" readSchemaFromFile="1" index="npc_a+npc_b" input="Relationship@Character.xlsx" />
+  <table name="TbCharacterPart" value="CharacterPart" readSchemaFromFile="1" index="id+color_id" input="CharacterPart@CharacterPart.xlsx" />
+  <table name="TbDialogue" value="Dialogue" readSchemaFromFile="1" index="id" input="Dialogue@Dialogue.xlsx" group="c" />
+  <table name="TbEvent" value="Event" readSchemaFromFile="1" index="id" input="Event@Dialogue.xlsx" group="c" />
+  <table name="TbDialogue01" value="Dialogue01" readSchemaFromFile="1" index="dialogue_id" input="Dialogue@Dialogue01.xlsx" />
+  <table name="TbGlobal" value="GlobalConfig" readSchemaFromFile="1" index="id" input="工作表1@global.xlsx" />
+  <table name="TbItem" value="Item" readSchemaFromFile="1" index="id" input="Item@Item.xlsx" />
+  <table name="TbItemTag" value="ItemTag" readSchemaFromFile="1" index="tag" input="标签对照@Item.xlsx" />
+  <table name="TbItemParameter" value="ItemParameter" readSchemaFromFile="1" index="value" input="参数对照@Item.xlsx" />
+  <table name="TbMap" value="Map" readSchemaFromFile="1" index="id" input="工作表1@map.xlsx" />
+  <table name="TbMonster" value="Monster" readSchemaFromFile="1" index="id" input="moster@moster.xlsx" />
+  <table name="TbName" value="Name" readSchemaFromFile="1" mode="list" input="工作表1@NAME.xlsx" />
+  <table name="TbProfession" value="ProfessionConfig" readSchemaFromFile="1" index="id" input="Profession@Profession.xlsx" />
+</module>

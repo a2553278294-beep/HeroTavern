@@ -1,0 +1,185 @@
+[
+  {
+    "file": "Excel/英雄酒馆任务记录与文档汇总.xlsx",
+    "url": "https://docs.qq.com/sheet/DYk9pS3BScGt4VmdN?tab=BB08J2",
+    "bytes": 9233,
+    "sha256": "6af05d896b6646bdf6e8f15fd40004f38b8aafb0d6e127481c9cb1afb26043f1",
+    "beforeWebFixesSha256": "eda2aa2a7bfa9ac16fb0134d0b0ac774d109e59581f6438a9d40af2152389681",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Excel/Character.xlsx",
+    "url": "https://docs.qq.com/sheet/DUmdRbG9SU0ZLc1hH",
+    "bytes": 43209,
+    "sha256": "8de0e3c5d440034ae0b84b48824ef0aa2f897f8a4ab81d797dc278264346ec3e",
+    "beforeWebFixesSha256": "94b88b97f41a651b4e29e8c54467c4103571d21fb7002dd6ea703c69292d0cec",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Excel/Item.xlsx",
+    "url": "https://docs.qq.com/sheet/DUkJzc05OTkxXVnVH",
+    "bytes": 21090,
+    "sha256": "23e09eac15c27d5d20aa097794a4064ea6e175738a8bde4152bb8b949f5a3fba",
+    "beforeWebFixesSha256": "1a63868a5fa5c64ba803ce7f0e05f250edb7051a15628991fe0295d83db92003",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Excel/NAME.xlsx",
+    "url": "https://docs.qq.com/sheet/DYkJ2UFZwSFFXZGZW?no_promotion=1&is_blank_or_template=blank&tab=BB08J2",
+    "bytes": 5647,
+    "sha256": "3d062f87a8b4cea7936df7bae1254db95796f1021279e39e11ea99741bc014cf",
+    "beforeWebFixesSha256": "a968bc061e6cd5d8b9e88ee69e0b6d4020acc86c90beecd4f0d93a462a3bc565",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Excel/CharacterPart.xlsx",
+    "url": "https://docs.qq.com/sheet/DUm1yY3FyTkVacUh2",
+    "bytes": 25043,
+    "sha256": "c4a5752388cbdc13f8f59149b21182de7ad06dbb5d7e4596e5da0b7540bffcff",
+    "beforeWebFixesSha256": "42e1516cf450de01756035ff3b3b3e12273d52c0c8903184feedb4d970f45a10",
+    "updatedAt": "2026-10-17"
+  },
+  {
+    "file": "Excel/global.xlsx",
+    "url": "https://docs.qq.com/sheet/DYmpsVWxLRG9yRFFj?tab=BB08J2",
+    "bytes": 6324,
+    "sha256": "2bfc8dd086d0c2c0c8d367236b84a4174b9820ce3e3ba13d982a2c1fda585d6c",
+    "beforeWebFixesSha256": "1285c6eb247b04f2df854b193b388bee2235c6deba42e9b326ae800b22812ae7",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Excel/Dialogue.xlsx",
+    "url": "https://docs.qq.com/sheet/DUk9hTGdsWVZGWVFv",
+    "bytes": 25230,
+    "sha256": "4d3f817dcf302b08669f04c8629b4048ae130ae01685ac8295de78a165d9e26c",
+    "beforeWebFixesSha256": "2c8807cc37e08d87dafd5c2e659b7f40cabcbfc66179a8ffd1a466c3828cd433",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Excel/Profession.xlsx",
+    "url": "https://docs.qq.com/sheet/DUmZxT09PTXB2d21S",
+    "bytes": 7394,
+    "sha256": "631ec08fb3064c3d0dc61ebb8b93c56eefa6318e94760e8c3b543aafa1a13e2a",
+    "beforeWebFixesSha256": "8f8969ac8bba7ea91d8818af7b88f631fe810e5f2857c176a48e66bc9e3a0fb4",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Excel/moster.xlsx",
+    "url": "https://docs.qq.com/sheet/DUnBXV3BPS3NCcEFW",
+    "bytes": 20986,
+    "sha256": "2446eacf5461da450456d46da24c7aaf6f96986e5a7d9ba615c00bb9b65562cd",
+    "beforeWebFixesSha256": "a39d1bbc8ab7a0643687d6498a4b0d7158cd43323c8b70f4b343bcec75009aea",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Excel/map.xlsx",
+    "url": "https://docs.qq.com/sheet/DYmZQcmh0dm5oUW9M?no_promotion=1&is_blank_or_template=blank&tab=BB08J2",
+    "bytes": 5793,
+    "sha256": "a635db22489f5fddf1505dc87df96ea19356f639bb47cbb3b8066c869b1bafe2",
+    "beforeWebFixesSha256": "3035f51501b8081d4c5f1d3ac86b2660794fe374d1df20862d9844e2ed6335ce",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Excel/Dialogue01.xlsx",
+    "url": "https://docs.qq.com/sheet/DUmVaVm5wcHJ0YXFV",
+    "bytes": 6187,
+    "sha256": "416cd59ae4c0c1be0259d6432da72f29babf1ae5372f7bfea395217a3ea8aeee",
+    "beforeWebFixesSha256": "863adcc7c69d72e36d0f7722a16de01397abd3b555638156ae34eab44c07ecab",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Word/《英雄酒馆》立项规划.docx",
+    "url": "https://docs.qq.com/doc/DYkFJY2dRdGZCcUR6?dver=",
+    "bytes": 16230,
+    "sha256": "899edd6b7af812adf0b29f8416fd51b2acd5429e8711285a1fd8e42545a33865",
+    "beforeWebFixesSha256": "88447df5173190eb6896a29351be862d8b8b0911b8366eea06988d523f0b5bd2",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Word/英雄酒馆_角色系统 v3.1.docx",
+    "url": "https://docs.qq.com/doc/DUk5Yc21GSmh1YWZF",
+    "bytes": 360702,
+    "sha256": "bff8047eca4e83997b8ddfed327149681d681ddd5fe8d038384225cc9a71412e",
+    "beforeWebFixesSha256": "84463c9b42e749733b8524a8d54b62d072c996fbb94b5eea17fa42727ed27077",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Word/英雄酒馆-模拟经营需求案.docx",
+    "url": "https://docs.qq.com/doc/DQ0t1RVJjbXRHWGFI",
+    "bytes": 381532,
+    "sha256": "d29a4ac362b882ad7a99ceaf376eb3357359da8f4a7fa194748f7804f5c0d0ba",
+    "beforeWebFixesSha256": "8f38c2845fe47863003f4fed5d467c1209b826f54c90b5656bfaddcfdb852a72",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Word/角色生成规则.docx",
+    "url": "https://docs.qq.com/doc/DYnZPcVNjVU53UXVz?no_promotion=1&is_blank_or_template=blank",
+    "bytes": 11633,
+    "sha256": "8a3d4f4c94170113782119189530ba17d0d238cfed20dbda45985fb06556f91c",
+    "beforeWebFixesSha256": "89700a6ba1e77203dfee691ccaf7a86e387bd94b4de018e13795177802ef5ea4",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Word/英雄酒馆职业系统策划案.docx",
+    "url": "https://docs.qq.com/doc/DYmJ1WXR6TWNSSUp1",
+    "bytes": 12107,
+    "sha256": "90ad4720bf11368d5a1db46ad15112708b7921dd6d0c5e9ff9684b9a1cdfd8d0",
+    "beforeWebFixesSha256": "7bbd4ddc2a57a4baa84ee39c31021979aecf5440c84bf0429878df8703c3b97a",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Word/英雄酒馆角色行为系统策划案.docx",
+    "url": "https://docs.qq.com/doc/DYk9yTXRBSEFrV1Zz?no_promotion=1&is_blank_or_template=blank",
+    "bytes": 17478,
+    "sha256": "5574dc2fb9529241e8d8c5ea25a3456e08e375aa6e7e223d7ea1d319b7d7f8b3",
+    "beforeWebFixesSha256": "52993f57817bd66f037d9de7c61c2d40a15f7c2104304b2e1d8bce3365179190",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Word/英雄酒馆-调酒系统需求案.docx",
+    "url": "https://docs.qq.com/doc/DQ0hIa1FqeENacktF",
+    "bytes": 111680,
+    "sha256": "6baa38f6d24dfb76fafa10b2392458798fe9a3e60faecbeb92c2dfeb2ecd50f7",
+    "beforeWebFixesSha256": "10f92dadda2e4d537e70ca6d1d7bf48ce44cb09d3c7976b85e5267db33219c56",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "file": "Word/边缘系统.docx",
+    "url": "https://docs.qq.com/doc/DUkRqWG1pV2t6aGJS",
+    "bytes": 11407,
+    "sha256": "ecc597224755803a5996fb13f2bb93df13eafe619f09350d9b3c1ba91477255b",
+    "beforeWebFixesSha256": "12a95e87d9a33bb241bee81f03b18a34efaa46160b223c9ab9fc8ae35fb56f90",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Word/美术角色资源说明.docx",
+    "url": "https://docs.qq.com/doc/DUmJsc0pZVmNUdUp6",
+    "bytes": 10847,
+    "sha256": "d1b6b008c5a7f3ec48fd52febf2b8370c9f0240817f81232dd1605c9560c6942",
+    "beforeWebFixesSha256": "330c618c17bdbabf11f1f1c5bb44b1411d3ce4a95a023e99709fcfbb5531eaad",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Word/英雄酒馆_文案系统.docx",
+    "url": "https://docs.qq.com/doc/DUnZ4dFJmd2JVem5G",
+    "bytes": 16244,
+    "sha256": "6f67a8b232cb2e7a42056652c8ff2b05daff8dc1db47b25206749483c6cfd1b6",
+    "beforeWebFixesSha256": "d563cf6590271b3afa3c44353628b0b0391a2e5cc19f251931e3eb9ba19fc62f",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Word/英雄酒馆_纯文案阅读版.docx",
+    "url": "https://docs.qq.com/doc/DUkVHQUppbGdSVmdF",
+    "bytes": 37066,
+    "sha256": "cbea4bf3b0cf156eb3cf30fbe4aee8b80fe0665cba6009a5e239b1ccf08c7805",
+    "beforeWebFixesSha256": "b260b75b34cd2e23e9d08201fcbc0424fb2bf72db5cc7896d09b83318e924eee",
+    "updatedAt": "2026-10-16"
+  },
+  {
+    "file": "Word/英雄酒馆-悬赏系统需求案.docx",
+    "url": "https://docs.qq.com/doc/DQ05sdVptWGpvZmJS",
+    "bytes": 270254,
+    "sha256": "846a11c3669430f91de6a27b4196b7c1041adbd84ce556f181112db063577a97",
+    "updatedAt": "2026-10-16"
+  }
+]

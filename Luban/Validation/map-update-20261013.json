@@ -1,0 +1,290 @@
+{
+  "date": "2026-10-13",
+  "source": "Tencent Docs exports through the connected Edge session",
+  "excelFilesSynchronized": 11,
+  "wordFilesModified": 0,
+  "backup": {
+    "archive": "修改前完整备份.zip",
+    "snapshot": "20261013-map-sync-01a13451",
+    "cloudExcelFiles": 11,
+    "cloudWordFiles": 11,
+    "includesPreviousLocalExcelWordAndLuban": true,
+    "sha256": "dd1dc70929385f6b9d9acce4a3fb714ec6ba0477dd7c59a3504cb92e92c78fb3",
+    "archiveIntegrityPassed": true
+  },
+  "mapUpdate": {
+    "file": "Excel/map.xlsx",
+    "sheet": "工作表1",
+    "rangeWritten": "B5:E10",
+    "coordinateBasis": "User approved initial coordinates within the existing 9 x 9 map",
+    "changedCells": [
+      "B5",
+      "C5",
+      "D5",
+      "E5",
+      "B6",
+      "C6",
+      "D6",
+      "E6",
+      "B7",
+      "C7",
+      "D7",
+      "E7",
+      "B8",
+      "C8",
+      "D8",
+      "E8",
+      "B9",
+      "C9",
+      "D9",
+      "E9",
+      "B10",
+      "C10",
+      "D10",
+      "E10"
+    ],
+    "allValuesOutsideWrittenRangePreserved": true,
+    "townAndSchemaPreserved": true,
+    "uniqueCoordinates": true,
+    "coordinatesWithin1To9": true,
+    "monsterLocationReferencesChecked": 15,
+    "allMonsterLocationsResolved": true,
+    "monsterLocations": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "tavernId": 7,
+    "tavernNotUsedForMonsterSpawning": true,
+    "rows": [
+      {
+        "id": 1,
+        "name": "城镇",
+        "x": 5,
+        "y": 5
+      },
+      {
+        "id": 2,
+        "name": "黑松林",
+        "x": 3,
+        "y": 5
+      },
+      {
+        "id": 3,
+        "name": "石牙矿洞",
+        "x": 7,
+        "y": 4
+      },
+      {
+        "id": 4,
+        "name": "沉雾沼泽",
+        "x": 2,
+        "y": 7
+      },
+      {
+        "id": 5,
+        "name": "白骨古墓",
+        "x": 7,
+        "y": 8
+      },
+      {
+        "id": 6,
+        "name": "黑曜城堡",
+        "x": 9,
+        "y": 9
+      },
+      {
+        "id": 7,
+        "name": "酒馆",
+        "x": 5,
+        "y": 4
+      }
+    ],
+    "generatedValuesCompared": 28
+  },
+  "upstreamChangesIncluded": [
+    "Character/Character/N4:N203: existing cloud health formulas exported with one leading equals sign",
+    "Item/Item: existing cloud item 57 情报 included",
+    "英雄酒馆任务记录与文档汇总/001/C11: existing cloud index description included"
+  ],
+  "newItemSourceMatchesGeneratedJson": true,
+  "newItemFieldsCompared": 14,
+  "generation": {
+    "strict": true,
+    "target": "all",
+    "outputs": [
+      "cs-bin",
+      "bin",
+      "json"
+    ],
+    "version": 1,
+    "ok": true,
+    "exitCode": 0,
+    "errors": []
+  },
+  "tableCount": 14,
+  "rowCount": 546,
+  "independentBinaryRuntimeTestRerun": false,
+  "allExcelArchivesValid": true,
+  "allLocalExcelFilesMatchCloudExportsAndManifest": true,
+  "files": [
+    {
+      "file": "Excel/英雄酒馆任务记录与文档汇总.xlsx",
+      "bytes": 9167,
+      "sha256": "62a766ce970adc52a06d341f397b1e621a84266b0367b3155c6810c2971766dc"
+    },
+    {
+      "file": "Excel/Character.xlsx",
+      "bytes": 43214,
+      "sha256": "afe0b31b72a6ae6e32ce71d3436140fd8520fd190c4f6efcc4e368af4ccc43c2"
+    },
+    {
+      "file": "Excel/Item.xlsx",
+      "bytes": 21094,
+      "sha256": "ccbdf0bbc66a6c18d1acb74c7f64746d06f85a1d68eb36fe51ed459d5b26f5ef"
+    },
+    {
+      "file": "Excel/NAME.xlsx",
+      "bytes": 5647,
+      "sha256": "e6e3992191089df537062b21c53b6a515fdc2b02223a6fa00107d4765d2ea53f"
+    },
+    {
+      "file": "Excel/CharacterPart.xlsx",
+      "bytes": 19868,
+      "sha256": "1dfad9b3dc57b8cf494bffe4c9a4adec43f1a52c9f7c500f5f9879ef91e2c656"
+    },
+    {
+      "file": "Excel/global.xlsx",
+      "bytes": 6333,
+      "sha256": "b99a7301ae6484b98e6b2ee503f56af708062cc6eac990d16679bb8ccc58a94a"
+    },
+    {
+      "file": "Excel/Dialogue.xlsx",
+      "bytes": 24558,
+      "sha256": "777eae74be48622e1d98cf3b1511918899c6fd48f73db786806b7909dba00315"
+    },
+    {
+      "file": "Excel/Profession.xlsx",
+      "bytes": 7392,
+      "sha256": "96d3de134f59adc30ad2f1dfd3339be1ab521b12b54985da11314797ab4795bf"
+    },
+    {
+      "file": "Excel/moster.xlsx",
+      "bytes": 20431,
+      "sha256": "c304ce826f319f28ec4d375db83623ecbdc9420ba01c382cfe830d58eee324bd"
+    },
+    {
+      "file": "Excel/map.xlsx",
+      "bytes": 5793,
+      "sha256": "65cabf1c84cd33e54aa2da560cf12444db6b0f8440afc8685e8a9654c4a600a7"
+    },
+    {
+      "file": "Excel/Dialogue01.xlsx",
+      "bytes": 6185,
+      "sha256": "2a35c8b33a21150d5f6ed2f87b96c2618008ddf759fa29b519c621a3b78488b8"
+    }
+  ],
+  "tables": [
+    {
+      "table": "TbCharacter",
+      "input": "Character@Character.xlsx",
+      "rows": 5,
+      "jsonSha256": "4eac4ee95860d798cc6bdea2aec84108de4ba97441a1e745493b2c024b29adaf",
+      "binarySha256": "c5a366d3f9fde5c5b566822a1b004c6fb2cd8a3c0ae2f7a405f77bd0e5cc0363"
+    },
+    {
+      "table": "TbRelationship",
+      "input": "Relationship@Character.xlsx",
+      "rows": 3,
+      "jsonSha256": "40a1af45af764e9cd31b882c5e6019d0517d6f482bf1aadad062ae7002dbb2ad",
+      "binarySha256": "ae23900b5e109e54f33fcf403760dc73a33118cbe8be5006b6798757525b3ec1"
+    },
+    {
+      "table": "TbCharacterPart",
+      "input": "CharacterPart@CharacterPart.xlsx",
+      "rows": 240,
+      "jsonSha256": "7b8200b063d1efcfc09988005ac41115cc9fbe5e08e19f999ee64d5783a29a62",
+      "binarySha256": "3aad99e27492d58b00fc34bfa8298d8541d47c558ea79a07b71f549e9dfc0b7c"
+    },
+    {
+      "table": "TbDialogue",
+      "input": "Dialogue@Dialogue.xlsx",
+      "rows": 107,
+      "jsonSha256": "81ea965e46236f2a970ccb27d5f0d3a107b14741f082cb331c66bc62590b1278",
+      "binarySha256": "fb4c716e08167b4493a5bbafba40fb7359ef1174dbdd380b1dbaf8c77439062d"
+    },
+    {
+      "table": "TbEvent",
+      "input": "Event@Dialogue.xlsx",
+      "rows": 63,
+      "jsonSha256": "fbf52e9237c4455361194772cfa21ebd371ece507cca621b96cdd99a2dfa0814",
+      "binarySha256": "81abb481206943643284ab2bc0306b75bae56b8a65ffe2f1e597830ef4ba6f8e"
+    },
+    {
+      "table": "TbDialogue01",
+      "input": "Dialogue@Dialogue01.xlsx",
+      "rows": 10,
+      "jsonSha256": "43ce1795d1dbe88a8c2fbbf52fd9d2ad707429674abd7ddce70ad9a57a294cf2",
+      "binarySha256": "80889bc1be393a159d38d7f83184a6a083e997a1dc05176726f9c1dbc5b93a7b"
+    },
+    {
+      "table": "TbGlobal",
+      "input": "工作表1@global.xlsx",
+      "rows": 6,
+      "jsonSha256": "d9b802d85fc0a7c7b0d758c1e6d07bab9108389e79eea4b3ad04113878721e6b",
+      "binarySha256": "b5eb05fc841b8bd752f2aa1182cd2357b334adce464b78ee9af36fecd7c26317"
+    },
+    {
+      "table": "TbItem",
+      "input": "Item@Item.xlsx",
+      "rows": 57,
+      "jsonSha256": "5279aa7844dcdf18262689e0d8f551be395be2a63ba73b5596da99fc5211b294",
+      "binarySha256": "4d3cf42fdac8b8c46254025e18ccab0c3b3efbf973f9ae23940d1fe1ae19a460"
+    },
+    {
+      "table": "TbItemTag",
+      "input": "标签对照@Item.xlsx",
+      "rows": 11,
+      "jsonSha256": "a688ca4b51fd2dee2a232c6083e449cad0c758ea056fec113c313e77b34f0dae",
+      "binarySha256": "79757889a40896ef6b0c0c97a7fb82c8108266bc618337cab4c5a70cf67ed9a9"
+    },
+    {
+      "table": "TbItemParameter",
+      "input": "参数对照@Item.xlsx",
+      "rows": 7,
+      "jsonSha256": "84191a8a43b0ed1e4cd8f9835bdaf6a942bda1f775967874eb94c7472c022dde",
+      "binarySha256": "8c0fc0a526d74b9d259897e0ad5f95f8a6d47ed540b340dd20ac6fae4cae4b73"
+    },
+    {
+      "table": "TbMap",
+      "input": "工作表1@map.xlsx",
+      "rows": 7,
+      "jsonSha256": "c574981047e1e8f9998447cad32480c25c030f0dac9b3ed069a866ec2df4fe5e",
+      "binarySha256": "4e5b8bdb54db04a24bf2ceb15c022f47df9103e0a0285ba5f2bb0e58dff69758"
+    },
+    {
+      "table": "TbMonster",
+      "input": "moster@moster.xlsx",
+      "rows": 15,
+      "jsonSha256": "53dfafc728d72626662e72cc84bde1840f94841b49b7e4228ae0e0c439563645",
+      "binarySha256": "62831a950a386978631eba40dab393b42d0e40a6dc9387899ec69ede839ceb45"
+    },
+    {
+      "table": "TbName",
+      "input": "工作表1@NAME.xlsx",
+      "rows": 8,
+      "jsonSha256": "e88881f3831562a5770c5cdf3464eb3cf59cff4769d4d45e0d4aa767e72ddcb4",
+      "binarySha256": "1a640334965ef13a3b6f8972539a7bbb268a4f498d13545e77b78ddb96d2c5f1"
+    },
+    {
+      "table": "TbProfession",
+      "input": "Profession@Profession.xlsx",
+      "rows": 7,
+      "jsonSha256": "8338ace9721f0c3913ad524dea8b83422a5b5f2175ab6326f3cc1d5825a22ce1",
+      "binarySha256": "48d2c0da5322cb1d4bcd64ec7dd528bdb288d4ce64d07e93b111d1663703cf6b"
+    }
+  ]
+}

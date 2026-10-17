@@ -1,0 +1,213 @@
+{
+  "date": "2026-10-12",
+  "lubanVersion": "5.1.0+df34215d2e22035073d1af83d44e3ac0744dc3b3",
+  "sourceFiles": 22,
+  "excelFiles": 11,
+  "wordFiles": 11,
+  "generation": {
+    "strict": true,
+    "target": "all",
+    "outputs": [
+      "cs-bin",
+      "bin",
+      "json"
+    ],
+    "exitCode": 0,
+    "errors": []
+  },
+  "tableCount": 14,
+  "rowCount": 515,
+  "sourceValuesComparedToJson": 4580,
+  "runtime": {
+    "framework": "net10.0",
+    "runtimeSource": "focus-creative-games/luban v5.1.0 src/Luban.Tests/RuntimeSupport",
+    "compiled": true,
+    "allBinaryValuesMatchJson": true,
+    "allBinaryBytesConsumed": true,
+    "allDeclaredReferencesResolved": true
+  },
+  "tables": [
+    {
+      "table": "TbCharacter",
+      "input": "Character@Character.xlsx",
+      "rows": 5,
+      "fields": 22,
+      "values": 110
+    },
+    {
+      "table": "TbRelationship",
+      "input": "Relationship@Character.xlsx",
+      "rows": 3,
+      "fields": 6,
+      "values": 18
+    },
+    {
+      "table": "TbCharacterPart",
+      "input": "CharacterPart@CharacterPart.xlsx",
+      "rows": 216,
+      "fields": 9,
+      "values": 1944
+    },
+    {
+      "table": "TbDialogue",
+      "input": "Dialogue@Dialogue.xlsx",
+      "rows": 107,
+      "fields": 6,
+      "values": 642
+    },
+    {
+      "table": "TbEvent",
+      "input": "Event@Dialogue.xlsx",
+      "rows": 63,
+      "fields": 11,
+      "values": 693
+    },
+    {
+      "table": "TbDialogue01",
+      "input": "Dialogue@Dialogue01.xlsx",
+      "rows": 10,
+      "fields": 6,
+      "values": 60
+    },
+    {
+      "table": "TbGlobal",
+      "input": "工作表1@global.xlsx",
+      "rows": 6,
+      "fields": 4,
+      "values": 24
+    },
+    {
+      "table": "TbItem",
+      "input": "Item@Item.xlsx",
+      "rows": 56,
+      "fields": 14,
+      "values": 784
+    },
+    {
+      "table": "TbItemTag",
+      "input": "标签对照@Item.xlsx",
+      "rows": 11,
+      "fields": 4,
+      "values": 44
+    },
+    {
+      "table": "TbItemParameter",
+      "input": "参数对照@Item.xlsx",
+      "rows": 7,
+      "fields": 4,
+      "values": 28
+    },
+    {
+      "table": "TbMap",
+      "input": "工作表1@map.xlsx",
+      "rows": 1,
+      "fields": 4,
+      "values": 4
+    },
+    {
+      "table": "TbMonster",
+      "input": "moster@moster.xlsx",
+      "rows": 15,
+      "fields": 10,
+      "values": 150
+    },
+    {
+      "table": "TbName",
+      "input": "工作表1@NAME.xlsx",
+      "rows": 8,
+      "fields": 2,
+      "values": 16
+    },
+    {
+      "table": "TbProfession",
+      "input": "Profession@Profession.xlsx",
+      "rows": 7,
+      "fields": 9,
+      "values": 63
+    }
+  ],
+  "webCellEdits": [
+    {
+      "file": "Excel/Character.xlsx",
+      "sheet": "Character",
+      "cell": "M2",
+      "before": "int",
+      "after": "intelligence"
+    },
+    {
+      "file": "Excel/Item.xlsx",
+      "sheet": "Item",
+      "cell": "K2",
+      "before": "int",
+      "after": "intelligence"
+    },
+    {
+      "file": "Excel/Item.xlsx",
+      "sheet": "Item",
+      "cell": "O3",
+      "before": " ",
+      "after": "string"
+    },
+    {
+      "file": "Excel/Item.xlsx",
+      "sheet": "参数对照",
+      "cell": "B10",
+      "before": null,
+      "after": 6
+    },
+    {
+      "file": "Excel/moster.xlsx",
+      "sheet": "moster",
+      "cell": "G2",
+      "before": "int",
+      "after": "intelligence"
+    }
+  ],
+  "webDocumentEdits": [
+    {
+      "file": "Word/英雄酒馆-调酒系统需求案.docx",
+      "replacements": [
+        {
+          "paragraphIndex": 95,
+          "before": "int",
+          "after": "intelligence"
+        },
+        {
+          "paragraphIndex": 105,
+          "before": "hp、str、int、def 不使用，填 0；",
+          "after": "hp、str、intelligence、def 不使用，填 0；"
+        }
+      ]
+    },
+    {
+      "file": "Word/英雄酒馆_角色系统 v3.1.docx",
+      "replacements": [
+        {
+          "paragraphIndex": 272,
+          "before": "int",
+          "after": "intelligence"
+        },
+        {
+          "paragraphIndex": 331,
+          "before": "当物品type=1时，显示道具的hp、str、int增幅或减幅",
+          "after": "当物品type=1时，显示道具的hp、str、intelligence增幅或减幅"
+        }
+      ]
+    }
+  ],
+  "preservation": {
+    "formulaCellsUnchanged": 200,
+    "worksheetDimensionsUnchanged": true,
+    "mergedCellsUnchanged": true,
+    "dataValidationRulesUnchanged": true,
+    "documentParagraphAndTableCountsUnchanged": true
+  },
+  "stringWhitespacePreservedByLuban": [
+    {
+      "file": "Item.xlsx",
+      "sheet": "参数对照",
+      "cell": "E4"
+    }
+  ],
+  "scope": "Luban schema, strict data validation, C# compilation and standalone binary loading. Unity gameplay was not exercised."
+}

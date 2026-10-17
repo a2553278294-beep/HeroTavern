@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-15",
+  "sourceFileCount": 23,
+  "sourceExportsEqualRepository": true,
+  "sourceContentChanges": [
+    {
+      "file": "英雄酒馆_角色系统 v3.1.docx",
+      "status": "changed"
+    },
+    {
+      "file": "英雄酒馆-模拟经营需求案.docx",
+      "status": "changed"
+    },
+    {
+      "file": "英雄酒馆-悬赏系统需求案.docx",
+      "status": "new"
+    }
+  ],
+  "onlineEdits": [
+    "CharacterPart.xlsx",
+    "美术角色资源说明.docx"
+  ],
+  "characterPart": {
+    "rows": 324,
+    "uniqueIds": 54,
+    "originalRowsPreserved": 240,
+    "originalValuesTypesStylesPreserved": true,
+    "addedRows": 84,
+    "comparedGeneratedValues": 2916,
+    "colorIdsPreserveLeadingZero": true,
+    "counterpartReferencesExist": true
+  },
+  "assets": {
+    "total": 318,
+    "characters": 294,
+    "icons": 24,
+    "replacedLegacyQImages": 16,
+    "newQFrames": 256,
+    "newPortraitFiles": 14,
+    "identicalPortraitOverlaps": 2,
+    "sourceFilesHashMatched": 272,
+    "manifestHashSizeDimensionsVerified": true,
+    "animationGroups": 12,
+    "framesAndMasksComplete": true
+  },
+  "retainedPlaceholders": [
+    "character_c_idle_body_02",
+    "character_c_idle_body_03",
+    "character_c_idle_body_04",
+    "character_c_idle_body_05",
+    "character_c_idle_body_06",
+    "character_c_idle_face_02",
+    "character_c_idle_face_03",
+    "character_c_idle_face_04",
+    "character_c_idle_face_05",
+    "character_c_idle_face_06",
+    "character_c_idle_face_07",
+    "character_c_idle_face_08",
+    "character_c_idle_face_09",
+    "character_c_idle_face_10",
+    "character_c_idle_hair_02",
+    "character_c_idle_hair_04",
+    "character_c_idle_hair_05",
+    "character_c_idle_hair_06",
+    "character_c_idle_hair_07",
+    "character_r_idle_body_03",
+    "character_r_idle_body_04",
+    "character_r_idle_body_05",
+    "character_r_idle_body_06"
+  ],
+  "newQPlaceholdersConfirmedByUser": [
+    "character_c_idle_face_07",
+    "character_c_idle_face_08",
+    "character_c_idle_face_09",
+    "character_c_idle_face_10",
+    "character_c_idle_hair_07"
+  ],
+  "generation": {
+    "strict": true,
+    "exitCode": 0,
+    "tables": 14,
+    "rows": 630,
+    "jsonAndBinaryHashesVerified": true,
+    "runtimeGameTest": false
+  },
+  "officeZipIntegrity": true,
+  "backups": [
+    {
+      "file": "HeroTavern-before-sync-20261015.zip",
+      "sha256": "2d0f29fa37db8643c12e96c3fc8296d4eb5e296baa23befc254a4a47f580fe9c",
+      "bytes": 3704777
+    },
+    {
+      "file": "TencentDocs-before-edit-20261015.zip",
+      "sha256": "c01ea2ba991d5fa4f601b1c155bff4391924bb7f08f8f3f50e9514f92045c5ef",
+      "bytes": 1241759
+    }
+  ],
+  "visualReview": "Updated online document and sheet inspected. Resource guide exported to a one-page PDF, rendered and visually verified; exported DOCX text and XLSX cells verified. Local LibreOffice renderer unavailable."
+}

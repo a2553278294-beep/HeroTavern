@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<module name="">
+  <enum name="TextCategory">
+    <var name="Chat" value="1" alias="普通闲聊" />
+    <var name="Main" value="2" alias="主线事件" />
+    <var name="Special" value="3" alias="特殊事件" />
+    <var name="Favor" value="4" alias="好感度对话" />
+  </enum>
+  <enum name="Profession">
+    <var name="Any" value="0" alias="不限" />
+    <var name="Cook" value="1" alias="厨师" />
+    <var name="Merchant" value="2" alias="商人" />
+    <var name="Smith" value="3" alias="铁匠" />
+    <var name="Farmer" value="4" alias="农民" />
+    <var name="Warrior" value="5" alias="战士" />
+    <var name="Priest" value="6" alias="牧师" />
+    <var name="Bard" value="7" alias="吟游诗人" />
+  </enum>
+  <enum name="Speaker">
+    <var name="System" value="0" alias="系统" />
+    <var name="EventNpc" value="1" alias="事件角色" />
+    <var name="Player" value="2" alias="玩家" />
+    <var name="RelatedNpc" value="3" alias="相关角色" />
+    <var name="Guest" value="4" alias="客人" />
+    <var name="Bartender" value="5" alias="酒保" />
+  </enum>
+  <enum name="Trigger">
+    <var name="DailyTalk" value="1" alias="日常交谈" />
+    <var name="FirstTalk" value="2" alias="首次交谈" />
+    <var name="HoldItem" value="3" alias="持有物品时交谈" />
+    <var name="BuyFromNpc" value="4" alias="向本人购买后交谈" />
+    <var name="DeliverToNpc" value="5" alias="交付物品后交谈" />
+    <var name="CookComplete" value="6" alias="本人烹饪完成后交谈" />
+    <var name="ForgeComplete" value="7" alias="本人锻造完成后交谈" />
+    <var name="BattleSuccessReturn" value="8" alias="本人战斗完成并返馆" />
+    <var name="HealComplete" value="9" alias="本人治疗完成后交谈" />
+    <var name="NewMonsterNews" value="10" alias="购得新怪物情报" />
+    <var name="QuestPublishedTalk" value="11" alias="关联悬赏发布后交谈" />
+    <var name="QuestPublished" value="12" alias="关联悬赏发布" />
+    <var name="QuestSuccess" value="13" alias="关联悬赏完成" />
+    <var name="QuestActorBattleDeath" value="14" alias="关联悬赏战斗死亡" />
+    <var name="TargetClearedBeforeQuest" value="15" alias="目标提前清除" />
+    <var name="QuestTerminated" value="16" alias="关联悬赏终止" />
+    <var name="RelationBecameHostile" value="17" alias="NPC关系转为敌对" />
+    <var name="TalkRelatedNpc" value="18" alias="与关系另一方交谈" />
+    <var name="TalkEventNpc" value="19" alias="返回事件角色交谈" />
+    <var name="FavorThreshold" value="20" alias="好感达到门槛" />
+    <var name="OwnerBattleDeath" value="21" alias="本人悬赏战斗死亡" />
+    <var name="QuestSuccessTalk" value="22" alias="关联悬赏完成后交谈" />
+    <var name="QuestDeathTalk" value="23" alias="关联悬赏阵亡后交谈" />
+  </enum>
+</module>

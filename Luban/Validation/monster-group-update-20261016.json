@@ -1,0 +1,187 @@
+{
+  "date": "2026-10-16",
+  "baseCommit": "754e73a9fa4f2dd80196b667d77f8503dd6e1d72",
+  "authoredInEdgeFirst": true,
+  "backupDirectory": "C:\\Users\\Lorcin\\Desktop\\聚光灯创意\\备份\\20261016-怪物组改版前",
+  "updatedDocuments": [
+    {
+      "file": "Word/边缘系统.docx",
+      "sha256": "ecc597224755803a5996fb13f2bb93df13eafe619f09350d9b3c1ba91477255b",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    },
+    {
+      "file": "Word/英雄酒馆_纯文案阅读版.docx",
+      "sha256": "cbea4bf3b0cf156eb3cf30fbe4aee8b80fe0665cba6009a5e239b1ccf08c7805",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    },
+    {
+      "file": "Word/英雄酒馆_文案系统.docx",
+      "sha256": "6f67a8b232cb2e7a42056652c8ff2b05daff8dc1db47b25206749483c6cfd1b6",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    },
+    {
+      "file": "Word/英雄酒馆-悬赏系统需求案.docx",
+      "sha256": "846a11c3669430f91de6a27b4196b7c1041adbd84ce556f181112db063577a97",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    },
+    {
+      "file": "Word/英雄酒馆职业系统策划案.docx",
+      "sha256": "90ad4720bf11368d5a1db46ad15112708b7921dd6d0c5e9ff9684b9a1cdfd8d0",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    },
+    {
+      "file": "Word/英雄酒馆角色行为系统策划案.docx",
+      "sha256": "5574dc2fb9529241e8d8c5ea25a3456e08e375aa6e7e223d7ea1d319b7d7f8b3",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    },
+    {
+      "file": "Word/《英雄酒馆》立项规划.docx",
+      "sha256": "899edd6b7af812adf0b29f8416fd51b2acd5429e8711285a1fd8e42545a33865",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    },
+    {
+      "file": "Word/美术角色资源说明.docx",
+      "sha256": "d1b6b008c5a7f3ec48fd52febf2b8370c9f0240817f81232dd1605c9560c6942",
+      "intendedTextOnly": true,
+      "existingImagesPreserved": true
+    }
+  ],
+  "updatedWorkbooks": [
+    "Excel/moster.xlsx",
+    "Excel/Dialogue.xlsx"
+  ],
+  "monsterTemplates": 8,
+  "groupCountInitial": 3,
+  "newMonsterImages": 16,
+  "existingBartenderImagesUnchanged": 98,
+  "allResourceHashesVerified": 432,
+  "dialogueCellsChanged": 32,
+  "eventIdsPreserved": true,
+  "fixedSpeciesLocationRemoved": true,
+  "stageAttributesWeightsPreserved": true,
+  "localDocxRenderer": "Microsoft Word read-only PDF export",
+  "runtimeGameTest": false,
+  "strictLuban": {
+    "passed": true,
+    "exitCode": 0,
+    "tables": 14,
+    "rows": 689
+  },
+  "generatedSourceMatches": {
+    "tbmonster": 8,
+    "tbdialogue": 107,
+    "tbevent": 63
+  },
+  "referencesVerified": true,
+  "renderedWordPages": 34,
+  "wordLayoutVisuallyReviewed": true,
+  "resourceLocationsRandomized": true,
+  "spawnRuntimeImplemented": false,
+  "tableSummary": [
+    {
+      "table": "TbCharacter",
+      "input": "Character@Character.xlsx",
+      "rows": 5,
+      "jsonSha256": "4eac4ee95860d798cc6bdea2aec84108de4ba97441a1e745493b2c024b29adaf",
+      "binarySha256": "c5a366d3f9fde5c5b566822a1b004c6fb2cd8a3c0ae2f7a405f77bd0e5cc0363"
+    },
+    {
+      "table": "TbRelationship",
+      "input": "Relationship@Character.xlsx",
+      "rows": 3,
+      "jsonSha256": "40a1af45af764e9cd31b882c5e6019d0517d6f482bf1aadad062ae7002dbb2ad",
+      "binarySha256": "ae23900b5e109e54f33fcf403760dc73a33118cbe8be5006b6798757525b3ec1"
+    },
+    {
+      "table": "TbCharacterPart",
+      "input": "CharacterPart@CharacterPart.xlsx",
+      "rows": 390,
+      "jsonSha256": "cd676d26d849a6f326d7377233b3ded52aa875c508fddbf5e01365ea41f22ac2",
+      "binarySha256": "55fddfc6a9cf05a9a29fc9e5be48aaa214a0c5a69a05adc45accb1c3aaa1f2ac"
+    },
+    {
+      "table": "TbDialogue",
+      "input": "Dialogue@Dialogue.xlsx",
+      "rows": 107,
+      "jsonSha256": "c79be13dc2a7957b814726e86e875d684b0afec4eae7bd9e199a6dcdffc44cf1",
+      "binarySha256": "efee16add7d43b98df9568521e5180790dbe4e2de8630ace39d9d7752e7d4deb"
+    },
+    {
+      "table": "TbEvent",
+      "input": "Event@Dialogue.xlsx",
+      "rows": 63,
+      "jsonSha256": "97a5a71652bd53d9398b7fa359a27c71571dc681a07b236736fabd8b5cfb313b",
+      "binarySha256": "ffd6fb4c711a1c7056465c7f49f11e2171ecb94d70110a21a9feb3b0b25d6a78"
+    },
+    {
+      "table": "TbDialogue01",
+      "input": "Dialogue@Dialogue01.xlsx",
+      "rows": 10,
+      "jsonSha256": "43ce1795d1dbe88a8c2fbbf52fd9d2ad707429674abd7ddce70ad9a57a294cf2",
+      "binarySha256": "80889bc1be393a159d38d7f83184a6a083e997a1dc05176726f9c1dbc5b93a7b"
+    },
+    {
+      "table": "TbGlobal",
+      "input": "工作表1@global.xlsx",
+      "rows": 6,
+      "jsonSha256": "d9b802d85fc0a7c7b0d758c1e6d07bab9108389e79eea4b3ad04113878721e6b",
+      "binarySha256": "b5eb05fc841b8bd752f2aa1182cd2357b334adce464b78ee9af36fecd7c26317"
+    },
+    {
+      "table": "TbItem",
+      "input": "Item@Item.xlsx",
+      "rows": 57,
+      "jsonSha256": "5279aa7844dcdf18262689e0d8f551be395be2a63ba73b5596da99fc5211b294",
+      "binarySha256": "4d3cf42fdac8b8c46254025e18ccab0c3b3efbf973f9ae23940d1fe1ae19a460"
+    },
+    {
+      "table": "TbItemTag",
+      "input": "标签对照@Item.xlsx",
+      "rows": 11,
+      "jsonSha256": "a688ca4b51fd2dee2a232c6083e449cad0c758ea056fec113c313e77b34f0dae",
+      "binarySha256": "79757889a40896ef6b0c0c97a7fb82c8108266bc618337cab4c5a70cf67ed9a9"
+    },
+    {
+      "table": "TbItemParameter",
+      "input": "参数对照@Item.xlsx",
+      "rows": 7,
+      "jsonSha256": "84191a8a43b0ed1e4cd8f9835bdaf6a942bda1f775967874eb94c7472c022dde",
+      "binarySha256": "8c0fc0a526d74b9d259897e0ad5f95f8a6d47ed540b340dd20ac6fae4cae4b73"
+    },
+    {
+      "table": "TbMap",
+      "input": "工作表1@map.xlsx",
+      "rows": 7,
+      "jsonSha256": "c574981047e1e8f9998447cad32480c25c030f0dac9b3ed069a866ec2df4fe5e",
+      "binarySha256": "4e5b8bdb54db04a24bf2ceb15c022f47df9103e0a0285ba5f2bb0e58dff69758"
+    },
+    {
+      "table": "TbMonster",
+      "input": "moster@moster.xlsx",
+      "rows": 8,
+      "jsonSha256": "8b6588bb792f068535b151ede1889288bafd30c037ec6d9315db422ee321ed32",
+      "binarySha256": "30fc2fe7fde51989dbe06906b59658a244ae80cc8f7b6279e25e9b939769f26b"
+    },
+    {
+      "table": "TbName",
+      "input": "工作表1@NAME.xlsx",
+      "rows": 8,
+      "jsonSha256": "e88881f3831562a5770c5cdf3464eb3cf59cff4769d4d45e0d4aa767e72ddcb4",
+      "binarySha256": "1a640334965ef13a3b6f8972539a7bbb268a4f498d13545e77b78ddb96d2c5f1"
+    },
+    {
+      "table": "TbProfession",
+      "input": "Profession@Profession.xlsx",
+      "rows": 7,
+      "jsonSha256": "8338ace9721f0c3913ad524dea8b83422a5b5f2175ab6326f3cc1d5825a22ce1",
+      "binarySha256": "48d2c0da5322cb1d4bcd64ec7dd528bdb288d4ce64d07e93b111d1663703cf6b"
+    }
+  ]
+}

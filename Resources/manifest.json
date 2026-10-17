@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "files": [
     {
       "file": "Resources/Characters/character_c_idle_body_01_a_1.png",
@@ -2861,6 +2861,1779 @@
       "size": [
         128,
         128
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_a_1.png",
+      "bytes": 4317,
+      "sha256": "74216bba18598e50aa6ad2520da47b212707991bfed5fa43c4b36f60e00f4744",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_a_2.png",
+      "bytes": 4379,
+      "sha256": "be4a482b8b976f74e5efdf84c6967a66b59b2634bf49b66acea0637ffb9fd649",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_b_1.png",
+      "bytes": 4458,
+      "sha256": "92a361a8c559c3ce6986fc05bd9966e478ead85a641f2f86593e396176cef1ba",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_b_2.png",
+      "bytes": 4416,
+      "sha256": "203c8500fc6907832bab719a6fd80b2312df1f906e326289f904365353fac4a8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_c_1.png",
+      "bytes": 4462,
+      "sha256": "72f6b863760812cbb8d05675976a556678705d6b86baeb1b460234e4f0a9a6c1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_c_2.png",
+      "bytes": 4542,
+      "sha256": "0e9753425babe507de61efecf2ef1d31d4569ca244349493f6a0c95b9eeebb3c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_d_1.png",
+      "bytes": 4446,
+      "sha256": "c0eb87596807d324add8b34f38dc712c3d73c56c77543f5f906afcbd2ec76a6d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_00m_d_2.png",
+      "bytes": 4402,
+      "sha256": "0cbd01ab1fe067843752a726bb05552d8921809f8eb314c44fd66bbe2f3285e0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_a_1.png",
+      "bytes": 4536,
+      "sha256": "22c8cad024ea01ffe5eab3d526bd1a2f8d63d61c5dd806b5764b0436129b61f0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_a_2.png",
+      "bytes": 4412,
+      "sha256": "e255cedd96f0b77cf9f23fc4ed38ed2a7ecbf407e77c8e04aed7a5f461ef34b9",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_b_1.png",
+      "bytes": 4431,
+      "sha256": "5b3da197793cfddb4306653e1a4f608cf952caaca4dfb6cfe4e3bf490bb1ed30",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_b_2.png",
+      "bytes": 4431,
+      "sha256": "25fedfc954f7d426f4dae28e2f76cf36f9b7b07349836c683987c0cc3b87260b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_c_1.png",
+      "bytes": 4426,
+      "sha256": "d52ea379c6649a958dc784c26d558b22134413311d28a9b0a87162d8a499a17e",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_c_2.png",
+      "bytes": 4426,
+      "sha256": "02162046a214ad9fa24bf582ca3e4bfde39897cd39b9f5fd2bcc18a38c5195f4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_d_1.png",
+      "bytes": 4294,
+      "sha256": "0e826b3306f13ac9d604cb2984600c96ae77b35d9192546d81086541bd38fee6",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_face_00_d_2.png",
+      "bytes": 4412,
+      "sha256": "e35192b75f70826a8e34ac44baacee7e91665906b0e6c80e83e87289134a978c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_a_1.png",
+      "bytes": 5037,
+      "sha256": "5b4932510be275acdbad60a48a9f8638fefd96c64f9ac9c7a505828a85d44c33",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_a_2.png",
+      "bytes": 4915,
+      "sha256": "5305b5ffd1b507e2d39dd5f526aa3f19d1a8ccd1497e0fdbb34996df0991a9de",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_b_1.png",
+      "bytes": 4871,
+      "sha256": "e829521b0dc9c75c3649d796416f5d7a635115c6f0849b49595332a358ebf4b0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_b_2.png",
+      "bytes": 4874,
+      "sha256": "5daab12205255b02b34116ccb72d1ada466cce4faf3fa649822887503061ee7e",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_c_1.png",
+      "bytes": 4832,
+      "sha256": "cef95ae5f6e5090d3b784512d3371f0904d03f4d8d3af68d27448214d8ad5b0c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_c_2.png",
+      "bytes": 4835,
+      "sha256": "7a6163228e2046f6b0cb8361e152252a8942c76c28123c2759029653cb9bc537",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_d_1.png",
+      "bytes": 5127,
+      "sha256": "feb4a5afe08bf56401550d98e752cab0cbfd464605524887ba899124c40d4179",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_hair_00_d_2.png",
+      "bytes": 5127,
+      "sha256": "c8cc261f612c195fe64316ece23fa95c29fe9a6f81672787708cbe78122c7463",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_a_1.png",
+      "bytes": 4627,
+      "sha256": "49711c63a0eeba76db4d567f561a677044610f4fab70091c52334109fd28af83",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_a_2.png",
+      "bytes": 4684,
+      "sha256": "285d412547db2c8fa3032dbeb40d983a65f59f457eb36cae23dcf97c6a955d61",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_b_1.png",
+      "bytes": 4690,
+      "sha256": "a7a660114cba63b6b4acac6b0129969138f709e4e3f0a9e88e71b8a08ee06857",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_b_2.png",
+      "bytes": 4694,
+      "sha256": "7f76af32539eeeda773b80f07952a5705d4ec0ceb4aa3726b13ffd117dd8df9a",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_c_1.png",
+      "bytes": 4688,
+      "sha256": "7cb9c80f2726a662f8ede37a9ea9ac55dbeabf54b4f29740f6b1605b49f9ed4c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_c_2.png",
+      "bytes": 4695,
+      "sha256": "dec2b16339747e37c139fa21dfca21916a35553e8ecc86ac5cc4ac1cb3e0ed90",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_d_1.png",
+      "bytes": 4548,
+      "sha256": "fecccbc10937de5f35ffcc9600cb70f50cd66b035c5e29461bd47c55e92162aa",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_00_d_2.png",
+      "bytes": 4535,
+      "sha256": "f8babf0a52b200a9f6e5fff635bc1938c534c5ae45da22769f3ed510b5685b6d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_a_1.png",
+      "bytes": 4536,
+      "sha256": "1d025cd5f412d13169c95cb61d856e4652eb36ca83eb897f4fd84c4b52f7ce9e",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_a_2.png",
+      "bytes": 4411,
+      "sha256": "487546afae4ba587e0e15a7c1eddef1b57bf11b133977050b4a973268b78e7b3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_b_1.png",
+      "bytes": 4431,
+      "sha256": "ce1ed2514fe62701c5e27f173b8170a494025222cc0fd4f91a0c64206243ec2c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_b_2.png",
+      "bytes": 4431,
+      "sha256": "2492a4d83bf54be12db8d654867e5c56c3eebf7a1b0870bc8224aee87571a9da",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_c_1.png",
+      "bytes": 4426,
+      "sha256": "6cd76f50c4d1ffd32d8580178ac6752dc0f0c99cbf77210a14b346ec86a580b6",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_c_2.png",
+      "bytes": 4426,
+      "sha256": "ebcc592776090a43deea7d34dd0b5745853569de5af79972239e50ef36ca21df",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_d_1.png",
+      "bytes": 4294,
+      "sha256": "94ba734336d69003dc72731bacf7c804396648ba9740951f2edb56e16ebebdfc",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_face_00_d_2.png",
+      "bytes": 4411,
+      "sha256": "fa4574031a9f05fd2e77e152541835161b7a6f817a8e41ee12be6c03fd07637b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_a_1.png",
+      "bytes": 5323,
+      "sha256": "35aee2a70e07a71609f883d4fb0c13e1b450d95888cf888cc7e631322a7ad970",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_a_2.png",
+      "bytes": 5200,
+      "sha256": "23147abd9d71a3a7b003dcdc33c38619ca36cab041375e486279da42bb65af33",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_b_1.png",
+      "bytes": 5157,
+      "sha256": "dc6b21debd6942d540818f9333d7c239d9df0b7f92d3682fc657e5ad4c389df3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_b_2.png",
+      "bytes": 5161,
+      "sha256": "1936d32e2ea819eba3ac1f7fba67d4c5223e9eaba98bee52bb0acaf8802e75c9",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_c_1.png",
+      "bytes": 5118,
+      "sha256": "827e9f0a61f5863fbff2a69b6a2e24cf4023a87b0c24c1cb2b036625ccb5c44b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_c_2.png",
+      "bytes": 5121,
+      "sha256": "3724c3fc72cb604d18e52653b7b059c0ade29d005d2581945008231edfc0fa42",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_d_1.png",
+      "bytes": 5413,
+      "sha256": "fe78f17d6b05351f99130633f5658287a766440798a456b94d406de35236fec5",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_hair_00_d_2.png",
+      "bytes": 5413,
+      "sha256": "869f25185f0befe1ef90005fd0b9e1e6206fa9f3f7d8f6b3e3da2bed213e2fd2",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_1.png",
+      "bytes": 4685,
+      "sha256": "2c11d04c6b661cbf027406cb5d356becc5ae9b73c4326de072457f36665ae843",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_2.png",
+      "bytes": 4675,
+      "sha256": "f281ff1548884ee557a758e1c17fce98dc33b7f55b497ca8a4269fd3c5696f88",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_3.png",
+      "bytes": 4645,
+      "sha256": "28932a66a46891986979177fd5bfe2becaf5a3d496b1226a4a80b557d6c43772",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_a_4.png",
+      "bytes": 4675,
+      "sha256": "4a0e31a363f4874069e53ebe8e3cbb3ccf55bc55549860e2656b4024f2017355",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_1.png",
+      "bytes": 4729,
+      "sha256": "ce53f768798d1595010c7c4696716cf5cd97b6383a6a8cd97079da8ae0490fc8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_2.png",
+      "bytes": 4721,
+      "sha256": "bb8821117dcbd8667434d20b0a67f32f50ce20785c2575a80258accf8894f4ee",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_3.png",
+      "bytes": 4729,
+      "sha256": "e2db8f5cc1e34ef973592e636d0094c14b1720c45a8e4f47624535d2a16e8e11",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_b_4.png",
+      "bytes": 4721,
+      "sha256": "af9c77e94f9401fbdc80b3b38e56f6f2d1ece159bf1b1cd6083d6093d3893c6c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_1.png",
+      "bytes": 4760,
+      "sha256": "244ba3173db1801582d311ee589c14ce2f368a1c798046039acc457a49c42c0b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_2.png",
+      "bytes": 4735,
+      "sha256": "10a8f9f6ddb5d5e6b184fad4a3781088d3dc601b5d6550d3c54f72d25f64ceb3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_3.png",
+      "bytes": 4760,
+      "sha256": "1a3c46dee042a598ccf2a3798e1a08408bb0e7f2f94270c168a8444951640e51",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_c_4.png",
+      "bytes": 4735,
+      "sha256": "42e4cdeae0645f452d964ef9aa3fbc6f8637248f0a92d52cd36ec1edf9cf9ec0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_1.png",
+      "bytes": 4710,
+      "sha256": "8bd4761f3cb18147759295f32b78a492189e000b481c9ec070b5cd04ec0531e7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_2.png",
+      "bytes": 4614,
+      "sha256": "c0efb1704e3ce7b508a28f3a28d84a1d95d3dbc3b9abed25ac444bca2f6261ad",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_3.png",
+      "bytes": 4710,
+      "sha256": "cfc040843c43796bf3d46d9c9b22093886cc0b36d37223082110216e9db7e3cb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_00_d_4.png",
+      "bytes": 4614,
+      "sha256": "5928bda181dd88b7618a786eeeca5a7d263132d927caf5b54d2cb1362c0e7018",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_1.png",
+      "bytes": 4452,
+      "sha256": "9c0180235ec86791b46ea635a9afdf500c17d9bf215c500d5f6de606dfceaacb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_2.png",
+      "bytes": 4412,
+      "sha256": "e8d51027d7708a99614595c5fe1ccbb56ead6fbc053647edafcc9a7da8c6ce62",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_3.png",
+      "bytes": 4411,
+      "sha256": "26679341d3e977a972add061ac5a7301c70fd5467b85e4485cd70b1141a909b7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_a_4.png",
+      "bytes": 4412,
+      "sha256": "f6eef5daf6b408a4757a7f1fddf8a72a3e101b6be59db83c033fd148e2425abc",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_1.png",
+      "bytes": 4431,
+      "sha256": "2e38b895fd5df3aea4a451b4b62321a724c57ebc0c5eec2c7d10e22f047da8e1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_2.png",
+      "bytes": 4431,
+      "sha256": "c514e4c1c5536475c64c066cebeb87c9647b5e9a5aeff4e480cf0d176233ddcf",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_3.png",
+      "bytes": 4431,
+      "sha256": "0bca8564f3a920c5d585999b36177304ae38d95e43f9519afe1be7ddc0d7a99a",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_b_4.png",
+      "bytes": 4431,
+      "sha256": "76f41cdc27dd8cfcf54e8e295923cf95725e78c6c1012f6bbebbb020b3f42a6b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_1.png",
+      "bytes": 4426,
+      "sha256": "f78d1fa45055c72232200766d33ebf021604c813d58e1afd8c8d4ae844fdd7ab",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_2.png",
+      "bytes": 4426,
+      "sha256": "208590b188609b0681e2e5f8de322f6f0b864804cccef0bc8cb531fed3b9c00c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_3.png",
+      "bytes": 4426,
+      "sha256": "0264bb759849d6cd60e6bc002b871a3392e461acdf1d5718bdfe47263e30c620",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_c_4.png",
+      "bytes": 4426,
+      "sha256": "395e7a1ac7b8706cadd0450640f2ba9403a099964559315eb81819f751cbda3d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_1.png",
+      "bytes": 4294,
+      "sha256": "a11e5b041952a4b1e6f95d24b875a137ade2f49cd2830bfccb4030bce809f919",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_2.png",
+      "bytes": 4294,
+      "sha256": "f80fa29f823b9f398707749bead73dccbc8cddcdff4407f587b8f50334c66750",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_3.png",
+      "bytes": 4294,
+      "sha256": "2a5bc17826f86b6c576874e3e67568689b6ea36437fb733608d5b96666efd037",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_face_00_d_4.png",
+      "bytes": 4294,
+      "sha256": "1e4eec43ad46d848de7cb48f3e0ead2ce6236b9669e480748fe41e710d4bad44",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_1.png",
+      "bytes": 5323,
+      "sha256": "8942ab206cdbb6e027c2cc6d1ab9314fe886a49715a07c031727e5c8ff675d1d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_2.png",
+      "bytes": 5201,
+      "sha256": "2f9ae5e4afe3868c061776dc66efe74b9199c824e1011a4fd299898d52eac607",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_3.png",
+      "bytes": 5226,
+      "sha256": "d474c16395a243920786173ac5eb5076aaff3f33fee6323bfe5a221b632dccc0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_a_4.png",
+      "bytes": 5201,
+      "sha256": "3265138b8d036c5717438b9c1c22b76b55181ad28c36b1b9b6ba1459042f9145",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_1.png",
+      "bytes": 5157,
+      "sha256": "9d7604eac99e9dd41d2f5b41c5a79d9e2fdc67221e544ba8bd5427c8c2ff3dff",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_2.png",
+      "bytes": 5159,
+      "sha256": "e4e876269720af5e89e556f8375882bc0cbf03fa78dca1b09ee37146f3b37cc5",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_3.png",
+      "bytes": 5157,
+      "sha256": "589b822b003347d9ae94c6035618c4db8b0e8b94ab0688311c76843ef9a8cebb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_b_4.png",
+      "bytes": 5159,
+      "sha256": "b1bd95e7ad5ff3fc058f32e612c913a5e31ba5ec88cf4b7523b42c189e696abe",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_1.png",
+      "bytes": 5118,
+      "sha256": "543df208f0392579d3860aec931112b00a2307d40aab32744a09a54f05799680",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_2.png",
+      "bytes": 5119,
+      "sha256": "15d51ec152ef886d4369e1967dddea44a8d3970768bbb25942772269b9aad9c4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_3.png",
+      "bytes": 5118,
+      "sha256": "1e1adb39257208149daab921b789933641e2a822bdbeaf8dcefeda9a9649a4a7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_c_4.png",
+      "bytes": 5119,
+      "sha256": "68cb8095ed315d46371c5d9810c3c92aafe42a81c03fbc0990bd53a3597bc701",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_1.png",
+      "bytes": 5413,
+      "sha256": "721f2f0537196af36b57d8c042f2ce021e9962ac576a556884e32276c7ad5750",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_2.png",
+      "bytes": 5413,
+      "sha256": "ac7f9d9d4fb6b40494b1aaa103c517d8423b5ce3a5fc7960466f0eabb644fbf3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_3.png",
+      "bytes": 5413,
+      "sha256": "6f8d39767724c8ff821288185582463a624d23950330cabe1b16f82cf69dd07f",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_hair_00_d_4.png",
+      "bytes": 5413,
+      "sha256": "24e305eff7ed30a7de4e89e0a7f8d8da1f30bb9b07a9996fb492f0e0171356f1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_empty.png",
+      "bytes": 3932,
+      "sha256": "f777c1a187715d94694fc1120d7d6a0f9274d7007ead2ae7696389776040303c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_hair_00.png",
+      "bytes": 39619,
+      "sha256": "5361bbc6d94d48a6c4633b70d6aaecacd7d3fec07d4676ecdcfb0dc95eb7191d",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_a_1.png",
+      "bytes": 10842,
+      "sha256": "32da28ce0ce5ccb037e987f7563d6258976e52cebea5193a136e3f9e6d91a8ef",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_a_2.png",
+      "bytes": 11705,
+      "sha256": "9d692bf09032c443b1c71e8614b09b2b61e0d1ba5ad8b9ea27edc43462a555fd",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_b_1.png",
+      "bytes": 10733,
+      "sha256": "5c332a32e687b2d3bd89bea36040a2c3b3d186935d7979b1a8de136fd9d18afb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_b_2.png",
+      "bytes": 11330,
+      "sha256": "f999e50a5f200e1268bbd9ad017629c43dbad67c2799b8a99b7260496818a9a8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_c_1.png",
+      "bytes": 10987,
+      "sha256": "68c0ee4ba198f8221d344305ac8f5af902025929a5904db40be3ac5470736e7b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_c_2.png",
+      "bytes": 11357,
+      "sha256": "128d6a29c79fc3bc176ddc925dc626e3042e2816e0685acbbcc06bdc07fad678",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_d_1.png",
+      "bytes": 10560,
+      "sha256": "e97f74d0ab6098fb5a960d142347f1bcd23aed8500ea661012fe82e5c80743d1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_01_d_2.png",
+      "bytes": 10663,
+      "sha256": "9a9265194f94657fd8c07707fb2fc4a82b157a6b5c935dc4f49cf41ed6465ec0",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_a_1.png",
+      "bytes": 10454,
+      "sha256": "3f1be9c1f6d21a4fd67b9068f6b9d906a484fb519a20a32d863ffbcf6b056352",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_a_2.png",
+      "bytes": 11413,
+      "sha256": "35e1c2efd3061d4c5423bfbc01940e94bead8a4b05f2c8320d8060af950c1190",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_b_1.png",
+      "bytes": 10584,
+      "sha256": "ef6b04330528e67b235d6ed91d12d878ffb69aadb5e49bb920b999ee88c415ff",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_b_2.png",
+      "bytes": 11448,
+      "sha256": "7a40a59045216b316a727d72fa94798edba960645775e9f8fb54ad58de12e4fc",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_c_1.png",
+      "bytes": 10786,
+      "sha256": "b1d3d43ad2a825d2a8db80d7940937fb2ae43bd9fdc1ce6771a9d0e7afb85018",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_c_2.png",
+      "bytes": 12174,
+      "sha256": "68942b92dc361da42a8e9e19bed21f687747e2b86bb126c5007e340231a829fb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_d_1.png",
+      "bytes": 10348,
+      "sha256": "4bf993ba246e6260294f6a484060816d6826facdb194212695a19ff5a65b1b87",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_02_d_2.png",
+      "bytes": 10806,
+      "sha256": "cf2ad352fbdcb750fa81aa74b9a826b4d208bb8a3b6fccdddd19a2f598d0d424",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_a_1.png",
+      "bytes": 11256,
+      "sha256": "3b6b376b0bc69264961a07df7ac072079f1aa71c6469ed8b6dcbbc73c18b2d34",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_a_2.png",
+      "bytes": 11696,
+      "sha256": "2e36ca2a1e95845215a442e41d0491abbdd8df4ba20bbef6aee6ca37a118afdf",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_b_1.png",
+      "bytes": 10985,
+      "sha256": "dcf027ec8c6e69332969fe8029c01a1a5e485391855a49eb7564843a4f31486b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_b_2.png",
+      "bytes": 11899,
+      "sha256": "0760a3720addc8729cc70cfaac0a255a8ca56a7febea8d9675881ff292ec868f",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_c_1.png",
+      "bytes": 11092,
+      "sha256": "4dab6011412e3edc52dc5569d7c2425bcf435014e7cf86ffc30acf2ef2d34f21",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_c_2.png",
+      "bytes": 12026,
+      "sha256": "8b5530938ead82dd74e3374feb95858d9b684bae72bd9f89eded68481ff283d4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_d_1.png",
+      "bytes": 11639,
+      "sha256": "ac8686f485c7fd4a47298ed79e50def59099b72f2ef3056480d80824ce768fd8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_03_d_2.png",
+      "bytes": 13391,
+      "sha256": "10bbd1a44c3dc330323399fb0d2e327ad7bc4341bb3a07a303104c25d47215f8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_04_a_1.png",
+      "bytes": 10975,
+      "sha256": "9efb37151795666dfebdae561b4f89d9b4cc0c00947eca86f54f45fcbffa6c2b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_04_b_1.png",
+      "bytes": 12976,
+      "sha256": "56fe6998b1b8692622ae02c07ebdd81567770c4844dacd2d27abd274493157c7",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Monsters/monster_04_c_1.png",
+      "bytes": 11900,
+      "sha256": "7f708173b0de31238810a60ff2d1d3fd68a72ebb71b2a9bc36b3ae4ecebe10b4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_a_1.png",
+      "bytes": 5103,
+      "sha256": "9aee00ae9ac85a36de49a5ecf41435dd1e69386c147bc7a34bacfdc520f6a016",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_a_2.png",
+      "bytes": 4945,
+      "sha256": "9637d9a2d24530119a9acbb11915a9829978399f4efa82458cd4ff4a85c02a68",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_b_1.png",
+      "bytes": 4953,
+      "sha256": "32efe3618e03d3cddd44153853ab67e9e56bb233d22a273137c97e5ac5c706e8",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_b_2.png",
+      "bytes": 4952,
+      "sha256": "b11614fd4ddc25faa7d15a058b55871a2c930f2fe4224e99f4ae50737174e165",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_c_1.png",
+      "bytes": 4954,
+      "sha256": "630d38c42e1ba74dd3d133365bb3280ef909367babcbcdada2fe2eea1cc0f3bb",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_c_2.png",
+      "bytes": 4955,
+      "sha256": "bea41f46bae71252a4f04d40b4d3ce68d58d5d9de6b8cd3234c21492f5da1242",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_d_1.png",
+      "bytes": 4919,
+      "sha256": "f9f1e91f8119147f54136b3e3e261f17fafe81333d035ff67a09be15e909bfde",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02_d_2.png",
+      "bytes": 4922,
+      "sha256": "ba4baf1926ec75a30fc8e8a957d9a7ee98aa8f40bd20a9e8c3feb1fa703e6210",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_a_1.png",
+      "bytes": 4452,
+      "sha256": "261ea5c24f0de71b4cffc0a6345aaf62de8b7fab3f15ec220c58eb4a2108687d",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_a_2.png",
+      "bytes": 4522,
+      "sha256": "ff82689e7eaf922376fdfe9b8938974dddd8af0f57c6587919effa746c622574",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_b_1.png",
+      "bytes": 4509,
+      "sha256": "5bc377085276a3c639587c28478ae28f671e8ba78fc9b69ce470c0a8bfb6a956",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_b_2.png",
+      "bytes": 4506,
+      "sha256": "b02ca929791ead912f50ceef6fc6f38fcfaec6ce84c223b19df7eacea0a5ab97",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_c_1.png",
+      "bytes": 4515,
+      "sha256": "19eaef59148d6395452801c17424269c99d181ced6f2cd29a54e99ab0d165939",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_c_2.png",
+      "bytes": 4513,
+      "sha256": "375252ea0e584a39ae1fdcb743d360365f1683a624ccf8caa43048ec9bcda28e",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_d_1.png",
+      "bytes": 4507,
+      "sha256": "78b29df454e9f54ccbd76c18e153ee7214b03fc2a5d8942dca4f05c4839c5116",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_idle_body_02m_d_2.png",
+      "bytes": 4503,
+      "sha256": "a500719bf9b9f090341aa0f56c2fdb480a9b55c0f51c0b42789ec888a565c2e2",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_a_1.png",
+      "bytes": 4938,
+      "sha256": "281e1c240b25c82ceeb7ad5f9a593eedeb6664e9f594b37f21bfbb8837703426",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_a_2.png",
+      "bytes": 4821,
+      "sha256": "175c383f3cd9b1fc4f1c3be3d95e7bd69e1a5780f2b263f5fada4656f74c09da",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_b_1.png",
+      "bytes": 4882,
+      "sha256": "f86754be168ba2793ecc49daa55e60de2581784aad443a698409a879a5f80415",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_b_2.png",
+      "bytes": 4888,
+      "sha256": "b1871b11c1d7ccb557a57dfd8e10e6d56654da6e0695a0151e0258b82cb83520",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_c_1.png",
+      "bytes": 4875,
+      "sha256": "bf7e975c5376688ee6e453bd8db02e9277d269dd22bc0c92b8c6042dba76b200",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_c_2.png",
+      "bytes": 4882,
+      "sha256": "407bad267f74facf5674f8819b7da06f6e880190b87f1fadf7ddf76495f4bdd4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_d_1.png",
+      "bytes": 4744,
+      "sha256": "429e8d90b701868c3da82f83cc80bd43e8d1104f393ebed4a3a16af4ac702472",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02_d_2.png",
+      "bytes": 4739,
+      "sha256": "f7d5b24185608ef808fb37466c94018517d874e0555f1fc3f5d0a4dfc5c669b3",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_a_1.png",
+      "bytes": 4458,
+      "sha256": "8c53bc64d975ec0ef53ea35b1dde0caa3308fd702c30bb9e7ad625ca8d846b88",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_a_2.png",
+      "bytes": 4471,
+      "sha256": "5ef3777521ae7752b299cc0eaecb4a7106edb14ab5ce36c3e8a677c409da5017",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_b_1.png",
+      "bytes": 4512,
+      "sha256": "9b0c552ab52b833ff8beae843d3c2174d44ff22b4f826adb66a04b6f8a596a81",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_b_2.png",
+      "bytes": 4508,
+      "sha256": "76af6296438be77ca87449f7937e0ac35005d44df0ad9e0257310c22eda271e5",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_c_1.png",
+      "bytes": 4507,
+      "sha256": "63dcad355adea9a85062cfd9b55d7304e3d3c6686f4d659d9b6839188e4f8530",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_c_2.png",
+      "bytes": 4506,
+      "sha256": "b2f1dfc761f05a42074265213b6aae50583d687159177b87fe37e3c428973e3c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_d_1.png",
+      "bytes": 4425,
+      "sha256": "8d2c9dfe9fa22be66aa43c375b60580904ebf278ab4cb7ed5fbaea76fc8a0d53",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_sit_body_02m_d_2.png",
+      "bytes": 4421,
+      "sha256": "e985023d42fd002573c1b4b91420ad962910253e64338de79b99323ca2bff893",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_a_1.png",
+      "bytes": 4906,
+      "sha256": "0b7d4222b037d055bd426b8dbf2d88459ca11b5c98528806c46ba5f88cbef287",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_a_2.png",
+      "bytes": 4814,
+      "sha256": "4a6196034de5fed61b4da3846407df3435a6638c6e32f47a2d3af7e929a0038f",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_a_3.png",
+      "bytes": 4820,
+      "sha256": "142a056562e5552be809d5a41b949c57f3492d351de76e6165d7e0a036587139",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_a_4.png",
+      "bytes": 4830,
+      "sha256": "715b03bf5226d63f5f8be98472073eec09f6460c155d7a14a2f3248b41090bab",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_b_1.png",
+      "bytes": 4892,
+      "sha256": "4aa9f6e75ebe9b07784cbc8427eedbd40578fd4203a30e5e8b50854b6d03b6d2",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_b_2.png",
+      "bytes": 4910,
+      "sha256": "1b43886aa0aee93813cf1ff1a179592f5ef7bdc2ec26a820cd094bcdcea94733",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_b_3.png",
+      "bytes": 4892,
+      "sha256": "26326ff149e4081304c2c2957f962795d4a2a8036c94fc854c6d038e6701aeba",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_b_4.png",
+      "bytes": 4910,
+      "sha256": "24668b38099431e1f249df24a340a73092e8248df648990e519d13fbb9a08aba",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_c_1.png",
+      "bytes": 4894,
+      "sha256": "ebd6c79af41b554524b7c6e1aa5d586215eeeebe90c2cd9e88c86e75e483acce",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_c_2.png",
+      "bytes": 4926,
+      "sha256": "8b31e4320c8b7f3cf08cc84cb73c6b3338d932dc969f547d17171b68f07d016b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_c_3.png",
+      "bytes": 4894,
+      "sha256": "ae15cc854657917951ec2f2bbcd7aa8ef834c28abd91d05e4dafd7df0b1940e4",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_c_4.png",
+      "bytes": 4926,
+      "sha256": "66d70ed93f96eddbefeb2012a1329c228e34f7e6308000940f0398461b8e8d15",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_d_1.png",
+      "bytes": 4765,
+      "sha256": "af652455ba5c440dd22475380a4821f947615690aafaca821a35615d3b916228",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_d_2.png",
+      "bytes": 4776,
+      "sha256": "7930c48e1282c0f5c52096c7049f182492de1722d3aff19f5297a12af86f6177",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_d_3.png",
+      "bytes": 4747,
+      "sha256": "773833bbe1738a24788fffcd9241cb870a429e1e58834bbf82e1a79e09d75b08",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02_d_4.png",
+      "bytes": 4762,
+      "sha256": "2f29636a8543c3a11a8fc47bedb9bc16abb584cbd2e86d3650401a359ef74b89",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_a_1.png",
+      "bytes": 4467,
+      "sha256": "9f269cde677a4c1c81dcf24712588823b1a7dded4e1ae8dbfd2e2c3b3168a67a",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_a_2.png",
+      "bytes": 4509,
+      "sha256": "9ba5278cc94703783f27c236b8e44306c20d9f70b63d88a6df509a2f35108c91",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_a_3.png",
+      "bytes": 4512,
+      "sha256": "c486d124c4e9f6917665b78abe140d11771d83a92d87ef64f6162b58c3c79924",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_a_4.png",
+      "bytes": 4517,
+      "sha256": "923667e928a73a849b43d3adbbb9ac147bfac0abe16011dc12a4482776d92bf1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_b_1.png",
+      "bytes": 4535,
+      "sha256": "e4ef9ca5b803f83eeb60c2de05005f557bcef5d602d3aaabc6d427429109c674",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_b_2.png",
+      "bytes": 4542,
+      "sha256": "5a1e5d64e0acb7fb3accd2b43d0024ffc08b6a04aac80df39e6239e274bdf097",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_b_3.png",
+      "bytes": 4535,
+      "sha256": "7c1fff5def73e398f3d3641669dc72b94019742bdef7293b5d84e0220a37f829",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_b_4.png",
+      "bytes": 4542,
+      "sha256": "dd447d2a6ead587ca23c7a38488189320ca1353ac1d8c19afe7fb1803d0d3966",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_c_1.png",
+      "bytes": 4540,
+      "sha256": "f5050847c456ea80161cb09e6cd0325ad274234adc99be904cc2c0fb61781880",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_c_2.png",
+      "bytes": 4550,
+      "sha256": "67200cf4a8c4c3d50eed07d58eb49b7f199543a85ef81f10d7aa857ab05ebb75",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_c_3.png",
+      "bytes": 4540,
+      "sha256": "3c8bddcb65da80c316042a580775c54355d78e7bc540b915ff60f1994b5057f1",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_c_4.png",
+      "bytes": 4550,
+      "sha256": "a89ceb1245f6d9c16dd1556176aadc0b126ce1baa54bdab8804e80ae06cf8f08",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_d_1.png",
+      "bytes": 4495,
+      "sha256": "d8b43219a7465c7cbaf2a989e90528de724ceca5c8f4bec1a16fe0674c30969c",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_d_2.png",
+      "bytes": 4498,
+      "sha256": "2401099b07a856d6b0cc317c56931ff8c8523f80f73a84297ae5d5b74a1522b6",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_d_3.png",
+      "bytes": 4481,
+      "sha256": "3ff41963f6dbcc64f62088fa23d7e3a517aae908d5d15ac6c70bcbaadc158c6b",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_c_walk_body_02m_d_4.png",
+      "bytes": 4493,
+      "sha256": "48dec54727de857c55e8c18af9a99d1efee8ac78a3418d42d0ffdc1458664a1a",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_03.png",
+      "bytes": 13475,
+      "sha256": "feb2a38f47155b13a0c4dc52590ed4551887250429f920099cdeba4294081c65",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_03_m.png",
+      "bytes": 6967,
+      "sha256": "ffa144d11cddece8f2fc0358f2f5def38c11b0791c1264e8bd11354c279fc2a8",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_04.png",
+      "bytes": 13595,
+      "sha256": "031cb8cdd2edbb975a623aeb47070f1d48fbad847ea4ace82469f390027b47ac",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_04_m.png",
+      "bytes": 6739,
+      "sha256": "72abf98b640cb318791657f255517d877a0015f675b6d2d5aebba0993259115f",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_05.png",
+      "bytes": 15109,
+      "sha256": "e3feabae4f454002d2c3038f9a07c1124e90fdea0d3cb3bfc17133c9fff669b2",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_05_m.png",
+      "bytes": 7459,
+      "sha256": "acbc5394eaf3da126374de1b4a4999abbff7936dfa9b75b596563c4dd111f0e6",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_06.png",
+      "bytes": 13662,
+      "sha256": "9737f1a1765d32d826b58421d2b8dc4606b849083e0a3220d4d3bc5a9a13b806",
+      "size": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "Resources/Characters/character_r_idle_body_06_m.png",
+      "bytes": 7684,
+      "sha256": "f2c72d06820c6be20c6be737b0c2d8b62ae35a37cc64d5daaae61f8c367e6e8a",
+      "size": [
+        768,
+        768
       ]
     }
   ]
