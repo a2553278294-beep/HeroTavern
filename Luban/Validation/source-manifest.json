@@ -34,10 +34,10 @@
   {
     "file": "Excel/CharacterPart.xlsx",
     "url": "https://docs.qq.com/sheet/DUm1yY3FyTkVacUh2",
-    "bytes": 24642,
-    "sha256": "685225e89dc82aff61c817adf419b9a15cdecfe6c4a826cfa82e76cff1f24e1d",
+    "bytes": 25043,
+    "sha256": "c4a5752388cbdc13f8f59149b21182de7ad06dbb5d7e4596e5da0b7540bffcff",
     "beforeWebFixesSha256": "42e1516cf450de01756035ff3b3b3e12273d52c0c8903184feedb4d970f45a10",
-    "updatedAt": "2026-10-16"
+    "updatedAt": "2026-10-17"
   },
   {
     "file": "Excel/global.xlsx",
