@@ -47,11 +47,11 @@ public sealed partial class EventRow : Luban.BeanBase
     /// </summary>
     public readonly string EventId;
     /// <summary>
-    /// 文案类别（源表为中文枚举词，未匹配 __enums__ 占位词表，按 string 读取）
+    /// 文案类别
     /// </summary>
     public readonly string Category;
     /// <summary>
-    /// 职业（源值含“不限”，ht.Profession 无该别名，按 string 读取，不修改共享枚举）
+    /// 职业
     /// </summary>
     public readonly string Profession;
     /// <summary>
@@ -60,7 +60,7 @@ public sealed partial class EventRow : Luban.BeanBase
     public readonly string PreviousId;
     public ht.EventRow PreviousId_Ref;
     /// <summary>
-    /// 出现条件（源表为中文枚举词，未匹配 __enums__ 占位词表，按 string 读取）
+    /// 出现条件
     /// </summary>
     public readonly string Trigger;
     /// <summary>

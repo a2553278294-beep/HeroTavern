@@ -27,8 +27,10 @@ public sealed partial class MonsterRow : Luban.BeanBase
         Intelligence = _buf.ReadInt();
         Def = _buf.ReadInt();
         Description = _buf.ReadString();
-        Location = _buf.ReadInt();
+        ResourceName = _buf.ReadString();
         Weight = _buf.ReadInt();
+        GroupResourceName = _buf.ReadString();
+        GroupCount = _buf.ReadInt();
     }
 
     public static MonsterRow DeserializeMonsterRow(ByteBuf _buf)
@@ -69,13 +71,21 @@ public sealed partial class MonsterRow : Luban.BeanBase
     /// </summary>
     public readonly string Description;
     /// <summary>
-    /// 出现场地
+    /// 单只资源名
     /// </summary>
-    public readonly int Location;
+    public readonly string ResourceName;
     /// <summary>
     /// 抽取权重
     /// </summary>
     public readonly int Weight;
+    /// <summary>
+    /// 群组资源名
+    /// </summary>
+    public readonly string GroupResourceName;
+    /// <summary>
+    /// 每组数量
+    /// </summary>
+    public readonly int GroupCount;
    
     public const int __ID__ = 410599906;
     public override int GetTypeId() => __ID__;
@@ -95,8 +105,10 @@ public sealed partial class MonsterRow : Luban.BeanBase
         + "intelligence:" + Intelligence + ","
         + "def:" + Def + ","
         + "description:" + Description + ","
-        + "location:" + Location + ","
+        + "resourceName:" + ResourceName + ","
         + "weight:" + Weight + ","
+        + "groupResourceName:" + GroupResourceName + ","
+        + "groupCount:" + GroupCount + ","
         + "}";
     }
 }

@@ -13,317 +13,89 @@ namespace GameConfig
 {
 public partial class Tables
 {
-    #region The Tables
-
-    private item.TbItem m_TbItem;
-    public item.TbItem TbItem 
-    {
-        get
-        {
-            if (m_TbItem == null)
-            {
-                m_TbItem = new item.TbItem(defaultLoader("item_tbitem"));
-                m_TbItem.ResolveRef(this);
-            }
-            return m_TbItem;
-        }
-        set
-        {
-            m_TbItem = value;
-            m_TbItem.ResolveRef(this);
-        }
-    }
+    public item.TbItem TbItem {get; }
     /// <summary>
     /// 物品/酒水/配方
     /// </summary>
-    private ht.TbItemGame m_TbItemGame;
-    public ht.TbItemGame TbItemGame 
-    {
-        get
-        {
-            if (m_TbItemGame == null)
-            {
-                m_TbItemGame = new ht.TbItemGame(defaultLoader("ht_tbitemgame"));
-                m_TbItemGame.ResolveRef(this);
-            }
-            return m_TbItemGame;
-        }
-        set
-        {
-            m_TbItemGame = value;
-            m_TbItemGame.ResolveRef(this);
-        }
-    }
+    public ht.TbItemGame TbItemGame {get; }
     /// <summary>
     /// 姓名词表（name1姓/name2名）
     /// </summary>
-    private ht.TbName m_TbName;
-    public ht.TbName TbName 
-    {
-        get
-        {
-            if (m_TbName == null)
-            {
-                m_TbName = new ht.TbName(defaultLoader("ht_tbname"));
-                m_TbName.ResolveRef(this);
-            }
-            return m_TbName;
-        }
-        set
-        {
-            m_TbName = value;
-            m_TbName.ResolveRef(this);
-        }
-    }
+    public ht.TbName TbName {get; }
     /// <summary>
     /// 职业
     /// </summary>
-    private ht.TbProfession m_TbProfession;
-    public ht.TbProfession TbProfession 
-    {
-        get
-        {
-            if (m_TbProfession == null)
-            {
-                m_TbProfession = new ht.TbProfession(defaultLoader("ht_tbprofession"));
-                m_TbProfession.ResolveRef(this);
-            }
-            return m_TbProfession;
-        }
-        set
-        {
-            m_TbProfession = value;
-            m_TbProfession.ResolveRef(this);
-        }
-    }
+    public ht.TbProfession TbProfession {get; }
     /// <summary>
     /// 全局参数键值
     /// </summary>
-    private ht.TbGlobal m_TbGlobal;
-    public ht.TbGlobal TbGlobal 
-    {
-        get
-        {
-            if (m_TbGlobal == null)
-            {
-                m_TbGlobal = new ht.TbGlobal(defaultLoader("ht_tbglobal"));
-                m_TbGlobal.ResolveRef(this);
-            }
-            return m_TbGlobal;
-        }
-        set
-        {
-            m_TbGlobal = value;
-            m_TbGlobal.ResolveRef(this);
-        }
-    }
+    public ht.TbGlobal TbGlobal {get; }
     /// <summary>
     /// 建筑坐标
     /// </summary>
-    private ht.TbMap m_TbMap;
-    public ht.TbMap TbMap 
-    {
-        get
-        {
-            if (m_TbMap == null)
-            {
-                m_TbMap = new ht.TbMap(defaultLoader("ht_tbmap"));
-                m_TbMap.ResolveRef(this);
-            }
-            return m_TbMap;
-        }
-        set
-        {
-            m_TbMap = value;
-            m_TbMap.ResolveRef(this);
-        }
-    }
+    public ht.TbMap TbMap {get; }
     /// <summary>
     /// 怪物模板
     /// </summary>
-    private ht.TbMonster m_TbMonster;
-    public ht.TbMonster TbMonster 
-    {
-        get
-        {
-            if (m_TbMonster == null)
-            {
-                m_TbMonster = new ht.TbMonster(defaultLoader("ht_tbmonster"));
-                m_TbMonster.ResolveRef(this);
-            }
-            return m_TbMonster;
-        }
-        set
-        {
-            m_TbMonster = value;
-            m_TbMonster.ResolveRef(this);
-        }
-    }
+    public ht.TbMonster TbMonster {get; }
     /// <summary>
     /// 角色部件配色
     /// </summary>
-    private ht.TbCharacterPart m_TbCharacterPart;
-    public ht.TbCharacterPart TbCharacterPart 
-    {
-        get
-        {
-            if (m_TbCharacterPart == null)
-            {
-                m_TbCharacterPart = new ht.TbCharacterPart(defaultLoader("ht_tbcharacterpart"));
-                m_TbCharacterPart.ResolveRef(this);
-            }
-            return m_TbCharacterPart;
-        }
-        set
-        {
-            m_TbCharacterPart = value;
-            m_TbCharacterPart.ResolveRef(this);
-        }
-    }
+    public ht.TbCharacterPart TbCharacterPart {get; }
     /// <summary>
     /// 悬赏板（目标/赏金/发布费/物资/线索）
     /// </summary>
-    private ht.TbBounty m_TbBounty;
-    public ht.TbBounty TbBounty 
-    {
-        get
-        {
-            if (m_TbBounty == null)
-            {
-                m_TbBounty = new ht.TbBounty(defaultLoader("ht_tbbounty"));
-                m_TbBounty.ResolveRef(this);
-            }
-            return m_TbBounty;
-        }
-        set
-        {
-            m_TbBounty = value;
-            m_TbBounty.ResolveRef(this);
-        }
-    }
+    public ht.TbBounty TbBounty {get; }
     /// <summary>
     /// 悬赏常量（槽位数）
     /// </summary>
-    private ht.TbBountyConst m_TbBountyConst;
-    public ht.TbBountyConst TbBountyConst 
-    {
-        get
-        {
-            if (m_TbBountyConst == null)
-            {
-                m_TbBountyConst = new ht.TbBountyConst(defaultLoader("ht_tbbountyconst"));
-                m_TbBountyConst.ResolveRef(this);
-            }
-            return m_TbBountyConst;
-        }
-        set
-        {
-            m_TbBountyConst = value;
-            m_TbBountyConst.ResolveRef(this);
-        }
-    }
+    public ht.TbBountyConst TbBountyConst {get; }
     /// <summary>
     /// 对话文案行（按 group_id+order 组成会话；speaker 源为中文枚举词，按 string 读取）
     /// </summary>
-    private ht.TbDialogue m_TbDialogue;
-    public ht.TbDialogue TbDialogue 
-    {
-        get
-        {
-            if (m_TbDialogue == null)
-            {
-                m_TbDialogue = new ht.TbDialogue(defaultLoader("ht_tbdialogue"));
-                m_TbDialogue.ResolveRef(this);
-            }
-            return m_TbDialogue;
-        }
-        set
-        {
-            m_TbDialogue = value;
-            m_TbDialogue.ResolveRef(this);
-        }
-    }
+    public ht.TbDialogue TbDialogue {get; }
     /// <summary>
     /// 事件阶段表（category/trigger/profession 源为中文枚举词，按 string 读取；previous_id 自引用）
     /// </summary>
-    private ht.TbEvent m_TbEvent;
-    public ht.TbEvent TbEvent 
-    {
-        get
-        {
-            if (m_TbEvent == null)
-            {
-                m_TbEvent = new ht.TbEvent(defaultLoader("ht_tbevent"));
-                m_TbEvent.ResolveRef(this);
-            }
-            return m_TbEvent;
-        }
-        set
-        {
-            m_TbEvent = value;
-            m_TbEvent.ResolveRef(this);
-        }
-    }
+    public ht.TbEvent TbEvent {get; }
     /// <summary>
     /// 旧口径闲聊文案（角色系统 v3.1 3.3 抽取备用）
     /// </summary>
-    private ht.TbDialogue01 m_TbDialogue01;
-    public ht.TbDialogue01 TbDialogue01 
-    {
-        get
-        {
-            if (m_TbDialogue01 == null)
-            {
-                m_TbDialogue01 = new ht.TbDialogue01(defaultLoader("ht_tbdialogue01"));
-                m_TbDialogue01.ResolveRef(this);
-            }
-            return m_TbDialogue01;
-        }
-        set
-        {
-            m_TbDialogue01 = value;
-            m_TbDialogue01.ResolveRef(this);
-        }
-    }
-
-    #endregion
-
-    System.Func<string, ByteBuf> defaultLoader;
+    public ht.TbDialogue01 TbDialogue01 {get; }
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
-        SetDefaultLoader(loader);
-        Init();
+        TbItem = new item.TbItem(loader("item_tbitem"));
+        TbItemGame = new ht.TbItemGame(loader("ht_tbitemgame"));
+        TbName = new ht.TbName(loader("ht_tbname"));
+        TbProfession = new ht.TbProfession(loader("ht_tbprofession"));
+        TbGlobal = new ht.TbGlobal(loader("ht_tbglobal"));
+        TbMap = new ht.TbMap(loader("ht_tbmap"));
+        TbMonster = new ht.TbMonster(loader("ht_tbmonster"));
+        TbCharacterPart = new ht.TbCharacterPart(loader("ht_tbcharacterpart"));
+        TbBounty = new ht.TbBounty(loader("ht_tbbounty"));
+        TbBountyConst = new ht.TbBountyConst(loader("ht_tbbountyconst"));
+        TbDialogue = new ht.TbDialogue(loader("ht_tbdialogue"));
+        TbEvent = new ht.TbEvent(loader("ht_tbevent"));
+        TbDialogue01 = new ht.TbDialogue01(loader("ht_tbdialogue01"));
+        ResolveRef();
     }
     
-    public void SetDefaultLoader(System.Func<string, ByteBuf> loader)
+    private void ResolveRef()
     {
-        defaultLoader = null;
-        defaultLoader = loader;
-    }
-
-    //public partial void Init();
-
-    public void Init(){}
-
-    /// <summary>
-    /// 清空全部表的懒加载缓存（含分片表）；仅释放托管引用，不释放 YooAsset 资源。
-    /// </summary>
-    public void ClearPartitions()
-    {
-        m_TbItem = null;
-        m_TbItemGame = null;
-        m_TbName = null;
-        m_TbProfession = null;
-        m_TbGlobal = null;
-        m_TbMap = null;
-        m_TbMonster = null;
-        m_TbCharacterPart = null;
-        m_TbBounty = null;
-        m_TbBountyConst = null;
-        m_TbDialogue = null;
-        m_TbEvent = null;
-        m_TbDialogue01 = null;
+        TbItem.ResolveRef(this);
+        TbItemGame.ResolveRef(this);
+        TbName.ResolveRef(this);
+        TbProfession.ResolveRef(this);
+        TbGlobal.ResolveRef(this);
+        TbMap.ResolveRef(this);
+        TbMonster.ResolveRef(this);
+        TbCharacterPart.ResolveRef(this);
+        TbBounty.ResolveRef(this);
+        TbBountyConst.ResolveRef(this);
+        TbDialogue.ResolveRef(this);
+        TbEvent.ResolveRef(this);
+        TbDialogue01.ResolveRef(this);
     }
 }
 

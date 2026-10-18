@@ -47,7 +47,7 @@ public sealed partial class DialogueRow : Luban.BeanBase
     /// </summary>
     public readonly int Order;
     /// <summary>
-    /// 说话者（源表为中文枚举词，未匹配 __enums__ 占位词表，按 string 读取）
+    /// 说话者
     /// </summary>
     public readonly string Speaker;
     /// <summary>
