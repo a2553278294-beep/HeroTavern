@@ -14,8 +14,10 @@ namespace GameLogic.World
         public readonly int Str;
         public readonly int Int;
         public readonly int Def;
+        /// <summary>每组数量（TbMonster group_count 列）：<see cref="MonsterSystem.DailySpawn"/> 每天刷一组时的组内规模，配置缺失按 1。</summary>
+        public readonly int GroupCount;
 
-        public MonsterDef(int id, string name, int stage, int weight, int hp, int str, int intel, int def)
+        public MonsterDef(int id, string name, int stage, int weight, int hp, int str, int intel, int def, int groupCount = 1)
         {
             Id = id;
             Name = name;
@@ -25,6 +27,7 @@ namespace GameLogic.World
             Str = str;
             Int = intel;
             Def = def;
+            GroupCount = groupCount;
         }
     }
 
@@ -44,7 +47,7 @@ namespace GameLogic.World
 
     /// <summary>
     /// 怪物系统（边缘系统 + 立项·怪物刷新区域）。
-    /// 占位口径（待确认）：每天刷新 1 只；狩猎延迟 24 小时；攻击间隔 6 小时（饱食度＞50 后 12 小时）；
+    /// 占位口径（待确认）：每天刷新 1 <strong>组</strong>（组内数量 = MonsterDef.GroupCount，配置缺失按 1）；狩猎延迟 24 小时；攻击间隔 6 小时（饱食度＞50 后 12 小时）；
     /// 单次伤害 ≥ 生命上限 50% 判重伤（3 天），否则轻伤（1 天）。
     /// M3：目录可由配置注入（<see cref="ReloadCatalog"/>）、城镇存活怪物上限 <see cref="TownMonsterLimit"/>、
     /// 击杀接口 <see cref="KillMonster"/>、迁入广播 <see cref="MonsterEnteredTown"/>。
@@ -71,6 +74,8 @@ namespace GameLogic.World
             new MonsterDef(6, "黑曜魔像", 5, 5, 220, 26, 6, 18),
         };
 
+        private static readonly IReadOnlyList<Monster> EmptySpawn = Array.Empty<Monster>();
+
         private readonly IRandomSource _random;
         private readonly List<Monster> _monsters = new List<Monster>();
 
@@ -83,6 +88,10 @@ namespace GameLogic.World
         public IReadOnlyList<MonsterDef> Catalog => _catalog;
 
         public event Action<Monster> Spawned;
+        /// <summary>整组怪物刷新完成（一组只触发一次，参数 = 组内首只）。
+        /// 口径：同种怪物的一整组只算「一次刷新」，情报（M4，每组一套 3 条）与悬赏点亮（M5）订阅本事件，不按组内数量翻倍；
+        /// 需要逐实例表现（地图卡图）的逻辑订阅 <see cref="Spawned"/>。</summary>
+        public event Action<Monster> GroupSpawned;
         /// <summary>怪物攻击角色。参数：monster, target, damage, targetDied。</summary>
         public event Action<Monster, CharacterData, int, bool> Attacked;
         /// <summary>怪物被角色击杀。参数：monster, killer（killer 可为 null，表示非角色来源）。</summary>
@@ -101,13 +110,18 @@ namespace GameLogic.World
             return 1 + (dayOverall - 1) / DaysPerStage;
         }
 
-        /// <summary>每日刷新（占位：每天 1 只，活跃刷新区域随机落格；场上存活数上限 20）。</summary>
-        public Monster DailySpawn(WorldMap map, int dayOverall)
+        /// <summary>每日刷新（每天 1 <strong>组</strong>：组内数量取 <see cref="MonsterDef.GroupCount"/>（TbMonster group_count 列），配置缺失按 1；
+        /// 组内在同一随机选中的活跃刷新区域各自随机落格；场上存活数上限 <see cref="MaxAliveMonsters"/>，余量不足时按余量截断）。
+        /// 每只实例都触发 <see cref="Spawned"/>（表现层逐实例建视图），整组只触发一次 <see cref="GroupSpawned"/>（情报 / 悬赏按组一次）。
+        /// 返回本次刷出的实例列表（无刷新时返回空列表）。</summary>
+        public IReadOnlyList<Monster> DailySpawn(WorldMap map, int dayOverall)
         {
             _monsters.RemoveAll(m => !m.IsAlive);
-            if (_monsters.Count >= MaxAliveMonsters || map.ActiveSpawnAreas.Count == 0)
+            // 余量 = 当天还能再刷多少只（满额或没有活跃刷新区域就不刷）。
+            int headroom = MaxAliveMonsters - _monsters.Count;
+            if (headroom <= 0 || map.ActiveSpawnAreas.Count == 0)
             {
-                return null;
+                return EmptySpawn;
             }
 
             int stage = PoolStage(dayOverall);
@@ -138,17 +152,33 @@ namespace GameLogic.World
                 }
             }
 
-            int areaId = map.ActiveSpawnAreas[_random.Next(0, map.ActiveSpawnAreas.Count)];
-            var monster = new Monster
+            if (picked == null)
             {
-                Def = picked,
-                Hp = picked.Hp,
-                Satiety = 0,
-                Position = new GridPos(areaId, _random.Next(0, GridMap.Width), _random.Next(0, GridMap.Height)),
-            };
-            _monsters.Add(monster);
-            Spawned?.Invoke(monster);
-            return monster;
+                // 兜底：阶段内没有可命中条目（权重全 0 等异常），不刷新也不抛异常。
+                return EmptySpawn;
+            }
+
+            // 整组落在同一个刷新区域内，组内每只各自随机格（不与队友重叠去重，贴图允许叠卡）。
+            int areaId = map.ActiveSpawnAreas[_random.Next(0, map.ActiveSpawnAreas.Count)];
+            int count = Math.Min(Math.Max(1, picked.GroupCount), headroom);
+            var group = new List<Monster>(count);
+            for (int i = 0; i < count; i++)
+            {
+                var monster = new Monster
+                {
+                    Def = picked,
+                    Hp = picked.Hp,
+                    Satiety = 0,
+                    Position = new GridPos(areaId, _random.Next(0, GridMap.Width), _random.Next(0, GridMap.Height)),
+                };
+                _monsters.Add(monster);
+                group.Add(monster);
+                Spawned?.Invoke(monster);
+            }
+
+            // 组级事件：整组一次，情报（M4）与悬赏点亮（M5）不随组内数量翻倍。
+            GroupSpawned?.Invoke(group[0]);
+            return group;
         }
 
         /// <summary>每游戏小时推进：狩猎倒计时、接近城镇、攻击。</summary>

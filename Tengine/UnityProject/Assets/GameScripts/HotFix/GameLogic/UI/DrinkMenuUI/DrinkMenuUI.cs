@@ -16,7 +16,8 @@ namespace GameLogic
     ///
     /// 经营案口径：
     /// - 准备阶段（当日首单前）可改上架开关与份数；营业开始（<see cref="TavernSystem.IsLockedToday"/>）后全部只读，仍可打开查看。
-    /// - 上架数量为 0 = 不上架，无独立「关架」逻辑；✓ 按钮负责上架/下架（槽位上限 <see cref="TavernSystem.ShelfSlotLimit"/>）。
+    /// - 上架数量为 0 = 不上架，无独立「关架」逻辑；m_btnShelf 是勾选框式开关，点击切换上架/下架
+    ///   （槽位上限 <see cref="TavernSystem.ShelfSlotLimit"/>），勾选态贴图由 <see cref="ApplyShelfCheck"/> 按上架状态切换。
     /// - 份数不在设定时扣钱，成本按当日实际售出杯数在 0:00 结算；页脚只是预估。
     /// </summary>
     [Window(UILayer.UI)]
@@ -45,8 +46,8 @@ namespace GameLogic
         // ==================== 运行时状态 ====================
 
         private readonly List<int> _wines = new List<int>(); // 当前展示的已解锁酒（与卡片一一对应）
-        private Sprite _shelfOnSprite;   // ui_mixology_btn_01_s1（绿✓：可点上架）
-        private Sprite _shelfOffSprite;  // ui_mixology_btn_01_s2（灰：锁定/不可用）
+        private Sprite _shelfCheckedSprite;   // ui_mixology_btn_01_s1（绿底白勾：已上架）
+        private Sprite _shelfUncheckedSprite; // ui_mixology_btn_01_s2（灰底白勾：未上架）
         private string _lastSignature;
 
         private static WorldSimulation Sim => GameModule.World.Sim;
@@ -103,9 +104,25 @@ namespace GameLogic
         {
             Current = this;
 
+            // 上架勾选框两态贴图：s1 = 绿底白勾（已上架），s2 = 灰底白勾（未上架）。
+            _shelfCheckedSprite = Resources.Load<Sprite>("ui01/mixology/ui_mixology_btn_01_s1");
+            _shelfUncheckedSprite = Resources.Load<Sprite>("ui01/mixology/ui_mixology_btn_01_s2");
+
             // 窗口 Canvas 自带 Scaler：1960×1080 设计分辨率，与宿主根 Canvas 配置解耦。
-            _shelfOnSprite = Resources.Load<Sprite>("ui01/mixology/ui_mixology_btn_01_s1");
-            _shelfOffSprite = Resources.Load<Sprite>("ui01/mixology/ui_mixology_btn_01_s2");
+            // 烘焙按钮统一 alpha=0/无贴图：恢复可见性并补 +/− 美术（btn_03=加号、btn_02=减号，贴图自带符号）；
+            // ✓ 勾选框贴图由 ApplyShelfCheck 按上架状态切换，这里只需恢复不透明。
+            for (int i = 0; i < CardCount; i++)
+            {
+                UiArtInjector.ApplyButtonArt(_btnPluses[i] != null ? _btnPluses[i].GetComponent<Image>() : null, "ui01/mixology/ui_mixology_btn_03");
+                UiArtInjector.ApplyButtonArt(_btnMinuses[i] != null ? _btnMinuses[i].GetComponent<Image>() : null, "ui01/mixology/ui_mixology_btn_02");
+                if (_imgShelves[i] != null)
+                {
+                    _imgShelves[i].color = Color.white;
+                    _imgShelves[i].preserveAspect = true;
+                }
+            }
+
+            UiArtInjector.ApplyButtonArt(_btnClose != null ? _btnClose.GetComponent<Image>() : null, "ui01/common/ui_common_btn_close");
         }
 
         protected override void OnDestroy()
@@ -211,18 +228,10 @@ namespace GameLogic
                     _textCounts[i].text = planned.ToString();
                 }
 
-                // 锁定期（营业中）全部只读；✓ 按钮换灰色态。
+                // 锁定期（营业中）全部只读。
                 SetInteractable(_btnPluses[i], !locked);
                 SetInteractable(_btnMinuses[i], !locked);
-                SetInteractable(_btnShelves[i], !locked);
-                if (_imgShelves[i] != null)
-                {
-                    var sprite = locked ? _shelfOffSprite : _shelfOnSprite;
-                    if (sprite != null)
-                    {
-                        _imgShelves[i].sprite = sprite;
-                    }
-                }
+                ApplyShelfCheck(i, onShelf, locked);
             }
 
             // 页脚：当日成本预估 = Σ 上架酒 份数 × 单份成本（售价 × 60% 取整，经营案口径）。
@@ -241,6 +250,31 @@ namespace GameLogic
                 _textFooter.text = locked
                     ? $"当日成本预估：{estimate}G　（营业中，酒单已锁定）"
                     : $"当日成本预估：{estimate}G";
+            }
+        }
+
+        /// <summary>
+        /// 刷新上架勾选框：勾选态贴图由上架状态决定（绿底勾 = 已上架，灰底勾 = 未上架），
+        /// 营业锁定只置灰不可点、不改勾选态——锁定期间仍要如实显示当前是否在架。
+        /// </summary>
+        private void ApplyShelfCheck(int slot, bool onShelf, bool locked)
+        {
+            var button = _btnShelves[slot];
+            SetInteractable(button, !locked);
+            if (button != null)
+            {
+                // targetGraphic 优先：勾选框贴图挂在按钮本体上，取不到再回退绑定到的 Image。
+                var image = button.targetGraphic as Image ?? _imgShelves[slot];
+                if (image != null)
+                {
+                    image.color = Color.white;
+                    image.preserveAspect = true;
+                    var sprite = onShelf ? _shelfCheckedSprite : _shelfUncheckedSprite;
+                    if (sprite != null)
+                    {
+                        image.sprite = sprite;
+                    }
+                }
             }
         }
 

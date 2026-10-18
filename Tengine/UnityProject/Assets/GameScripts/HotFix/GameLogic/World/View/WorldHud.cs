@@ -142,6 +142,12 @@ namespace GameLogic
             _panel = Panel.KitchenChoice;
         }
 
+        /// <summary>直接开调酒面板（厨房选择的二级；视觉验收截图等不经点击的路径用）。</summary>
+        public void OpenBrewPanel()
+        {
+            _panel = Panel.Brew;
+        }
+
         /// <summary>点悬赏栏建筑：开悬赏板，并把世界停住（悬赏案 2.1 的「静止」侧由本文件做）。</summary>
         public void OpenBoardPanel()
         {
@@ -274,15 +280,15 @@ namespace GameLogic
         private void DrawKitchenChoice()
         {
             var rect = CenterRect(220, 90);
-            BeginPanel(rect, "厨房");
-            if (GUI.Button(new Rect(20, 30, 80, 40), "酒单"))
+            BeginPanel(rect, "厨房", "common/ui_common_frame_01");
+            if (GUI.Button(new Rect(20, 30, 80, 40), "酒单", ReadableButton))
             {
                 // 经营案：酒单为独立窗口（uGUI DrinkMenuUI），营业中也可打开查看（锁定只读）。
                 _panel = Panel.None;
                 GameModule.UI.ShowUIAsync<DrinkMenuUI>();
             }
 
-            if (GUI.Button(new Rect(120, 30, 80, 40), "调酒"))
+            if (GUI.Button(new Rect(120, 30, 80, 40), "调酒", ReadableButton))
             {
                 _panel = Panel.Brew;
             }
@@ -293,16 +299,16 @@ namespace GameLogic
         private void DrawBrew(WorldSimulation sim)
         {
             var rect = CenterRect(560, 360);
-            BeginPanel(rect, "调酒");
-            GUILayout.BeginArea(new Rect(10, 24, rect.width - 20, rect.height - 34));
+            BeginPanel(rect, "调酒", "common/ui_common_frame_02");
+            GUILayout.BeginArea(new Rect(10, 30, rect.width - 20, rect.height - 40));
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("返回", GUILayout.Width(60)))
+            if (GUILayout.Button("返回", ReadableButton, GUILayout.Width(60)))
             {
                 _panel = Panel.KitchenChoice;
             }
 
-            if (GUILayout.Button("关闭", GUILayout.Width(60)))
+            if (GUILayout.Button("关闭", ReadableButton, GUILayout.Width(60)))
             {
                 ClosePanels();
             }
@@ -319,7 +325,7 @@ namespace GameLogic
 
             bool wasEnabled = GUI.enabled;
             GUI.enabled = wasEnabled && iceCount > 0;
-            if (GUILayout.Button($"加冰：{(_ice ? "开" : "关")}（库存 {iceCount}）"))
+            if (GUILayout.Button($"加冰：{(_ice ? "开" : "关")}（库存 {iceCount}）", ReadableButton))
             {
                 _ice = !_ice;
             }
@@ -328,7 +334,7 @@ namespace GameLogic
 
             bool canBrew = bases.Count > 0 && ings.Count > 0;
             GUI.enabled = wasEnabled && canBrew; // 三槽都有内容才点亮（调酒案）。
-            if (GUILayout.Button("调酒"))
+            if (GUILayout.Button("调酒", ReadableButton))
             {
                 var result = sim.Brewing.Brew(sim.Warehouse, bases[_baseIdx].Id, ings[_ingAIdx].Id, ings[_ingBIdx].Id, _ice);
                 switch (result.Outcome)
@@ -351,10 +357,10 @@ namespace GameLogic
 
             if (!string.IsNullOrEmpty(_brewMessage))
             {
-                GUILayout.Label(_brewMessage);
+                GUILayout.Label(_brewMessage, InkLabel);
             }
 
-            GUILayout.Label("已解锁酒单：" + BuildWineListText(sim));
+            GUILayout.Label("已解锁酒单：" + BuildWineListText(sim), InkLabel);
             GUILayout.EndArea();
             EndPanel();
         }
@@ -376,16 +382,16 @@ namespace GameLogic
         private void DrawSelector(string label, List<ItemDef> options, ref int index)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label(label, GUILayout.Width(50));
+            GUILayout.Label(label, InkLabel, GUILayout.Width(50));
             if (options.Count == 0)
             {
-                GUILayout.Label("（仓库无存货）");
+                GUILayout.Label("（仓库无存货）", InkLabel);
             }
             else
             {
                 ClampIndex(options.Count, ref index);
                 var def = options[index];
-                if (GUILayout.Button($"{def.Name} ×{Sim.Warehouse.Count(def.Id)}", GUILayout.Width(160)))
+                if (GUILayout.Button($"{def.Name} ×{Sim.Warehouse.Count(def.Id)}", ReadableButton, GUILayout.Width(160)))
                 {
                     index = (index + 1) % options.Count;
                 }
@@ -595,23 +601,118 @@ namespace GameLogic
             return new Rect(Screen.width / 2f - width / 2f, Screen.height / 2f - height / 2f, width, height);
         }
 
+        private static GUIStyle s_panelTitle;
+        private static GUIStyle s_readableButton;
+
+        /// <summary>面板标题样式：居中墨色（线性空间默认皮肤文字发灰，在羊皮纸框上对比不足）。</summary>
+        private static GUIStyle PanelTitle
+        {
+            get
+            {
+                if (s_panelTitle == null)
+                {
+                    s_panelTitle = new GUIStyle(GUI.skin.label)
+                    {
+                        fontSize = 14,
+                        fontStyle = FontStyle.Bold,
+                        alignment = TextAnchor.MiddleCenter,
+                    };
+                    s_panelTitle.normal.textColor = new Color(0.24f, 0.18f, 0.11f);
+                }
+
+                return s_panelTitle;
+            }
+        }
+
+        /// <summary>可读按钮：透明底 + 墨色文字（默认按钮贴图在线性空间呈深灰块）。点击区域不受影响。</summary>
+        private static GUIStyle ReadableButton
+        {
+            get
+            {
+                if (s_readableButton == null)
+                {
+                    s_readableButton = new GUIStyle(GUI.skin.button)
+                    {
+                        fontSize = 14,
+                        fontStyle = FontStyle.Bold,
+                        alignment = TextAnchor.MiddleCenter,
+                    };
+                    var ink = new Color(0.24f, 0.18f, 0.11f);
+                    s_readableButton.normal.textColor = ink;
+                    s_readableButton.hover.textColor = ink;
+                    s_readableButton.active.textColor = ink;
+                    // background=null 对 GUI.Button 不生效（仍画默认深色块），改用程序化羊皮纸底。
+                    s_readableButton.normal.background = ParchmentTex;
+                    s_readableButton.hover.background = ParchmentTex;
+                    s_readableButton.active.background = ParchmentTex;
+                }
+
+                return s_readableButton;
+            }
+        }
+
+        private static GUIStyle s_inkLabel;
+        private static Texture2D s_parchmentTex;
+
+        /// <summary>面板正文标签：墨色（默认 label 在线性空间呈浅灰，羊皮纸上不可读）。</summary>
+        private static GUIStyle InkLabel
+        {
+            get
+            {
+                if (s_inkLabel == null)
+                {
+                    s_inkLabel = new GUIStyle(GUI.skin.label);
+                    s_inkLabel.normal.textColor = new Color(0.24f, 0.18f, 0.11f);
+                }
+
+                return s_inkLabel;
+            }
+        }
+
+        /// <summary>程序化羊皮纸底（2×2 纯色），供 IMGUI 按钮当浅色背景用。</summary>
+        private static Texture2D ParchmentTex
+        {
+            get
+            {
+                if (s_parchmentTex == null)
+                {
+                    s_parchmentTex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                    var c = new Color(0.97f, 0.94f, 0.85f, 1f);
+                    s_parchmentTex.SetPixels(new[] { c, c, c, c });
+                    s_parchmentTex.Apply();
+                }
+
+                return s_parchmentTex;
+            }
+        }
+
         /// <summary>
         /// 画一块 HUD 面板：先按 <paramref name="framePath"/> 铺底框贴图（可空，缺贴图时 HudSkin 回退 GUI.Box），
         /// 再叠标题框，最后把矩形登记进防穿透列表。
         /// </summary>
         private void BeginPanel(Rect rect, string title, string framePath = null)
         {
-            if (!string.IsNullOrEmpty(framePath))
+            if (!string.IsNullOrEmpty(framePath) && HudSkin.Tex(framePath) != null)
             {
                 HudSkin.DrawFrame(rect, framePath);
+                // 有框贴图时不再盖默认深色 Box（线性空间下发黑、内容不可读），标题改墨色 label。
+                GUI.Label(new Rect(rect.x, rect.y + 2f, rect.width, 24f), title, PanelTitle);
+            }
+            else
+            {
+                GUI.Box(rect, title);
             }
 
-            GUI.Box(rect, title);
             _panelRects.Add(rect);
+            // 内容坐标统一为面板局部：BeginPanel 后子控件用 (0,0)=面板左上角 的局部坐标。
+            // 修复前 DrawKitchenChoice / DrawBrew 的 BeginArea/GUI.Button 用的是屏幕绝对坐标，
+            // 面板框居中、内容却渲染在屏幕左上角（错位）。
+            GUILayout.BeginArea(rect);
         }
 
         private void EndPanel()
         {
+            GUILayout.EndArea();
         }
     }
 }

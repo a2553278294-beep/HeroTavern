@@ -117,6 +117,35 @@ namespace GameLogic.Tests
             GameModule.UI.CloseUI<TradeUI>();
 
             yield return new WaitForSecondsRealtime(0.5f);
+
+            // ---- 悬赏板（OnGUI 面板；打开即暂停世界，关闭恢复） ----
+            boot.Hud.OpenBoardPanel();
+            yield return new WaitForSecondsRealtime(0.5f);
+            yield return Capture("06_bounty_board");
+            boot.Hud.ClosePanels();
+
+            // ---- 厨房选择（OnGUI 小面板） ----
+            boot.Hud.OpenKitchenChoice();
+            yield return new WaitForSecondsRealtime(0.3f);
+            yield return Capture("07_kitchen_choice");
+
+            // ---- 调酒面板（厨房二级；公开入口直接开） ----
+            boot.Hud.OpenBrewPanel();
+            yield return new WaitForSecondsRealtime(0.3f);
+            yield return Capture("08_brew_panel");
+            boot.Hud.ClosePanels();
+
+            // ---- NPC 交互气泡（交流/交易/查看三按钮） ----
+            MainHudUI.Current.ShowBubble(npc);
+            yield return new WaitForSecondsRealtime(0.5f);
+            yield return Capture("09_interact_bubble");
+            MainHudUI.Current.HideBubble();
+
+            // ---- 结算分栏：直推时间跨过 0:00（一档 1 游戏分钟/真实秒，Tick(秒) 即分钟数） ----
+            var sim2 = GameModule.World.Sim;
+            sim2.Tick(960f); // 从开局 9:00 推过午夜，触发 SettlementReady
+            yield return new WaitForSecondsRealtime(0.3f); // 结算分栏 5 秒自动收起，窗口内立刻拍
+            yield return Capture("10_settlement");
         }
 
         /// <summary>诊断：uGUI 窗口不可见时输出 UIRoot/窗口 Canvas 状态到控制台。</summary>

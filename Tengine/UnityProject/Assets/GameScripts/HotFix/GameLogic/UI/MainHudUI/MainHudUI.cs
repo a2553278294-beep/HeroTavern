@@ -33,6 +33,7 @@ namespace GameLogic
         private Transform _settlementPanel;
         private TextMeshProUGUI _textSettleTitle;
         private TextMeshProUGUI _textSettleDay;
+        private TextMeshProUGUI _textSettleNote; // 页脚：破产红字 / 默认结出提示（经营案结算分栏方案A）
         private readonly TextMeshProUGUI[] _settleLabels = new TextMeshProUGUI[4];
         private readonly TextMeshProUGUI[] _settleValues = new TextMeshProUGUI[4];
         private RectTransform _bubble;
@@ -47,6 +48,24 @@ namespace GameLogic
         private float _reportUntil = -1f;
         private bool _settlementPinned;
         private CharacterData _bubbleTarget;
+
+        // ===== 结算分栏配色/文案常量（经营案结算分栏方案A）=====
+        // 说明：结算分栏标题沿用 prefab m_tmpSettleTitle 默认文案「今日累计」，口径=需求案
+        // 「展示刚结束的这一营业日」，故此处不覆盖标题，只固定页脚与数值行的配色。
+        /// <summary>页脚默认文案，与 prefab MainHudUI.prefab 中 m_tmpSettleNote 的 m_text 逐字一致。</summary>
+        private const string SettleNoteDefaultText = "每天 0:00 自动结出「本日流水」";
+
+        /// <summary>页脚默认配色，对应 prefab m_tmpSettleNote 的 m_fontColor（154,148,112）/255。</summary>
+        private static readonly Color SettleNoteDefaultColor = new Color(0.6039216f, 0.5803922f, 0.4392157f, 1f);
+
+        /// <summary>收益绿（正数行 / 收入行）。</summary>
+        private static readonly Color SettlePositiveColor = new Color(0.62f, 0.70f, 0.29f);
+
+        /// <summary>支出红（负数行 / 破产红字）。</summary>
+        private static readonly Color SettleNegativeColor = new Color(0.70f, 0.35f, 0.29f);
+
+        /// <summary>中性色：杯数行（文本、非金额，不参与正负着色），对齐 prefab 标签色（138,130,89）/255。</summary>
+        private static readonly Color SettleNeutralColor = new Color(0.5411765f, 0.50980395f, 0.34901962f, 1f);
 
         // 图标双态贴图（运行时加载，路径不带扩展名）。
         private Sprite _iconPauseOn, _iconPauseOff;
@@ -78,6 +97,8 @@ namespace GameLogic
             _settlementPanel = FindChild("m_goSettlementPanel");
             _textSettleTitle = FindChildComponent<TextMeshProUGUI>("m_goSettlementPanel/m_tmpSettleTitle");
             _textSettleDay = FindChildComponent<TextMeshProUGUI>("m_goSettlementPanel/m_tmpSettleDay");
+            // 页脚（prefab 已有节点，此前未在代码绑定）：余额不足时显示红字，否则还原默认结出提示。
+            _textSettleNote = FindChildComponent<TextMeshProUGUI>("m_goSettlementPanel/m_tmpSettleNote");
             for (int i = 0; i < 4; i++)
             {
                 _settleLabels[i] = FindChildComponent<TextMeshProUGUI>($"m_goSettlementPanel/m_tmpSettleLabel{i}");
@@ -128,6 +149,84 @@ namespace GameLogic
 
         #endregion
 
+        private static Sprite _needleSprite;
+
+        /// <summary>气泡按钮规整：无底图时铺浅色底；文字子节点拉满按钮矩形并居中（修烘焙错位）。</summary>
+        private static void FixBubbleButton(Button btn)
+        {
+            if (btn == null)
+            {
+                return;
+            }
+
+            var img = btn.GetComponent<Image>();
+            if (img != null && img.sprite == null)
+            {
+                img.color = new Color(0.99f, 0.97f, 0.90f, 0.96f);
+            }
+
+            var tmp = btn.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (tmp == null)
+            {
+                return;
+            }
+
+            var rt = tmp.rectTransform;
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.color = new Color(0.24f, 0.18f, 0.11f);
+            tmp.enableAutoSizing = true;
+            tmp.fontSizeMin = 16f;
+            tmp.fontSizeMax = 30f;
+        }
+
+        /// <summary>程序化钟摆针：12×58 金色圆头短针（摆轴在顶端），替代烘焙误配的整张钟面贴图。</summary>
+        private static Sprite NeedleSprite()
+        {
+            if (_needleSprite != null)
+            {
+                return _needleSprite;
+            }
+
+            const int w = 12, h = 58;
+            var tex = new Texture2D(w, h, TextureFormat.RGBA32, false)
+            {
+                filterMode = FilterMode.Bilinear,
+                wrapMode = TextureWrapMode.Clamp,
+            };
+            var gold = new Color(0.72f, 0.55f, 0.22f);
+            var edge = new Color(0.48f, 0.34f, 0.12f);
+            var clear = new Color(0f, 0f, 0f, 0f);
+            for (int y = 0; y < h; y++)
+            {
+                for (int x = 0; x < w; x++)
+                {
+                    float dx = x - (w - 1) / 2f;
+                    Color c = clear;
+                    if (y >= 8 && Mathf.Abs(dx) <= 2f)
+                    {
+                        c = Mathf.Abs(dx) >= 1.5f ? edge : gold;
+                    }
+
+                    float dy = y - 7f;
+                    float dist = Mathf.Sqrt(dx * dx + dy * dy);
+                    if (dist <= 6f)
+                    {
+                        c = dist >= 4.5f ? edge : gold;
+                    }
+
+                    tex.SetPixel(x, y, c);
+                }
+            }
+
+            tex.Apply();
+            _needleSprite = Sprite.Create(tex, new Rect(0f, 0f, w, h), new Vector2(0.5f, 1f));
+            return _needleSprite;
+        }
+
         /// <summary>html-to-ugui 设计分辨率：UIWindow 据此对窗口根做居中等比适配（宿主画布为 1920×1080 横屏参考，宽高各半匹配）。</summary>
         protected override Vector2 DesignResolution => new Vector2(1960f, 1080f);
 
@@ -142,6 +241,17 @@ namespace GameLogic
                 _pendulum.pivot = new Vector2(0.5f, 1f);
                 _pendulum.anchorMin = _pendulum.anchorMax = new Vector2(0f, 1f);
                 _pendulum.anchoredPosition = new Vector2(960f, -18f);
+
+                // 烘焙误把整张钟面贴图塞进指针节点（72×234 拉伸成贯穿顶栏的长条，视觉错位）；
+                // 本批没有独立指针贴图，运行时生成一根短金针替代，长度收进表盘半径内。
+                _pendulum.sizeDelta = new Vector2(12f, 58f);
+                var pendulumImg = _pendulum.GetComponent<Image>();
+                if (pendulumImg != null)
+                {
+                    pendulumImg.sprite = NeedleSprite();
+                    pendulumImg.preserveAspect = false;
+                    pendulumImg.color = Color.white;
+                }
             }
 
             // 气泡：pivot 底部中心，便于贴 NPC 头顶定位。
@@ -150,6 +260,11 @@ namespace GameLogic
                 _bubble.pivot = new Vector2(0.5f, 0f);
                 _bubble.gameObject.SetActive(false);
             }
+
+            // 交互气泡按钮：烘焙 alpha=0 无底图、文字子节点与按钮错位——统一铺浅色底、文字拉满居中。
+            FixBubbleButton(_btnTalk);
+            FixBubbleButton(_btnTrade);
+            FixBubbleButton(_btnView);
 
             if (_settlementPanel != null)
             {
@@ -407,6 +522,13 @@ namespace GameLogic
             }
         }
 
+        /// <summary>
+        /// 结算分栏四行填充（经营案结算分栏「方案A」，口径=需求案「展示刚结束的这一营业日」）：
+        /// 第 1 行 收入 = 酒水付费 + 悬赏奖励 + 发布费返还（同属当日入账，故合并为一行）；
+        /// 第 2/3 行 支出拆成营业成本、酒保工资两行（不再合并）；
+        /// 第 4 行 杯数 = 售出 N 杯 / 未售 M 杯（文本行，中性色）；
+        /// 扣费后余额 &lt; 0（游戏结束）时在页脚追加红字，详见 <see cref="ApplySettleNote"/>。
+        /// </summary>
         private void FillSettlement(SettlementReport report)
         {
             if (_textSettleDay != null)
@@ -414,12 +536,46 @@ namespace GameLogic
                 _textSettleDay.text = $"第 {report.DayOverall} 天";
             }
 
-            SetSettleRow(0, "累计营收·酒水付费", report.Income);
-            SetSettleRow(1, "悬赏奖励", report.BountyReward);
-            SetSettleRow(2, "累计支出·工资/成本", -(report.Wage + report.Cost));
-            SetSettleRow(3, "发布费返还", report.BountyRefund);
+            // 标题保持 prefab 默认「今日累计」（prefab m_tmpSettleTitle 的 m_text 已核实为该文案），
+            // 与「展示刚结束的这一营业日」口径一致，无需在代码里改写。
+
+            // 第 1 行 收入：酒水付费 + 悬赏奖励 + 发布费返还（经营案：发布费返还同属入账）。
+            SetSettleRow(0, "收入", report.Income + report.BountyReward + report.BountyRefund);
+            // 第 2、3 行 支出：营业成本、酒保工资各占一行；支出记负值以沿用正绿负红着色。
+            SetSettleRow(1, "成本", -report.Cost);
+            SetSettleRow(2, "酒保工资", -report.Wage);
+            // 第 4 行 杯数：文本行，不参与正负着色（走 string 重载）。
+            SetSettleRow(3, "杯数", $"售出 {report.SoldCups} / 未售 {report.UnsoldCups}");
+
+            // 页脚：破产红字 / 默认结出提示。
+            ApplySettleNote(report);
         }
 
+        /// <summary>
+        /// 页脚文案（经营案结算分栏方案A）：<paramref name="report"/> 为游戏结束
+        /// （扣费后余额 &lt; 0）时显示红字「余额不足，游戏结束」；否则显式还原 prefab 默认
+        /// 文案与默认色，避免点金币框回看上一份报告时残留红字。
+        /// </summary>
+        private void ApplySettleNote(SettlementReport report)
+        {
+            if (_textSettleNote == null)
+            {
+                return;
+            }
+
+            if (report != null && report.IsGameOver)
+            {
+                _textSettleNote.text = "余额不足，游戏结束";
+                _textSettleNote.color = SettleNegativeColor;
+            }
+            else
+            {
+                _textSettleNote.text = SettleNoteDefaultText;
+                _textSettleNote.color = SettleNoteDefaultColor;
+            }
+        }
+
+        /// <summary>数值行：正数显示 "+N" 并用收益绿、负数用支出红（结算分栏既有着色逻辑不变）。</summary>
         private void SetSettleRow(int index, string label, long value)
         {
             if (_settleLabels[index] != null)
@@ -430,7 +586,22 @@ namespace GameLogic
             if (_settleValues[index] != null)
             {
                 _settleValues[index].text = (value >= 0 ? "+" : "") + value;
-                _settleValues[index].color = value >= 0 ? new Color(0.62f, 0.70f, 0.29f) : new Color(0.70f, 0.35f, 0.29f);
+                _settleValues[index].color = value >= 0 ? SettlePositiveColor : SettleNegativeColor;
+            }
+        }
+
+        /// <summary>文本行（杯数行）：值不是金额，固定用中性色，不做正负着色。</summary>
+        private void SetSettleRow(int index, string label, string value)
+        {
+            if (_settleLabels[index] != null)
+            {
+                _settleLabels[index].text = label;
+            }
+
+            if (_settleValues[index] != null)
+            {
+                _settleValues[index].text = value;
+                _settleValues[index].color = SettleNeutralColor;
             }
         }
 

@@ -247,7 +247,8 @@ namespace GameLogic.World
             return _monstersArray;
         }
 
-        /// <summary>按 id 取怪物原始行（MonsterDef 承载不到的 Location / Description 在这里）。</summary>
+        /// <summary>按 id 取怪物原始行（MonsterDef 承载不到的 Description / ResourceName / GroupResourceName 在这里；
+        /// GroupCount 已由 <see cref="MonsterDef.GroupCount"/> 承载，不再需要从原始行读）。</summary>
         public ConfigMonsterRow GetMonsterRow(int id)
         {
             EnsureBuilt();
@@ -256,11 +257,10 @@ namespace GameLogic.World
             return _monsterRows.TryGetValue(id, out row) ? row : null;
         }
 
-        /// <summary>怪物出现场地号（配置缺失返回 0）。</summary>
+        /// <summary>怪物出现场地号。策划表已删除 location 列（怪物按阶段迁入城镇，不再按场地号配置），保留接口恒返回 0。</summary>
         public int GetMonsterLocation(int id)
         {
-            ConfigMonsterRow row = GetMonsterRow(id);
-            return row == null ? 0 : row.Location;
+            return 0;
         }
 
         /// <summary>姓名词表（姓 / 名）。未配置时返回两个空数组，调用方回退占位词表。</summary>
@@ -740,7 +740,9 @@ namespace GameLogic.World
 
                     // MonsterDef 承载不到 Location / Description，原始行另存一份供 M3/M4 查询。
                     _monsterRows[row.Id] = row;
-                    _monsters.Add(new MonsterDef(row.Id, row.Name, row.Stage, row.Weight, row.Hp, row.Str, row.Intelligence, row.Def));
+                    // GroupCount 来自 TbMonster group_count 列（每组数量）：缺失 / 非法（<1）按 1，即退化为「每天刷 1 只」。
+                    _monsters.Add(new MonsterDef(row.Id, row.Name, row.Stage, row.Weight, row.Hp, row.Str, row.Intelligence, row.Def,
+                        row.GroupCount < 1 ? 1 : row.GroupCount));
                 }
 
                 _monstersArray = _monsters.ToArray();

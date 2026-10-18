@@ -223,12 +223,13 @@ namespace GameLogic.World
             Monsters = new MonsterSystem(_random);
             Monsters.Spawned += m => MonsterSpawned?.Invoke(m);
 
-            // M4：情报系统。每只新怪物刷新时生成 3 条线索（位置 / 形象 / 属性各一），
+            // M4：情报系统。每<strong>组</strong>新怪物刷新时生成 3 条线索（位置 / 形象 / 属性各一），
             // 优先交给当日在城镇图的存活吟游诗人（待售清单，M9 补充货源）；没有则暂存系统池 + 占位直给玩家一条位置情报。
             Intel = new IntelSystem();
             Intel.IntelObtained += r => IntelObtained?.Invoke(r);
             Intel.SetCurrentDay(Time.DayOverall);
-            Monsters.Spawned += OnMonsterSpawnedIntel;
+            // 订阅 GroupSpawned（一组同种怪物只出一套情报），不订阅 Spawned，避免按组内数量翻倍。
+            Monsters.GroupSpawned += OnMonsterSpawnedIntel;
 
             // M3：安全分与联动订阅（行为案「安全分每失去 1 点，精神 -1」）。
             Safety = new TownSafety();
@@ -240,14 +241,14 @@ namespace GameLogic.World
             // ① 创建 + 读配置（配置缺失时悬赏侧内部回退占位示例，逻辑层始终可跑）；
             // ② 注入钱包与情报系统（发布四校验依赖余额与线索持有）；
             // ③ 怪物被击杀 → 回写悬赏完成进度（悬赏案 3.3-4；killer 可为 null，不影响按怪物名回写）；
-            // ④ 怪物刷新 → 点亮 target 匹配的悬赏条目（悬赏案 3.1-1）；
+            // ④ 怪物刷新 → 点亮 target 匹配的悬赏条目（悬赏案 3.1-1）；按 GroupSpawned 整组一次，不按只翻倍；
             // ⑤ 注入 Tavern：0:00 由 Tavern 内部<b>第一顺位</b>调 Bounty.OnDaySettled，
             //    赏金 / 物资 / 安定度 / 失败返还都在营业成本与酒保工资之前入账，故都参与当次余额 &lt; 0 判定。
             Bounty = new BountySystem();
             Bounty.LoadFromConfig();
             Bounty.Attach(Wallet, Intel);
             Monsters.MonsterKilled += (m, killer) => Bounty.ReportMonsterKilled(m.Def.Name);
-            Monsters.Spawned += OnMonsterSpawnedBountyReveal;
+            Monsters.GroupSpawned += OnMonsterSpawnedBountyReveal;
             Tavern.AttachBounty(Bounty, Warehouse, Safety);
 
             // M9：职业服务接线（master-plan M9「修改」）。装配顺序固定：
@@ -366,7 +367,7 @@ namespace GameLogic.World
                 Population.ReplenishOnNewDay(result.DayOverall, WorldMap.TownCenter);
                 ScatterStackedCharacters(); // 补员出生在城镇中心，散开
                 UnlockSpawnAreasByPoolStage(result.DayOverall); // M3：池阶段提升先解锁场地，再刷新，保证新场地当天即可出怪
-                // M4：情报 DayOverall 口径 = 刷新日：先按 DailySpawn 的入参设置，再让 Spawned 处理器生成线索。
+                // M4：情报 DayOverall 口径 = 刷新日：先按 DailySpawn 的入参设置，再让 GroupSpawned 处理器生成线索。
                 Intel.SetCurrentDay(result.DayOverall);
                 Monsters.DailySpawn(Map, result.DayOverall);
                 Monsters.OnDaySettled();
@@ -619,6 +620,7 @@ namespace GameLogic.World
         ///   此处直给只是保证悬赏（M5）发布不会因「无情报可耗」被永久卡死。
         ///   位置线索不入池，避免同一编号同时存在于玩家与系统池两侧。
         /// </summary>
+        /// <remarks>订阅 <see cref="MonsterSystem.GroupSpawned"/>：同种怪物的整组只生成一套 3 条情报，不按组内数量翻倍。</remarks>
         private void OnMonsterSpawnedIntel(Monster monster)
         {
             if (Intel == null || monster == null)
@@ -654,6 +656,7 @@ namespace GameLogic.World
         /// 等价于遍历 <see cref="BountySystem.Entries"/>、按 <c>TargetMonsterName == 怪物名</c> 逐条 <c>Reveal(id)</c>，
         /// 由悬赏侧实现（<see cref="BountySystem.RevealByTarget"/>）以复用其状态刷新；已点亮条目会被跳过，重复刷新不重复点亮。
         /// </summary>
+        /// <remarks>订阅 <see cref="MonsterSystem.GroupSpawned"/>：整组只点亮一次（<see cref="BountySystem.RevealByTarget"/> 本身幂等）。</remarks>
         private void OnMonsterSpawnedBountyReveal(Monster monster)
         {
             if (Bounty == null || monster == null || monster.Def == null)

@@ -17,6 +17,8 @@ namespace GameLogic
     /// 交互（沿用 OnGUI 白模的「点击代替拖拽」口径）：左键点物品 = 整叠摆出/撤出；右键点可拆分物品 = 拆分数量弹窗；
     /// 悬停 0.5s 出详情浮层（交易2）。好感不足（<see cref="TradeSession.CanBuy"/> 为 false）的 NPC 物品整格置灰不可点。
     ///
+    /// 物品图标：<see cref="ItemIconLibrary"/> 按 Item 表 icon 列加载 ui01/icons，运行时注入槽位
+    /// （<see cref="UiArtInjector"/>，不改烘焙 prefab）；有图标的格子不叠名称（对照 ui交易1.png），无图标物品保持文字名。
     /// 交易不夺走走时（经营案「暂停与否由玩家决定」）；世界点击由 EventSystem 射线拦截，面板区不穿透。
     /// 拆分实现说明：OnGUI 版把拆出物品搬进独立批次仓库，本版直接以「摆出数量」表达（语义等价，物品不出仓库，
     /// 关窗无需并回批次），规则 3.5.2 的「部分摆出」能力不变。
@@ -43,6 +45,7 @@ namespace GameLogic
         private TextMeshProUGUI _textRightValue;
         private TextMeshProUGUI _textFavor;
         private TextMeshProUGUI _textFavorDelta;
+        private Transform _favorDeltaBox;
         private TextMeshProUGUI _textResult;
         private Button _btnConfirm;
         private Button _btnClose;
@@ -63,6 +66,10 @@ namespace GameLogic
         private readonly TextMeshProUGUI[] _nCounts = new TextMeshProUGUI[GridSlotCount];
         private readonly TextMeshProUGUI[] _poCounts = new TextMeshProUGUI[OfferSlotCount];
         private readonly TextMeshProUGUI[] _noCounts = new TextMeshProUGUI[OfferSlotCount];
+        private readonly Image[] _pIcons = new Image[GridSlotCount];
+        private readonly Image[] _nIcons = new Image[GridSlotCount];
+        private readonly Image[] _poIcons = new Image[OfferSlotCount];
+        private readonly Image[] _noIcons = new Image[OfferSlotCount];
 
         // 详情浮层
         private RectTransform _tooltip;
@@ -119,18 +126,19 @@ namespace GameLogic
             _textRightValue = FindChildComponent<TextMeshProUGUI>("m_goPanel/m_goRightStrip/m_tmpRightValue");
             _textFavor = FindChildComponent<TextMeshProUGUI>("m_goPanel/m_goRightStrip/m_tmpFavor");
             _textFavorDelta = FindChildComponent<TextMeshProUGUI>("m_goPanel/m_goRightStrip/m_goFavorDeltaBox/m_tmpFavorDelta");
+            _favorDeltaBox = FindChild("m_goPanel/m_goRightStrip/m_goFavorDeltaBox");
             _textResult = FindChildComponent<TextMeshProUGUI>("m_goPanel/m_tmpResult");
             _btnConfirm = FindChildComponent<Button>("m_goPanel/m_btnConfirm");
             _btnClose = FindChildComponent<Button>("m_btnClose");
 
             BindSlotGrid("m_goPanel/m_btnPSlot", "m_goPanel/m_imgPSlotFrame", "m_goPanel/m_tmpPSlotName", "m_goPanel/m_tmpPSlotCount",
-                GridSlotCount, _pSlots, _pFrames, _pNames, _pCounts, i => OnClickGridSlot(i, true), (i, right) => OnGridSlotClick(i, true, right));
+                GridSlotCount, _pSlots, _pFrames, _pNames, _pCounts, _pIcons, i => OnClickGridSlot(i, true), (i, right) => OnGridSlotClick(i, true, right));
             BindSlotGrid("m_goPanel/m_btnNSlot", "m_goPanel/m_imgNSlotFrame", "m_goPanel/m_tmpNSlotName", "m_goPanel/m_tmpNSlotCount",
-                GridSlotCount, _nSlots, _nFrames, _nNames, _nCounts, i => OnClickGridSlot(i, false), (i, right) => OnGridSlotClick(i, false, right));
+                GridSlotCount, _nSlots, _nFrames, _nNames, _nCounts, _nIcons, i => OnClickGridSlot(i, false), (i, right) => OnGridSlotClick(i, false, right));
             BindSlotGrid("m_goPanel/m_goLeftStrip/m_btnPoSlot", "m_goPanel/m_goLeftStrip/m_imgPoSlotFrame", "m_goPanel/m_goLeftStrip/m_tmpPoSlotName", "m_goPanel/m_goLeftStrip/m_tmpPoSlotCount",
-                OfferSlotCount, _poSlots, _poFrames, _poNames, _poCounts, i => OnClickOfferSlot(i, true), null);
+                OfferSlotCount, _poSlots, _poFrames, _poNames, _poCounts, _poIcons, i => OnClickOfferSlot(i, true), null);
             BindSlotGrid("m_goPanel/m_goRightStrip/m_btnNoSlot", "m_goPanel/m_goRightStrip/m_imgNoSlotFrame", "m_goPanel/m_goRightStrip/m_tmpNoSlotName", "m_goPanel/m_goRightStrip/m_tmpNoSlotCount",
-                OfferSlotCount, _noSlots, _noFrames, _noNames, _noCounts, i => OnClickOfferSlot(i, false), null);
+                OfferSlotCount, _noSlots, _noFrames, _noNames, _noCounts, _noIcons, i => OnClickOfferSlot(i, false), null);
 
             _tooltip = FindChildComponent<RectTransform>("m_goTooltip");
             _textTipName = FindChildComponent<TextMeshProUGUI>("m_goTooltip/m_tmpTipName");
@@ -150,6 +158,17 @@ namespace GameLogic
             {
                 _btnConfirm.onClick.AddListener(ExecuteTrade);
             }
+
+            // 烘焙按钮 alpha=0/无贴图（确认交易整体隐形）：运行时补美术与文案；关闭按钮补通用关闭图。
+            UiArtInjector.ApplyButtonArt(_btnConfirm != null ? _btnConfirm.GetComponent<Image>() : null, "ui01/shop/ui_shop_btn_01");
+            var confirmText = _btnConfirm != null ? _btnConfirm.GetComponentInChildren<TextMeshProUGUI>(true) : null;
+            if (confirmText != null)
+            {
+                confirmText.text = "确认交易";
+                confirmText.color = new Color(0.24f, 0.18f, 0.11f);
+            }
+
+            UiArtInjector.ApplyButtonArt(_btnClose != null ? _btnClose.GetComponent<Image>() : null, "ui01/common/ui_common_btn_close");
 
             if (_btnClose != null)
             {
@@ -173,7 +192,7 @@ namespace GameLogic
         }
 
         private void BindSlotGrid(string btnPath, string framePath, string namePath, string countPath,
-            int count, Button[] buttons, Image[] frames, TextMeshProUGUI[] names, TextMeshProUGUI[] counts,
+            int count, Button[] buttons, Image[] frames, TextMeshProUGUI[] names, TextMeshProUGUI[] counts, Image[] icons,
             System.Action<int> onLeft, System.Action<int, bool> onClick)
         {
             for (int i = 0; i < count; i++)
@@ -182,6 +201,10 @@ namespace GameLogic
                 frames[i] = FindChildComponent<Image>($"{framePath}{i}");
                 names[i] = FindChildComponent<TextMeshProUGUI>($"{namePath}{i}");
                 counts[i] = FindChildComponent<TextMeshProUGUI>($"{countPath}{i}");
+                // 物品图标注入槽位按钮（置于按钮底图之上；边框/名称/计数是面板层兄弟节点，天然压在图标上）。
+                icons[i] = buttons[i] != null
+                    ? UiArtInjector.EnsureChildImage(buttons[i].transform, "m_imgItemIcon", new Vector2(0.08f, 0.22f), new Vector2(0.92f, 0.92f), true)
+                    : null;
 
                 int slot = i;
                 if (buttons[i] == null)
@@ -390,6 +413,12 @@ namespace GameLogic
                 _textFavorDelta.color = delta >= 0 ? new Color(0.55f, 0.65f, 0.29f) : new Color(0.70f, 0.35f, 0.29f);
             }
 
+            // 好感预览框空态隐藏（无增减时残留一块空白框）。
+            if (_favorDeltaBox != null)
+            {
+                _favorDeltaBox.gameObject.SetActive(delta != 0);
+            }
+
             if (_textResult != null)
             {
                 _textResult.text = _resultLine;
@@ -404,6 +433,7 @@ namespace GameLogic
             var frames = playerSide ? _pFrames : _nFrames;
             var names = playerSide ? _pNames : _nNames;
             var counts = playerSide ? _pCounts : _nCounts;
+            var icons = playerSide ? _pIcons : _nIcons;
             var bagItems = playerSide ? sim.Warehouse.Items : _npc.Bag.Items;
             var offer = playerSide ? _session.PlayerOffer : _session.NpcOffer;
 
@@ -416,9 +446,11 @@ namespace GameLogic
                 bool occupied = hasItem && remaining > 0;
 
                 var def = occupied ? ItemCatalog.Get(itemId) : null;
+                var icon = occupied ? ItemIconLibrary.Get(itemId) : null;
                 if (names[i] != null)
                 {
-                    names[i].text = occupied && def != null ? def.Name : string.Empty;
+                    // 有图标的格子不叠名称（对照 ui交易1.png）；无图标物品保持文字名。
+                    names[i].text = occupied && def != null && icon == null ? def.Name : string.Empty;
                 }
 
                 if (counts[i] != null)
@@ -446,6 +478,18 @@ namespace GameLogic
                     {
                         img.color = usable ? new Color(0.97f, 0.95f, 0.88f) : new Color(0.75f, 0.74f, 0.68f);
                     }
+
+                    if (icons[i] != null)
+                    {
+                        icons[i].sprite = icon;
+                        icons[i].gameObject.SetActive(icon != null);
+                        // 置灰槽位的图标同步降透明度（好感不足不可买的视觉反馈）。
+                        icons[i].color = usable ? Color.white : new Color(1f, 1f, 1f, 0.4f);
+                    }
+                }
+                else if (icons[i] != null)
+                {
+                    icons[i].gameObject.SetActive(false);
                 }
             }
         }
@@ -456,6 +500,7 @@ namespace GameLogic
             var buttons = playerSide ? _poSlots : _noSlots;
             var names = playerSide ? _poNames : _noNames;
             var counts = playerSide ? _poCounts : _noCounts;
+            var icons = playerSide ? _poIcons : _noIcons;
             var ids = offer.Where(kv => kv.Value > 0).Select(kv => kv.Key).OrderBy(id => id).ToList();
 
             for (int i = 0; i < OfferSlotCount; i++)
@@ -463,15 +508,24 @@ namespace GameLogic
                 bool occupied = i < ids.Count;
                 int itemId = occupied ? ids[i] : 0;
                 var def = occupied ? ItemCatalog.Get(itemId) : null;
+                var icon = occupied ? ItemIconLibrary.Get(itemId) : null;
 
                 if (names[i] != null)
                 {
-                    names[i].text = occupied && def != null ? def.Name : string.Empty;
+                    // 有图标的出价槽不叠名称；无图标物品保持文字名。
+                    names[i].text = occupied && def != null && icon == null ? def.Name : string.Empty;
                 }
 
                 if (counts[i] != null)
                 {
                     counts[i].text = occupied ? offer[itemId].ToString() : string.Empty;
+                }
+
+                if (icons[i] != null)
+                {
+                    icons[i].sprite = icon;
+                    icons[i].gameObject.SetActive(icon != null);
+                    icons[i].color = Color.white;
                 }
 
                 if (buttons[i] != null)

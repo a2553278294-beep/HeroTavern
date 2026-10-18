@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GameLogic.World;
 using UnityEngine;
 
@@ -274,7 +275,7 @@ namespace GameLogic.UI
             GUILayout.Label(TitleText, _titleStyle);
             GUILayout.EndArea();
 
-            if (GUI.Button(closeRect, "关闭", GUI.skin.button))
+            if (GUI.Button(closeRect, "关闭", _hintStyle))
             {
                 Close();
                 _closeRequested = true;
@@ -589,6 +590,9 @@ namespace GameLogic.UI
             BountyState state = bounty.QueryState(entry);
             bool intelHeld = IntelHeldOf(sim, entry);
 
+            // 详情顶部：目标怪物卡图（M13 资源补全；未交付图的目标不占高）。
+            DrawMonsterCard(entry);
+
             // 八个字段自上而下全部只读：发布前也不能在本界面改数值（2.5-1）。
             DrawField("名称", entry.Name);
             DrawField("线索", IntelLabelOf(sim, entry) + (intelHeld ? string.Empty : "（" + NotHeldText + "）"));
@@ -630,6 +634,74 @@ namespace GameLogic.UI
             {
                 PublishFromUi(sim, bounty, entry);
             }
+        }
+
+        /// <summary>详情怪物卡图高度（卡图 256×256 正方形，等比内缩）。</summary>
+        private const float MonsterCardHeight = 132f;
+
+        /// <summary>目标怪物名 → 卡图（静态缓存，含 null，避免每帧查表/告警）。群组图优先（悬赏针对一群）。</summary>
+        private static readonly Dictionary<string, Texture2D> MonsterCardCache = new Dictionary<string, Texture2D>();
+
+        private static Texture2D MonsterCardTex(BountyEntry entry)
+        {
+            if (entry == null || string.IsNullOrEmpty(entry.TargetMonsterName))
+            {
+                return null;
+            }
+
+            if (MonsterCardCache.TryGetValue(entry.TargetMonsterName, out var cached))
+            {
+                return cached;
+            }
+
+            Texture2D tex = null;
+            var catalog = GameConfigCatalog.Instance;
+            if (catalog != null)
+            {
+                var defs = catalog.GetMonsterCatalog();
+                for (int i = 0; i < defs.Length; i++)
+                {
+                    if (defs[i].Name != entry.TargetMonsterName)
+                    {
+                        continue;
+                    }
+
+                    var row = catalog.GetMonsterRow(defs[i].Id);
+                    string res = row != null && !string.IsNullOrEmpty(row.GroupResourceName) ? row.GroupResourceName : null;
+                    if (string.IsNullOrEmpty(res) && row != null)
+                    {
+                        res = row.ResourceName;
+                    }
+
+                    if (!string.IsNullOrEmpty(res))
+                    {
+                        tex = HudSkin.Tex("monsters/" + res);
+                    }
+
+                    break;
+                }
+            }
+
+            MonsterCardCache[entry.TargetMonsterName] = tex;
+            return tex;
+        }
+
+        /// <summary>详情栏顶部画目标怪物卡图（水平居中，等比；无图不占高）。</summary>
+        private static void DrawMonsterCard(BountyEntry entry)
+        {
+            var tex = MonsterCardTex(entry);
+            if (tex == null)
+            {
+                return;
+            }
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            var rect = GUILayoutUtility.GetRect(MonsterCardHeight, MonsterCardHeight, GUILayout.Width(MonsterCardHeight), GUILayout.Height(MonsterCardHeight));
+            GUI.DrawTexture(rect, tex, ScaleMode.ScaleToFit, true);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.Space(4f);
         }
 
         private void DrawField(string label, string value)
@@ -907,6 +979,44 @@ namespace GameLogic.UI
                 alignment = TextAnchor.MiddleCenter,
                 padding = new RectOffset(2, 2, 0, 0),
             };
+
+            // 可读性修复（ui01 美术接入后视觉走查）：IMGUI 默认皮肤在线性空间下按钮呈深灰块、
+            // 文字近白，槽卡与详情文字对比过低。统一墨色文字；按钮类样式去底透出已绘制的框贴图。
+            var ink = new Color(0.24f, 0.18f, 0.11f);
+            foreach (var style in new[] { _titleStyle, _sectionStyle, _stateStyle, _fieldStyle, _fieldLabelStyle, _statusStyle, _emptyStyle })
+            {
+                style.normal.textColor = ink;
+            }
+
+            // background=null 对 GUI.Button 不生效（仍画默认深色块），用程序化羊皮纸底透出文字。
+            var parchment = ParchmentTex();
+            foreach (var style in new[] { _cardStyle, _rowStyle, _hintStyle })
+            {
+                style.normal.textColor = ink;
+                style.hover.textColor = ink;
+                style.active.textColor = ink;
+                style.focused.textColor = ink;
+                style.normal.background = parchment;
+                style.hover.background = parchment;
+                style.active.background = parchment;
+                style.focused.background = parchment;
+            }
+        }
+
+        private static Texture2D s_parchmentTex;
+
+        /// <summary>程序化羊皮纸底（2×2 纯色）：IMGUI 按钮 background=null 仍画默认深色块，故用浅色底替代。</summary>
+        private static Texture2D ParchmentTex()
+        {
+            if (s_parchmentTex == null)
+            {
+                s_parchmentTex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                var c = new Color(0.97f, 0.94f, 0.85f, 1f);
+                s_parchmentTex.SetPixels(new[] { c, c, c, c });
+                s_parchmentTex.Apply();
+            }
+
+            return s_parchmentTex;
         }
     }
 }

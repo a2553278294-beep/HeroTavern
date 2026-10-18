@@ -12,7 +12,8 @@ namespace GameLogic
     /// 点击正文框推进一句；末句播完后再点关闭。期间世界停走——暂停由调用方
     /// （<see cref="WorldHud"/>）在打开前置位，窗口销毁时回调 <c>OnDialogueClosed</c> 恢复。
     ///
-    /// 立绘美术未接入：占位为羊皮纸槽 + lv 角花 + NPC 名（同 OnGUI 版占位口径）。
+    /// 立绘：r_* 三层染色合成（<see cref="SpriteCharacterLibrary.GetPortrait"/>，外观与场景 Q 版同 Id 派生），
+    /// 运行时注入 m_goPortrait（<see cref="UiArtInjector"/>，不改烘焙 prefab）；贴图缺失时保持羊皮纸槽占位。
     /// </summary>
     [Window(UILayer.UI)]
     public sealed class DialogueUI : UIWindow
@@ -29,6 +30,8 @@ namespace GameLogic
 
         private TextMeshProUGUI _textTitle;
         private TextMeshProUGUI _textPortraitName;
+        private Image _portraitFrame;
+        private Image _portraitArt;
         private TextMeshProUGUI _textBody;
         private TextMeshProUGUI _textProgress;
         private TextMeshProUGUI _textHint;
@@ -46,6 +49,13 @@ namespace GameLogic
         {
             _textTitle = FindChildComponent<TextMeshProUGUI>("m_goTitleTab/m_tmpTitle");
             _textPortraitName = FindChildComponent<TextMeshProUGUI>("m_goPortrait/m_tmpPortraitName");
+            // 立绘注入：压在羊皮纸框（m_imgPortraitFrame）之上、NPC 名之下。
+            _portraitFrame = FindChildComponent<Image>("m_goPortrait/m_imgPortraitFrame");
+            _portraitArt = UiArtInjector.EnsureChildImage(FindChild("m_goPortrait"), "m_imgPortraitArt", Vector2.zero, Vector2.one, false);
+            if (_portraitArt != null && _portraitFrame != null)
+            {
+                _portraitArt.transform.SetSiblingIndex(_portraitFrame.transform.GetSiblingIndex() + 1);
+            }
             _textBody = FindChildComponent<TextMeshProUGUI>("m_goPanel/m_tmpBody");
             _textProgress = FindChildComponent<TextMeshProUGUI>("m_goPanel/m_tmpProgress");
             _textHint = FindChildComponent<TextMeshProUGUI>("m_goPanel/m_tmpHint");
@@ -121,6 +131,8 @@ namespace GameLogic
         private void UpdateView()
         {
             string npcName = _npc != null ? _npc.Name : "客人";
+
+            UiArtInjector.ApplyPortrait(_portraitArt, _npc != null ? _npc.Id : -1);
 
             if (_textPortraitName != null)
             {

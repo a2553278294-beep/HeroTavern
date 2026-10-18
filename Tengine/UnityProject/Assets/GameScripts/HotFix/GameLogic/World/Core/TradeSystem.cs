@@ -359,9 +359,9 @@ namespace GameLogic.World
         // ------------------------------------------------------------------
 
         /// <summary>
-        /// 物品好感门槛（<b>占位</b>：品质 ×10）。
-        /// 品质取配置 Item 表 <c>quality</c> 列，取不到回退 0。
-        /// TODO：Item 表<b>尚无好感列</b>，落地后改读该列，本占位随之作废。
+        /// 物品好感门槛（<b>占位</b>：品质 × <see cref="QualityFavorUnit"/>）。
+        /// 品质取配置 Item 表 <c>quality</c> 列（当前 1—4），取不到回退 0。
+        /// TODO：Item 表<b>尚无好感门槛列</b>，落地后改读该列，本占位随之作废。
         /// </summary>
         public int FavorThreshold(int itemId)
         {
@@ -385,11 +385,18 @@ namespace GameLogic.World
             return row.Quality * QualityFavorUnit;
         }
 
-        /// <summary>每点品质折算的好感门槛单位（占位常量，待 Item 表好感列落地后作废）。</summary>
-        public const int QualityFavorUnit = 10;
+        /// <summary>
+        /// 每点品质折算的好感门槛单位（占位常量，待 Item 表好感门槛列落地后作废）。
+        /// 原为 10：门槛落在 10—40，而 NPC 初始好感为 0、开局无法建立，
+        /// 导致所有 NPC 道具整片置灰不可点。现降到 1：门槛 1—4 点，
+        /// 开局即可购买低品质道具，高品质需先积累少量好感。
+        /// </summary>
+        public const int QualityFavorUnit = 1;
 
         /// <summary>
-        /// 能否向该 NPC 购买此物：<b>好感 &gt; 物品好感门槛</b>（严格大于，取 v3.1 原文口径）。
+        /// 能否向该 NPC 购买此物：<b>好感 ≥ 物品好感门槛</b>。
+        /// 取「大于等于」与 <see cref="DialogueSystem"/> 的同类好感门槛判定保持一致
+        /// （此处原为严格大于，门槛为 0 时会把所有道具判成不可买）。
         /// 无交易对象 / 物品 id 非法一律 false。
         /// </summary>
         public bool CanBuy(int itemId)
@@ -399,7 +406,7 @@ namespace GameLogic.World
                 return false;
             }
 
-            return Favor > FavorThreshold(itemId);
+            return Favor >= FavorThreshold(itemId);
         }
 
         // ------------------------------------------------------------------

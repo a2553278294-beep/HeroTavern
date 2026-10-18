@@ -14,6 +14,12 @@ namespace GameLogic
     public sealed class WorldSceneBootstrap : SingletonBehaviour<WorldSceneBootstrap>
     {
         private readonly Dictionary<int, CharacterView> _views = new Dictionary<int, CharacterView>();
+
+        /// <summary>城镇内怪物的卡图视图（M13 资源补全）：键为 <see cref="Monster"/> 实例（核心无怪物 id 字段，按引用跟踪）。</summary>
+        private readonly Dictionary<Monster, SpriteRenderer> _monsterViews = new Dictionary<Monster, SpriteRenderer>();
+
+        /// <summary>怪物卡图场景显示高度（世界单位；卡图 256px/ppu100 原高 2.56，收到与 Q 版角色相近的体量）。</summary>
+        private const float MonsterViewHeight = 1.1f;
         private Camera _camera;
         private WorldHud _hud;
         private SpriteRenderer[] _bartenderParts;
@@ -173,6 +179,17 @@ namespace GameLogic
 
             _views.Clear();
 
+            // 怪物视图同样按旧对局实例缓存，换实例整体销毁清表。
+            foreach (var pair in _monsterViews)
+            {
+                if (pair.Value != null)
+                {
+                    Object.Destroy(pair.Value.gameObject);
+                }
+            }
+
+            _monsterViews.Clear();
+
             // HUD 可能还握着上一局选中的 CharacterData，先关面板，避免面板残留已销毁视图的数据。
             _hud?.ClosePanels();
 
@@ -202,6 +219,7 @@ namespace GameLogic
             GameModule.World.Tick(Time.deltaTime);
             FitCamera(); // 窗口拉伸时保持整图完整可见
             SyncCharacterViews();
+            SyncMonsterViews();
             HandleWorldClick();
         }
 
@@ -358,6 +376,113 @@ namespace GameLogic
                     _views[c.Id] = CharacterView.Create(c);
                 }
             }
+        }
+
+        // ==================== 怪物视图同步（M13 资源补全） ====================
+
+        /// <summary>
+        /// 城镇图内的存活怪物显示对应卡图（monster 表 group_resource_name 优先，单只图兜底）；
+        /// 城外/死亡怪物不显示。怪物迁移/狩猎移动由核心按小时改格，本处每帧把视图贴到格位。
+        /// </summary>
+        private void SyncMonsterViews()
+        {
+            if (Sim == null || !Sim.IsRunning || Sim.Monsters == null)
+            {
+                return;
+            }
+
+            var monsters = Sim.Monsters.Monsters;
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                var m = monsters[i];
+                if (m.IsAlive && m.Position.MapId == WorldMapIds.Town && !_monsterViews.ContainsKey(m))
+                {
+                    var view = CreateMonsterView(m);
+                    if (view != null)
+                    {
+                        _monsterViews[m] = view;
+                    }
+                }
+            }
+
+            List<Monster> dead = null;
+            foreach (var pair in _monsterViews)
+            {
+                var m = pair.Key;
+                if (m == null || !m.IsAlive || m.Position.MapId != WorldMapIds.Town)
+                {
+                    if (dead == null)
+                    {
+                        dead = new List<Monster>();
+                    }
+
+                    dead.Add(m);
+                    continue;
+                }
+
+                if (pair.Value != null)
+                {
+                    // 卡图 pivot 为中心：落点上抬半高；z 比同格角色略靠前。
+                    var pos = CellToWorld(m.Position);
+                    float halfH = pair.Value.bounds.extents.y;
+                    pair.Value.transform.position = new Vector3(pos.x, pos.y + halfH, pos.z - 0.05f);
+                }
+            }
+
+            if (dead != null)
+            {
+                foreach (var m in dead)
+                {
+                    if (_monsterViews.TryGetValue(m, out var view) && view != null)
+                    {
+                        Object.Destroy(view.gameObject);
+                    }
+
+                    _monsterViews.Remove(m);
+                }
+            }
+        }
+
+        /// <summary>建怪物卡图视图；配置缺资源名或贴图未交付时返回 null（不显示，不虚构占位）。
+        /// 贴图口径：地图令牌 = 一只怪物，用<strong>单只图</strong> ResourceName（TbMonster resource_name 列）；
+        /// 群组图 GroupResourceName（group_resource_name 列）由悬赏板图标使用（BountyPanel），这里只作兜底。</summary>
+        private static SpriteRenderer CreateMonsterView(Monster m)
+        {
+            if (m == null || m.Def == null)
+            {
+                return null;
+            }
+
+            string resName = null;
+            var catalog = GameConfigCatalog.Instance;
+            var row = catalog != null ? catalog.GetMonsterRow(m.Def.Id) : null;
+            if (row != null)
+            {
+                resName = !string.IsNullOrEmpty(row.ResourceName) ? row.ResourceName : row.GroupResourceName;
+            }
+
+            if (string.IsNullOrEmpty(resName))
+            {
+                return null;
+            }
+
+            var sprite = Resources.Load<Sprite>("ui01/monsters/" + resName);
+            if (sprite == null)
+            {
+                Log.Warning("WorldSceneBootstrap: 怪物卡图缺失 Resources/ui01/monsters/" + resName);
+                return null;
+            }
+
+            var go = new GameObject("Monster_" + m.Def.Name);
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+            float rawH = sprite.bounds.size.y;
+            if (rawH > 0.01f)
+            {
+                go.transform.localScale = Vector3.one * (MonsterViewHeight / rawH);
+            }
+
+            return sr;
         }
 
         // ==================== 整点表现 ====================
