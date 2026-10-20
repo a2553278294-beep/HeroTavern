@@ -4635,6 +4635,159 @@
         768,
         768
       ]
+    },
+    {
+      "file": "Resources/Icons/icon_41_.png",
+      "bytes": 1526,
+      "sha256": "83723e6efb82d1b10f47dd084c1144bfd87680018dcd83035684414208bdfc32",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_42_.png",
+      "bytes": 1571,
+      "sha256": "9b59460a32190d1a63b9b35b2e5ee542b7094d4ac5ab1cc7ce7dcee4f33cd774",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_43_.png",
+      "bytes": 1633,
+      "sha256": "987ffc4297c1d458af142a501c66627e88973c7af21c04e0839629f5f7464bc3",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_47_.png",
+      "bytes": 1744,
+      "sha256": "d3e5b55c2ef72732f95df8e20a30761a0700e5ef7d663ec031a250d54b5244b0",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_50_.png",
+      "bytes": 1218,
+      "sha256": "cd7b93bb64dc2d92465a7fa0c66d11546246a31e6798adde9f302c9ccc742fc9",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_54.png",
+      "bytes": 1477,
+      "sha256": "00f8d64da9c0588886796ac558be40ca31e43ce64eddf7984532334c72fbd554",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_55_.png",
+      "bytes": 1552,
+      "sha256": "764087c4fb270db8dfbeadcd302ebce867492e3f8fb159759a2b2edffade81f4",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_56_.png",
+      "bytes": 1568,
+      "sha256": "f647de4e33ecf10c969d2888a5893d7e1eb08dd0cb5323ff6c9fc7b0eba71317",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_60_.png",
+      "bytes": 1605,
+      "sha256": "a59bb9eca07796419ba64378e97370b2952f4f499d19937aa28b7eaa705c9837",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_62_.png",
+      "bytes": 1679,
+      "sha256": "ce3551c7c228690ce48dc8a3295d1d0bc07c73a93c9c9a6a28fa964c40cabbf2",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_64_.png",
+      "bytes": 1469,
+      "sha256": "87dd5efc79bcd2e844c96ceb2d9f0f16f79cae9a7c3cc43dd07eb3327077e790",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_66_.png",
+      "bytes": 1786,
+      "sha256": "0425bde73a24e859d0f933afb079da36648148d3415f4e378719a7c8e6e44db3",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_68_.png",
+      "bytes": 1882,
+      "sha256": "84f3fb40b802f4f6b8b37af2c54d032db82b685adaba16e7df4516a762aac706",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_69_.png",
+      "bytes": 1856,
+      "sha256": "e29e34e962a0b7ee5025231a4b1101bf97ade28046cff96111f1e099e4f6bbc9",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_71_.png",
+      "bytes": 1707,
+      "sha256": "90409e40b486c0910eae893a1ecb5bfeddb0d4b1b3ebc1e91b6beb4000a0db6b",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_72_.png",
+      "bytes": 1632,
+      "sha256": "95ce9255b605a0b9b1a0f71754a953f6943136dab61a09a45bd5dd62f3724b40",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "Resources/Icons/icon_74.png",
+      "bytes": 1846,
+      "sha256": "3ced345b3218cd840748a373aa143790dc7e6fc5c2c553afe561f59609cc7a47",
+      "size": [
+        128,
+        128
+      ]
     }
   ]
 }
