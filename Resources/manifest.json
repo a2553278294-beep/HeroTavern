@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "files": [
     {
       "file": "Resources/Characters/character_c_idle_body_01_a_1.png",
@@ -2937,8 +2937,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_a_1.png",
-      "bytes": 4536,
-      "sha256": "22c8cad024ea01ffe5eab3d526bd1a2f8d63d61c5dd806b5764b0436129b61f0",
+      "bytes": 5296,
+      "sha256": "d914824eb9928e5ddc22141115160d8920514b5a216ac025e23605413c719374",
       "size": [
         256,
         256
@@ -2946,8 +2946,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_a_2.png",
-      "bytes": 4412,
-      "sha256": "e255cedd96f0b77cf9f23fc4ed38ed2a7ecbf407e77c8e04aed7a5f461ef34b9",
+      "bytes": 5172,
+      "sha256": "0cb4dba24ec1e6f75d7a5541b7357335c779a439d8d6dc601982587eaaef2ecc",
       "size": [
         256,
         256
@@ -2955,8 +2955,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_b_1.png",
-      "bytes": 4431,
-      "sha256": "5b3da197793cfddb4306653e1a4f608cf952caaca4dfb6cfe4e3bf490bb1ed30",
+      "bytes": 5191,
+      "sha256": "02cc04365530afc840ffdf150d049cd10305080e6865f6ff1f093e045146cf58",
       "size": [
         256,
         256
@@ -2964,8 +2964,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_b_2.png",
-      "bytes": 4431,
-      "sha256": "25fedfc954f7d426f4dae28e2f76cf36f9b7b07349836c683987c0cc3b87260b",
+      "bytes": 5189,
+      "sha256": "61cbf92966fed7154e30ae51cf042152e8cbb5e6f8a57846125a37906f0aa4d5",
       "size": [
         256,
         256
@@ -2973,8 +2973,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_c_1.png",
-      "bytes": 4426,
-      "sha256": "d52ea379c6649a958dc784c26d558b22134413311d28a9b0a87162d8a499a17e",
+      "bytes": 5186,
+      "sha256": "5ed78e714969997e4570d1ab7cda36b8eb22f9d9eafe94107f035bb7c7e12ab5",
       "size": [
         256,
         256
@@ -2982,8 +2982,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_c_2.png",
-      "bytes": 4426,
-      "sha256": "02162046a214ad9fa24bf582ca3e4bfde39897cd39b9f5fd2bcc18a38c5195f4",
+      "bytes": 5186,
+      "sha256": "6f74fa8eeb8065813a09cc36c61aae6f5154325d4d462e5ea5f7cdcbfe516cc6",
       "size": [
         256,
         256
@@ -2991,8 +2991,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_d_1.png",
-      "bytes": 4294,
-      "sha256": "0e826b3306f13ac9d604cb2984600c96ae77b35d9192546d81086541bd38fee6",
+      "bytes": 5054,
+      "sha256": "77eec2b4f565727df9ec2d5fd4a1f154332275787af978709c59e66a43958515",
       "size": [
         256,
         256
@@ -3000,8 +3000,8 @@
     },
     {
       "file": "Resources/Characters/character_c_idle_face_00_d_2.png",
-      "bytes": 4412,
-      "sha256": "e35192b75f70826a8e34ac44baacee7e91665906b0e6c80e83e87289134a978c",
+      "bytes": 5172,
+      "sha256": "77cebb35207b330d544e39de789591cb1c00c2629a380c1b6a8fefc3f7dc547a",
       "size": [
         256,
         256

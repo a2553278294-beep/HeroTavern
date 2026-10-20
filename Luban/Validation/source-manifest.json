@@ -26,18 +26,20 @@
   {
     "file": "Excel/NAME.xlsx",
     "url": "https://docs.qq.com/sheet/DYkJ2UFZwSFFXZGZW?no_promotion=1&is_blank_or_template=blank&tab=BB08J2",
-    "bytes": 5647,
-    "sha256": "3d062f87a8b4cea7936df7bae1254db95796f1021279e39e11ea99741bc014cf",
+    "bytes": 6080,
+    "sha256": "8318e658f36f5a56c5460ece4d4ebc120668ee7536c1ce998b64e2cb8d01de9b",
     "beforeWebFixesSha256": "a968bc061e6cd5d8b9e88ee69e0b6d4020acc86c90beecd4f0d93a462a3bc565",
-    "updatedAt": "2026-10-15"
+    "updatedAt": "2026-10-20",
+    "localRevisionSource": "Art palette 2026-10-20 and reviewed fantasy name pools"
   },
   {
     "file": "Excel/CharacterPart.xlsx",
     "url": "https://docs.qq.com/sheet/DUm1yY3FyTkVacUh2",
-    "bytes": 25043,
-    "sha256": "c4a5752388cbdc13f8f59149b21182de7ad06dbb5d7e4596e5da0b7540bffcff",
+    "bytes": 36351,
+    "sha256": "a0414ede076f09444349a0b2e764a30987b3ec35c34f846b09d40b868c41fe4e",
     "beforeWebFixesSha256": "42e1516cf450de01756035ff3b3b3e12273d52c0c8903184feedb4d970f45a10",
-    "updatedAt": "2026-10-17"
+    "updatedAt": "2026-10-20",
+    "localRevisionSource": "Art palette 2026-10-20 and reviewed fantasy name pools"
   },
   {
     "file": "Excel/global.xlsx",

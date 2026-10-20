@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-20",
+  "branch": "HeroTavern",
+  "name": {
+    "surnames": 24,
+    "givenNames": 24,
+    "uniqueCombinations": 576,
+    "onlineValuesEqualLocal": true,
+    "fieldsAndGenerationOrderUnchanged": true
+  },
+  "colors": {
+    "sourceColorRows": 216,
+    "sourceGroups": 23,
+    "mappedGroups": 56,
+    "existingRows": 402,
+    "updatedRows": 336,
+    "changedExistingCells": 840,
+    "appendedRows": 192,
+    "totalRows": 594
+  },
+  "art": {
+    "replacedPngs": 8,
+    "copiesPerPng": 2,
+    "resourceManifestEntriesVerified": 515,
+    "unityMetaPreserved": true,
+    "face00NotRemapped": true
+  },
+  "validation": {
+    "planningStrictLubanTables": 14,
+    "changedJsonEqualsSource": true,
+    "runtimeStrictLuban": "passed",
+    "runtimeGeneratedCodeUnchanged": true,
+    "runtimeChangedBytes": [
+      "ht_tbname.bytes",
+      "ht_tbcharacterpart.bytes"
+    ],
+    "onlineCharacterPartEqualsLocal": true,
+    "onlineColorIdsAreZeroPaddedText": true,
+    "existingDirtyFilesPreserved": 61,
+    "dotnetBuild": "blocked: missing project.assets.json; no dependencies installed",
+    "unityEditor": "blocked: project com.unity.pipeline package and Unity CLI connection unavailable",
+    "runtimeGameTest": false
+  },
+  "collaboration": {
+    "transport": "DeepSeek Harness SDK stdio JSON-RPC",
+    "serverInfo": {
+      "name": "deepseek-harness-sdk-runtime",
+      "version": "0.0.1"
+    },
+    "sessionId": "herotavern-codex-joint-20261020",
+    "firstTurn": "max-tokens before deliverables",
+    "followupTurn": "completed with name_candidates.json and review.md",
+    "scope": "read source and propose candidates; final edits, validation and Git delivery by Codex"
+  },
+  "backups": [
+    "planning-assets-before.zip",
+    "runtime-targets-before.zip",
+    "NAME-online-before.xlsx",
+    "CharacterPart-online-before.xlsx"
+  ]
+}
