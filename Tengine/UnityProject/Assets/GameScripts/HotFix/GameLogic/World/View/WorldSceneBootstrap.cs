@@ -306,8 +306,8 @@ namespace GameLogic
 
             // 光照已移除：底图与角色（body/face/hair 分层贴图）全走 Sprites/Default 不受光。
 
-            // 酒保贴图形象（seed 7 → 03 号发型 + body 配色 02，与客人 01 配色区分）：站在吧台内弧空地。
-            var bartenderGo = SpriteCharacterBuilder.Build("Bartender", 7);
+            // 酒保贴图形象：00 预染色套装（编号 00 为酒保专用，不进入随机形象抽取）：站在吧台内弧空地。
+            var bartenderGo = SpriteCharacterBuilder.Build("Bartender", CharacterAppearance.Bartender);
             bartenderGo.transform.position = PixelToWorld(new Vector2(1580f, 400f)); // 吧台内弧空地（紫晶地面区），pivot=脚底
             _bartenderParts = bartenderGo.GetComponentsInChildren<SpriteRenderer>();
             SetBartenderTint(Color.white);

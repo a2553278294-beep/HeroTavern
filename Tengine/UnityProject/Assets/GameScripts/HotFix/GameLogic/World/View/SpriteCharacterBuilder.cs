@@ -10,10 +10,11 @@ namespace GameLogic
     /// 角色外观（Q 版部件组编号 + 配色 id）：由角色 Id 确定性派生，跨对局/重开稳定，
     /// Q 版场景形象（<see cref="SpriteCharacterBuilder"/>）与立绘（<see cref="SpriteCharacterLibrary.GetPortrait"/>）共用。
     /// 分桶（seed % 10）：
-    /// - 0：00 预染色套装（美术直出彩色主图，无 Mask 不染色；注意 idle 身体主图文件名带 m 后缀
-    ///   —— character_c_idle_body_00m_{dir}_{frame}，配表组名同步登记为 character_c_idle_body_00m）；
-    /// - 1-2：body_02 灰斗篷 + face_01 + hair 01/03（配色留白 = 原灰白稿，不虚构配色）；
-    /// - 其余：body_01 + face_01 + hair 01/03，配色 01/02（配表目前仅 body_01 落地了 01/02 两组配色）。
+    /// - 0-2：body_02 灰斗篷 + face_01 + hair 01/03；
+    /// - 其余：body_01 + face_01 + hair 01/03，配色按 CharacterPart 配表取色。
+    /// 00 预染色套装（美术直出彩色主图，无 Mask 不染色；idle 身体主图文件名带 m 后缀
+    /// —— character_c_idle_body_00m_{dir}_{frame}）为<b>酒保专用</b>（<see cref="Bartender"/>），
+    /// 不进入随机形象抽取（问题反馈 #4）。
     /// </summary>
     public readonly struct CharacterAppearance
     {
@@ -40,20 +41,24 @@ namespace GameLogic
             get { return Body == "00"; }
         }
 
-        /// <summary>按 seed 确定性派生外观（同一 seed 恒定同形象）。</summary>
+        /// <summary>酒保专用外观：00 预染色套装（编号 00 仅酒保使用，不进入随机形象抽取）。</summary>
+        public static CharacterAppearance Bartender
+        {
+            get { return new CharacterAppearance("00", "00", "00", "01"); }
+        }
+
+        /// <summary>
+        /// 按 seed 确定性派生外观（同一 seed 恒定同形象）；编号 00 为酒保专用，本池不出现。
+        /// 配色（问题反馈 #3）：配表已交付完整配色（body/face 01-06、hair 01-15），ColorId 三层共享
+        /// → 取交集 01-06 按 seed 轮转，保证每个随机角色都有真实配色（旧口径仅 body_01 用 01/02，
+        /// 其余固定留白 "01" = 灰白原稿，表现为「人物无颜色匹配」）。
+        /// </summary>
         public static CharacterAppearance Derive(int seed)
         {
+            string colorId = "0" + (seed % 6 + 1); // "01"-"06"
             string hair = (seed & 1) == 0 ? "01" : "03";
-            switch (seed % 10)
-            {
-                case 0:
-                    return new CharacterAppearance("00", "00", "00", "01");
-                case 1:
-                case 2:
-                    return new CharacterAppearance("02", "01", hair, "01");
-                default:
-                    return new CharacterAppearance("01", "01", hair, (seed & 2) == 0 ? "01" : "02");
-            }
+            string body = (seed % 10) < 3 ? "02" : "01"; // 灰斗篷 3/10，其余标准服饰
+            return new CharacterAppearance(body, "01", hair, colorId);
         }
     }
 
@@ -71,8 +76,11 @@ namespace GameLogic
         /// <summary>Resources 下的部件图目录。</summary>
         public const string ResourceDir = "ui01/characters";
 
-        /// <summary>256px × 0.43 ≈ 110px 高，对齐参考图 Q 版角色体量（ppu=100）。</summary>
-        public const float DefaultScale = 0.43f;
+        /// <summary>
+        /// 256px × 0.60 ≈ 154px 高（ppu=100）：相对吧台 / 圆凳 / 传送门背景道具的人物体量
+        /// （问题反馈 #2：0.43 ≈ 110px 时人物与背景严重失调、明显偏小）。
+        /// </summary>
+        public const float DefaultScale = 0.60f;
 
         /// <summary>
         /// 部件层序（<b>由后到前</b>）：face（头/颈）→ body（衣，衣领压住脖颈）→ hair（发，刘海压住额头）。
@@ -189,17 +197,18 @@ namespace GameLogic
         public static IEnumerator PrewarmCache(int bakesPerStep = 3)
         {
             string[] dirs = { "a", "b", "c", "d" };
-            // 形象由 Id 派生（CharacterAppearance.Derive）：body ∈ {00/01/02}、face ∈ {00/01}、hair ∈ {00/01/03}；
-            // 仅 body_01 落地配色 01/02，其余组配色留白（固定 colorId "01"，烘焙走原色快速路径）。
+            // 与 CharacterAppearance.Derive 输出对齐：body ∈ {01/02}、face = 01、hair ∈ {01/03}，
+            // 配色 01-06 全量；00 预染色套装仅酒保（染色流程跳过，预热成本极低）。
+            string[] paletteIds = { "01", "02", "03", "04", "05", "06" };
             var variants = new[]
             {
-                ("body", "01", new[] { "01", "02" }),
-                ("body", "02", new[] { "01" }),
+                ("body", "01", paletteIds),
+                ("body", "02", paletteIds),
                 ("body", "00", new[] { "01" }),
-                ("face", "01", new[] { "01", "02" }),
+                ("face", "01", paletteIds),
                 ("face", "00", new[] { "01" }),
-                ("hair", "01", new[] { "01", "02" }),
-                ("hair", "03", new[] { "01", "02" }),
+                ("hair", "01", paletteIds),
+                ("hair", "03", paletteIds),
                 ("hair", "00", new[] { "01" }),
             };
             var poses = new[] { ("walk", 4), ("idle", 2) };

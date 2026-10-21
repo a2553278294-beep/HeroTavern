@@ -49,6 +49,11 @@ namespace GameLogic
         {
             _textTitle = FindChildComponent<TextMeshProUGUI>("m_goTitleTab/m_tmpTitle");
             _textPortraitName = FindChildComponent<TextMeshProUGUI>("m_goPortrait/m_tmpPortraitName");
+            // 问题反馈 #5：立绘上的 NPC 名与立绘画面重叠 → 隐藏该文本（说话者名由页签 m_tmpTitle 承担）。
+            if (_textPortraitName != null)
+            {
+                _textPortraitName.gameObject.SetActive(false);
+            }
             // 立绘注入：压在羊皮纸框（m_imgPortraitFrame）之上、NPC 名之下。
             _portraitFrame = FindChildComponent<Image>("m_goPortrait/m_imgPortraitFrame");
             _portraitArt = UiArtInjector.EnsureChildImage(FindChild("m_goPortrait"), "m_imgPortraitArt", Vector2.zero, Vector2.one, false);
@@ -133,11 +138,6 @@ namespace GameLogic
             string npcName = _npc != null ? _npc.Name : "客人";
 
             UiArtInjector.ApplyPortrait(_portraitArt, _npc != null ? _npc.Id : -1);
-
-            if (_textPortraitName != null)
-            {
-                _textPortraitName.text = npcName;
-            }
 
             if (_textTitle != null)
             {
