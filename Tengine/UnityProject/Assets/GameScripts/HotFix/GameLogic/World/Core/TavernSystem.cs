@@ -45,6 +45,8 @@ namespace GameLogic.World
     {
         public const int BartenderWage = 20;
         public const int ShelfSlotLimit = 6;  // 上架槽上限（经营案 10.13：4 → 6）
+        /// <summary>开局默认上架的每酒份数（成本按售出杯数结算，备货多无资金风险；玩家可在酒单随时改）。</summary>
+        public const int DefaultPlannedCountPerWine = 10;
         public const int DrinkMinutes = 60;  // 饮用固定 1 游戏小时
 
         private sealed class DrinkOrder
@@ -168,6 +170,16 @@ namespace GameLogic.World
         }
 
         /// <summary>
+        /// NPC 决策可见的可售份数：当日未锁定时按规划份数预估（首单即锁定的经营案口径下，
+        /// 锁定前 RemainingCountOf 恒为 0，若只读它则「第一单」永远无法产生，形成点单死锁）；
+        /// 锁定后按当日实际剩余份数。
+        /// </summary>
+        public int AvailableCountOf(int wineId)
+        {
+            return _lockedToday ? RemainingCountOf(wineId) : PlannedCountOf(wineId);
+        }
+
+        /// <summary>
         /// 客人点单（玩家不能替客人点单；本 API 由角色行为系统调用）。
         /// 拒绝：游戏已结束、客人无效、未上架、当日份数已点完。
         /// 副作用：当日首次点单即锁定份数（规划值 → 可售份数），并在点单瞬间完成入账。
@@ -211,7 +223,9 @@ namespace GameLogic.World
             var available = new List<int>();
             foreach (int id in _shelf)
             {
-                if (RemainingCountOf(id) > 0)
+                // 用 AvailableCountOf（未锁定按规划份数预估）：锁定前 RemainingCountOf 恒为 0，
+                // 只看它会让「第一单」永远无法产生。
+                if (AvailableCountOf(id) > 0)
                 {
                     available.Add(id);
                 }

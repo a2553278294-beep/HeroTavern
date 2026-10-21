@@ -401,7 +401,11 @@ namespace GameLogic.World
                 var pool = MemoryPoolOf(sim, actor.Id);
                 pool.CurrentDayOverall = day;
 
-                if (actor.Stamina <= 0)
+                // 待机持续口径（策划案「强制回到城镇中执行待机，直至体力回满」）：
+                // 已在待机且体力未满时继续待机，避免「体力刚 +1 就复工、下一小时又耗尽」的反复横跳。
+                var currentAction = CurrentActionOf(actor.Id);
+                bool resting = currentAction != null && currentAction.Kind == BehaviorKind.RestAtTown;
+                if (actor.Stamina <= 0 || (resting && actor.Stamina < MaxStamina))
                 {
                     ForceRest(sim, actor, pool);
                     continue;
@@ -423,20 +427,24 @@ namespace GameLogic.World
         private void ForceRest(WorldSimulation sim, CharacterData actor, MemoryPool pool)
         {
             var restCell = TownRestCellOf(sim, pool);
-            var action = new BehaviorAction(actor, BehaviorKind.RestAtTown, restCell, 0);
             if (actor.Position != restCell)
             {
-                action.AddStep(BehaviorKind.MoveTo, restCell, 0);
+                // 待机应在城镇中执行：必须先真正下达移动目标（每整点走 1 格由
+                // WorldSimulation.MoveCharactersOneStep 驱动）。旧实现把移动步直接 MarkStepDone
+                // 跳过执行，角色永远原地待机、无法回城。跨图不可达时 SetMoveTarget 为空操作，
+                // 按矛盾 #15 口径原地恢复。
+                sim.SetMoveTarget(actor, restCell);
             }
+
+            var action = new BehaviorAction(actor, BehaviorKind.RestAtTown, restCell, 0);
 
             action.AddStep(BehaviorKind.RestAtTown, restCell, 0);
             action.Weight = ScoreAction(sim, actor, pool, action);
-            // 「出发」即视为移动步已执行；随后按待机口径恢复 1 小时。
-            action.MarkStepDone();
+            // 回城途中同样按待机口径恢复（策划案「体力为 0 时强制回城待机」）。
             ApplyRestRecovery(actor);
             action.MarkStepDone();
             SetCurrent(actor, action);
-            LastDecisionSummary = "#" + actor.Id + " 体力 0 → 强制回城待机 " + restCell;
+            LastDecisionSummary = "#" + actor.Id + " 体力耗尽 → 回城待机 " + restCell;
         }
 
         /// <summary>
@@ -659,6 +667,14 @@ namespace GameLogic.World
         private bool Reconsider(WorldSimulation sim, CharacterData actor, MemoryPool pool)
         {
             var current = CurrentActionOf(actor.Id);
+            // 待机持续口径同样约束动态改判：体力未满的回城待机不被记忆广播打断
+            // （策划案「强制回到城镇中执行待机，直至体力回满」——旧实现在 0:00 日结重播时
+            // 把已完成的待机行动按权重 0 替换掉，导致跨日后待机中断、体力永远回不满）。
+            if (current != null && current.Kind == BehaviorKind.RestAtTown && actor.Stamina < MaxStamina)
+            {
+                return false;
+            }
+
             int currentWeight = current != null && !current.IsFinished
                 ? ScoreAction(sim, actor, pool, current)
                 : 0;
@@ -957,9 +973,9 @@ namespace GameLogic.World
             for (int i = 0; i < shelf.Count; i++)
             {
                 int wineId = shelf[i];
-                if (tavern.RemainingCountOf(wineId) <= 0)
+                if (tavern.AvailableCountOf(wineId) <= 0)
                 {
-                    continue; // 当日售罄
+                    continue; // 当日售罄 / 无备货（未锁定时按规划份数预估，否则首单永远不可达）
                 }
 
                 var def = ItemCatalog.Get(wineId);
@@ -1227,8 +1243,15 @@ namespace GameLogic.World
         /// <summary>兜底：原地待机一小时（候选全被过滤时的最后保底）。</summary>
         private void RestOneHour(WorldSimulation sim, CharacterData actor, MemoryPool pool)
         {
-            var action = new BehaviorAction(actor, BehaviorKind.RestAtTown, actor.Position, 0);
-            action.AddStep(BehaviorKind.RestAtTown, actor.Position, 0);
+            // 待机应在城镇中执行：兜底待机同样以城镇待机格为落点（旧实现在原地待机）。
+            var restCell = TownRestCellOf(sim, pool);
+            if (actor.Position != restCell)
+            {
+                sim.SetMoveTarget(actor, restCell);
+            }
+
+            var action = new BehaviorAction(actor, BehaviorKind.RestAtTown, restCell, 0);
+            action.AddStep(BehaviorKind.RestAtTown, restCell, 0);
             action.Weight = ScoreAction(sim, actor, pool, action);
             ApplyRestRecovery(actor);
             SetCurrent(actor, action);

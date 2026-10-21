@@ -220,6 +220,17 @@ namespace GameLogic.World
             Tavern.Settled += r => SettlementReady?.Invoke(r);
             Tavern.GameOver += () => GameOver?.Invoke();
             Tavern.DrinkPaid += (g, w, p) => DrinkPaid?.Invoke(g, w, p);
+
+            // 基础运营兜底（问题反馈 #6）：开局自动上架初始解锁酒水并给默认份数。
+            // 空架开局时「点单 → 制作 → 入账 → 日结」链路没有任何输入，表现为基础运营不运转；
+            // 玩家仍可在酒单（DrinkMenuUI）随时调整上架与份数（当日首单锁定前）。
+            var defaultShelf = new System.Collections.Generic.List<int>(Brewing.UnlockedWines);
+            Tavern.SetShelf(defaultShelf);
+            for (int i = 0; i < defaultShelf.Count; i++)
+            {
+                Tavern.SetPlannedCount(defaultShelf[i], TavernSystem.DefaultPlannedCountPerWine);
+            }
+
             Monsters = new MonsterSystem(_random);
             Monsters.Spawned += m => MonsterSpawned?.Invoke(m);
 
@@ -527,7 +538,7 @@ namespace GameLogic.World
             DriftList(Population.Visitors);
         }
 
-        private static void DriftList(System.Collections.Generic.IReadOnlyList<CharacterData> characters)
+        private void DriftList(System.Collections.Generic.IReadOnlyList<CharacterData> characters)
         {
             for (int i = 0; i < characters.Count; i++)
             {
@@ -538,11 +549,24 @@ namespace GameLogic.World
                     continue;
                 }
 
-                c.Stamina = Math.Max(0, c.Stamina - 1);
+                // 待机（RestAtTown）期间体力不做每小时 -1 结算：待机恢复 +1 与衰减 -1 同时
+                // 结算会净 0，体力耗尽者永远无法「待机至体力回满」（表现为开局数日后全员永久困在强制待机）。
+                if (!IsResting(c))
+                {
+                    c.Stamina = Math.Max(0, c.Stamina - 1);
+                }
+
                 c.Spirit = Math.Max(0, c.Spirit - 1);
                 // M7：生命百分比按「有效上限」算（含装备 hp 加成），与怪物伤害走同一口径。
                 c.HealthScore += CharacterScores.HealthDriftPerHour(c.Hp, c.EffMaxHp);
             }
+        }
+
+        /// <summary>该角色本小时是否处于待机行动（行为系统上一小时落子的当前行动为 RestAtTown）。</summary>
+        private bool IsResting(CharacterData c)
+        {
+            var action = Behavior?.CurrentActionOf(c.Id);
+            return action != null && action.Kind == BehaviorKind.RestAtTown;
         }
 
         /// <summary>0:00：受伤 debuff 倒计时递减。</summary>
