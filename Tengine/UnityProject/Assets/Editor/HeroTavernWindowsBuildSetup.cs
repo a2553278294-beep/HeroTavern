@@ -23,6 +23,9 @@ public static class HeroTavernWindowsBuildSetup
         NamedBuildTarget target = NamedBuildTarget.Standalone;
         PlayerSettings.SetApplicationIdentifier(target, PackageName);
         PlayerSettings.SetScriptingBackend(target, ScriptingImplementation.IL2CPP);
+        // 本机 MSVC 14.43 cl.exe 在优化阶段编译重模板 TU（lump.cpp / UnityEngine.IMGUIModule__2.cpp）
+        // 触发 C1001 内部编译器错误（memmove 访问违例），与 Android NDK 同款问题，降为 /Od 规避。
+        PlayerSettings.SetIl2CppCompilerConfiguration(target, Il2CppCompilerConfiguration.Debug);
 
         string defines = PlayerSettings.GetScriptingDefineSymbols(target);
         string[] parts = defines.Split(';');

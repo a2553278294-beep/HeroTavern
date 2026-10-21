@@ -824,6 +824,7 @@ PlayerSettings:
     Standalone: 1
   il2cppCompilerConfiguration:
     Android: 0
+    Standalone: 0
   il2cppCodeGeneration: {}
   il2cppStacktraceInformation: {}
   managedStrippingLevel:
