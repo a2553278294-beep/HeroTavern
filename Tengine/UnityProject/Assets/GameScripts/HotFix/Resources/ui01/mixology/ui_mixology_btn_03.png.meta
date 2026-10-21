@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ui_mixology_btn_03_0: -4466792505673291234
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
